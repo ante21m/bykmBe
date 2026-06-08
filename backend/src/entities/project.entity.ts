@@ -1,6 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
 import {
   Entity,
-  PrimaryGeneratedColumn,
+  BeforeInsert,
+  PrimaryColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
@@ -22,8 +24,13 @@ export enum ProjectPillar {
 
 @Entity('projects')
 export class Project {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn({ type: 'varchar', length: 36 })
   id: string;
+
+  @BeforeInsert()
+  generateId() {
+    this.id = uuidv4();
+  }
 
   @Column({ length: 255 })
   title: string;

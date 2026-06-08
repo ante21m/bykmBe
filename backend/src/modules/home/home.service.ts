@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -213,7 +214,9 @@ export class HomeService implements OnModuleInit {
         sortOrder: 9,
       },
     ];
-    await this.homeRepository.save(sections);
+    await this.homeRepository.save(
+      sections.map((s) => ({ ...s, id: uuidv4() })),
+    );
   }
 
   async findAll(): Promise<HomeSection[]> {

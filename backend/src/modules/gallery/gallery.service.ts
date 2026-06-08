@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -48,7 +49,9 @@ export class GalleryService implements OnModuleInit {
       },
     ];
 
-    await this.galleryRepository.save(items);
+    await this.galleryRepository.save(
+      items.map((item) => ({ ...item, id: uuidv4() })),
+    );
   }
 
   async findAll(active?: boolean): Promise<Gallery[]> {

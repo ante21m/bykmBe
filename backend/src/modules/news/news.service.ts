@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -69,7 +70,9 @@ export class NewsService implements OnModuleInit {
       },
     ];
 
-    await this.newsRepository.save(items);
+    await this.newsRepository.save(
+      items.map((item) => ({ ...item, id: uuidv4() })),
+    );
   }
 
   async findAll(active?: boolean): Promise<News[]> {

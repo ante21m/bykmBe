@@ -1,6 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
 import {
   Entity,
-  PrimaryGeneratedColumn,
+  BeforeInsert,
+  PrimaryColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
@@ -8,8 +10,13 @@ import {
 
 @Entity('about_sections')
 export class AboutSection {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn({ type: 'varchar', length: 36 })
   id: string;
+
+  @BeforeInsert()
+  generateId() {
+    this.id = uuidv4();
+  }
 
   @Column({ length: 100 })
   sectionKey: string;

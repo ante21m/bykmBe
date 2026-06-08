@@ -1,6 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
 import {
   Entity,
-  PrimaryGeneratedColumn,
+  BeforeInsert,
+  PrimaryColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
@@ -23,8 +25,13 @@ export enum SubmissionStatus {
 
 @Entity('contact_submissions')
 export class ContactSubmission {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn({ type: 'varchar', length: 36 })
   id: string;
+
+  @BeforeInsert()
+  generateId() {
+    this.id = uuidv4();
+  }
 
   @Column({ length: 100 })
   firstName: string;

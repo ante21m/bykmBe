@@ -1,11 +1,17 @@
+import { v4 as uuidv4 } from 'uuid';
 import {
-  Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn,
+  Entity, BeforeInsert, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('news')
 export class News {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn({ type: 'varchar', length: 36 })
   id: string;
+
+  @BeforeInsert()
+  generateId() {
+    this.id = uuidv4();
+  }
 
   @Column({ length: 255 })
   title: string;

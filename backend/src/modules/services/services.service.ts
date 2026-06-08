@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -237,7 +238,9 @@ export class ServicesDataService implements OnModuleInit {
       },
     ];
 
-    await this.serviceRepository.save(services);
+    await this.serviceRepository.save(
+      services.map((s) => ({ ...s, id: uuidv4() })),
+    );
   }
 
   async findAll(pillarKey?: string): Promise<Service[]> {
