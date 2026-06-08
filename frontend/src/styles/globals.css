@@ -1,0 +1,345 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-lato: 'Lato', Helvetica, sans-serif;
+  --font-jetbrains: 'JetBrains Mono', monospace;
+
+  --navy-950: #080b2a;
+  --navy-900: #0d1240;
+  --navy-700: #172069;
+  --navy-600: #1a237e;
+  --forest-600: #1b5e20;
+  --forest-500: #2e7d32;
+  --gold-500: #c8a84b;
+  --gold-400: #ffca28;
+
+  --bg-primary: #f5f4ef;
+  --bg-secondary: #eae8e0;
+  --text-primary: #0d1240;
+  --text-secondary: #4a4a6a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-lato);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: var(--font-playfair);
+  letter-spacing: -0.02em;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f4ef;
+}
+::-webkit-scrollbar-thumb {
+  background: #1a237e;
+  border-radius: 3px;
+}
+
+/* Selection */
+::selection {
+  background: #1a237e;
+  color: #fff;
+}
+
+/* Utilities */
+@layer utilities {
+  .text-gradient-navy {
+    background: linear-gradient(135deg, #1a237e 0%, #2e7d32 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #c8a84b 0%, #ffca28 50%, #c8a84b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200%;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .glass-dark {
+    background: rgba(8, 11, 42, 0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .section-padding {
+    padding: 5rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding: 7rem 2rem;
+    }
+  }
+
+  .container-custom {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(13, 18, 64, 0.15);
+  }
+
+  .border-animate::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #c8a84b;
+    transition: width 0.3s ease;
+  }
+  .border-animate:hover::after {
+    width: 100%;
+  }
+}
+
+/* Animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.animate-on-scroll.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smart Chat animations */
+@keyframes chatPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200, 168, 75, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(200, 168, 75, 0); }
+}
+
+.chat-pulse {
+  animation: chatPulse 2s infinite;
+}
+
+/* Smooth shimmer loading */
+.smart-shimmer {
+  background: linear-gradient(90deg, #f5f4ef 25%, #eae8e0 50%, #f5f4ef 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Staggered children reveal */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.5s ease-out forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 400ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 500ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 600ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 700ms; }
+
+/* Nav */
+.nav-link {
+  position: relative;
+  font-family: var(--font-lato);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: #c8a84b;
+  transition: width 0.25s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Hero geometric shapes */
+.geo-shape {
+  position: absolute;
+  border: 1px solid rgba(200, 168, 75, 0.15);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* Pillar card */
+.pillar-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #1a237e, #2e7d32);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.pillar-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Stat counter */
+.stat-number {
+  font-family: var(--font-playfair);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  background: linear-gradient(135deg, #c8a84b, #ffca28);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Form */
+.form-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1.5px solid rgba(26, 35, 126, 0.15);
+  border-radius: 4px;
+  background: white;
+  font-family: var(--font-lato);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.form-input:focus {
+  border-color: #1a237e;
+  box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.08);
+}
+.form-input.error {
+  border-color: #c62828;
+}
+
+/* Button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #1a237e, #172069);
+  color: white;
+  font-family: var(--font-lato);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2e7d32, #1b5e20);
+  transition: left 0.3s ease;
+}
+.btn-primary:hover::before {
+  left: 0;
+}
+.btn-primary span,
+.btn-primary svg {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: transparent;
+  color: #1a237e;
+  font-family: var(--font-lato);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1.5px solid #1a237e;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-outline:hover {
+  background: #1a237e;
+  color: white;
+}
+
+.rich-text h1 { font-size: 1.75rem; font-weight: 700; margin: 1.5rem 0 0.75rem; }
+.rich-text h2 { font-size: 1.5rem; font-weight: 600; margin: 1.25rem 0 0.5rem; }
+.rich-text h3 { font-size: 1.25rem; font-weight: 600; margin: 1rem 0 0.5rem; }
+.rich-text h4 { font-size: 1.1rem; font-weight: 600; margin: 0.75rem 0 0.25rem; }
+.rich-text p { margin-bottom: 0.75rem; line-height: 1.8; }
+.rich-text ul, .rich-text ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+.rich-text li { margin-bottom: 0.25rem; }
+.rich-text strong { font-weight: 700; color: white; }
+.rich-text em { font-style: italic; }
+.rich-text a { color: #d4a853; text-decoration: underline; }
+.rich-text a:hover { color: #e6b85c; }
+.rich-text blockquote {
+  border-left: 3px solid #d4a853;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: rgba(255,255,255,0.6);
+  font-style: italic;
+}
