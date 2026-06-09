@@ -30,7 +30,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
-  app.use('/api/uploads', express.static(join(process.cwd(), 'uploads')));
+  // serving uploads via UploadController instead of express.static for cPanel compatibility
 
   const config = new DocumentBuilder()
     .setTitle('BYKM Trading PLC API')
