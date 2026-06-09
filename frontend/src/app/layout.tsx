@@ -28,7 +28,7 @@ const jetbrains = JetBrains_Mono({
   display: 'swap',
 });
 
-const SITE_URL = 'https://bykmtrading.com';
+const SITE_URL = 'https://bykmgroup.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

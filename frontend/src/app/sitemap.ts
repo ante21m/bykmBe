@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const BASE_URL = 'https://bykmtrading.com';
+const BASE_URL = 'https://bykmgroup.com';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages = [

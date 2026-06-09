@@ -10,7 +10,11 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.enableCors({
-    origin: [process.env.FRONTEND_URL || 'http://localhost:3000', 'http://localhost:3002'],
+    origin: [
+      process.env.FRONTEND_URL || 'http://localhost:3000',
+      'http://localhost:3000',
+      'http://localhost:3002',
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
@@ -26,7 +30,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
-  app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
+  // serving uploads via UploadController instead of express.static for cPanel compatibility
 
   const config = new DocumentBuilder()
     .setTitle('BYKM Trading PLC API')

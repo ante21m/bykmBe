@@ -1,16 +1,19 @@
 import {
-  Controller, Post, UseGuards, UseInterceptors, UploadedFile,
-  HttpCode, HttpStatus, BadRequestException,
+  Controller, Get, Post, Param, UseGuards, UseInterceptors,
+  UploadedFile, HttpCode, HttpStatus, BadRequestException,
+  NotFoundException, Res,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { Response } from 'express';
 import { extname, join } from 'path';
+import { existsSync } from 'fs';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 @ApiTags('upload')
-@Controller('upload')
+@Controller()
 export class UploadController {
-  @Post()
+  @Post('upload')
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(
@@ -32,5 +35,16 @@ export class UploadController {
       url: `/uploads/${file.filename}`,
       name: file.originalname,
     };
+  }
+
+  @Get('uploads/:filename')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Serve an uploaded file' })
+  serveFile(@Param('filename') filename: string, @Res() res: Response) {
+    const filePath = join(process.cwd(), 'uploads', filename);
+    if (!existsSync(filePath)) {
+      throw new NotFoundException('File not found');
+    }
+    res.sendFile(filePath);
   }
 }

@@ -4,10 +4,10 @@ export function JsonLd() {
     '@graph': [
       {
         '@type': 'Organization',
-        '@id': 'https://bykmtrading.com/#organization',
+        '@id': 'https://bykmgroup.com/#organization',
         name: 'BYKM Trading PLC',
-        url: 'https://bykmtrading.com',
-        logo: 'https://bykmtrading.com/images/logo-bykm.jpg',
+        url: 'https://bykmgroup.com',
+        logo: 'https://bykmgroup.com/images/logo-bykm.jpg',
         description:
           'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation driving industrial sovereignty through five integrated strategic pillars: Infrastructure, Agro-Industrialization, Global Trade, Digital Economy, and Hospitality.',
         address: {
@@ -20,27 +20,27 @@ export function JsonLd() {
           '@type': 'ContactPoint',
           telephone: '+251-XXX-XXXXXXX',
           contactType: 'customer service',
-          email: 'bykmtrading@gmail.com',
+          email: 'bykmgroup@gmail.com',
         },
         sameAs: [],
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://bykmtrading.com/#website',
-        url: 'https://bykmtrading.com',
+        '@id': 'https://bykmgroup.com/#website',
+        url: 'https://bykmgroup.com',
         name: 'BYKM Trading PLC',
         description:
           'Architecting Ethiopia\'s Integrated Future — multi-sectoral industrial corporation.',
-        publisher: { '@id': 'https://bykmtrading.com/#organization' },
+        publisher: { '@id': 'https://bykmgroup.com/#organization' },
         inLanguage: ['en', 'am'],
       },
       {
         '@type': 'WebPage',
-        '@id': 'https://bykmtrading.com/#webpage',
-        url: 'https://bykmtrading.com',
+        '@id': 'https://bykmgroup.com/#webpage',
+        url: 'https://bykmgroup.com',
         name: 'BYKM Trading PLC — Architecting Ethiopia\'s Integrated Future',
-        isPartOf: { '@id': 'https://bykmtrading.com/#website' },
-        about: { '@id': 'https://bykmtrading.com/#organization' },
+        isPartOf: { '@id': 'https://bykmgroup.com/#website' },
+        about: { '@id': 'https://bykmgroup.com/#organization' },
       },
     ],
   };
