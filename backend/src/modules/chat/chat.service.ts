@@ -71,20 +71,20 @@ const companyData: BilingualQAPair[] = [
   },
   {
     keywords: ['contact', 'reach', 'phone', 'email', 'address', 'location', 'get in touch'],
-    en: 'You can reach BYKM Trading PLC at our headquarters: Yeka Sub-City, Woreda 08, House No. 4-04, Addis Ababa, Ethiopia. Phone: +251 911 34 32 90 (Primary) or +251 912 76 43 43 (Operations). Email: info@bykmtrading.com. For partnerships, contact gm@bykmtrading.com. You can also use our contact form to submit a detailed inquiry.',
-    am: 'ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበርን በዋና መሥሪያ ቤታችን ማግኘት ይችላሉ፦ የካ ክፍለ ከተማ፣ ወረዳ 08፣ ቤት ቁጥር 4-04፣ አዲስ አበባ፣ ኢትዮጵያ። ስልክ፦ +251 911 34 32 90 (ዋና) ወይም +251 912 76 43 43 (ኦፕሬሽን)። ኢሜይል፦ info@bykmtrading.com። ለአጋርነት፦ gm@bykmtrading.com። እንዲሁም የእውቂያ ቅጻችንን በመጠቀም ዝርዝር ጥያቄ ማቅረብ ይችላሉ።',
+    en: 'You can reach BYKM Trading PLC at our headquarters: Yeka Sub-City, Woreda 08, House No. 4-04, Addis Ababa, Ethiopia. Phone: +251 911 34 32 90 (Primary) or +251 912 76 43 43 (Operations). Email: info@bykmgroup.com. For partnerships, contact gm@bykmgroup.com. You can also use our contact form to submit a detailed inquiry.',
+    am: 'ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበርን በዋና መሥሪያ ቤታችን ማግኘት ይችላሉ፦ የካ ክፍለ ከተማ፣ ወረዳ 08፣ ቤት ቁጥር 4-04፣ አዲስ አበባ፣ ኢትዮጵያ። ስልክ፦ +251 911 34 32 90 (ዋና) ወይም +251 912 76 43 43 (ኦፕሬሽን)። ኢሜይል፦ info@bykmgroup.com። ለአጋርነት፦ gm@bykmgroup.com። እንዲሁም የእውቂያ ቅጻችንን በመጠቀም ዝርዝር ጥያቄ ማቅረብ ይችላሉ።',
     suggestions: ['partnership', 'careers', 'company overview'],
   },
   {
     keywords: ['partner', 'partnership', 'invest', 'investment', 'joint venture', 'jv', 'collaborate'],
-    en: 'We actively invite government partners, international investors, and financial institutions to partner with BYKM. As a legally registered Ethiopian PLC with Category "A" taxpayer status, we provide an ideal local anchor for high-impact projects. Contact our Office of the General Manager at gm@bykmtrading.com or use our Partnership & JV inquiry form on the contact page.',
-    am: 'የመንግስት አጋሮችን፣ ዓለም አቀፍ ባለሀብቶችን እና የፋይናንስ ተቋማትን ከቢኬኤም ጋር አጋር እንዲሆኑ በንቃት እንጋብዛለን። በህጋዊ መንገድ የተመዘገበ የኢትዮጵያ ኃላፊነቱ የተወሰነ የግል ማህበር፣ ምድብ "ሀ" ግብር ከፋይ ሆኖ፣ ከፍተኛ ተጽእኖ ላላቸው ፕሮጀክቶች ተስማሚ የሆነ የሀገር ውስጥ መልህቅ እንሆናለን። የአጠቃላይ ሥራ አስኪያጅ ቢሮን በ gm@bykmtrading.com ወይም በእውቂያ ገፁ ላይ ያለውን የአጋርነት ቅጽ ይጠቀሙ።',
+    en: 'We actively invite government partners, international investors, and financial institutions to partner with BYKM. As a legally registered Ethiopian PLC with Category "A" taxpayer status, we provide an ideal local anchor for high-impact projects. Contact our Office of the General Manager at gm@bykmgroup.com or use our Partnership & JV inquiry form on the contact page.',
+    am: 'የመንግስት አጋሮችን፣ ዓለም አቀፍ ባለሀብቶችን እና የፋይናንስ ተቋማትን ከቢኬኤም ጋር አጋር እንዲሆኑ በንቃት እንጋብዛለን። በህጋዊ መንገድ የተመዘገበ የኢትዮጵያ ኃላፊነቱ የተወሰነ የግል ማህበር፣ ምድብ "ሀ" ግብር ከፋይ ሆኖ፣ ከፍተኛ ተጽእኖ ላላቸው ፕሮጀክቶች ተስማሚ የሆነ የሀገር ውስጥ መልህቅ እንሆናለን። የአጠቃላይ ሥራ አስኪያጅ ቢሮን በ gm@bykmgroup.com ወይም በእውቂያ ገፁ ላይ ያለውን የአጋርነት ቅጽ ይጠቀሙ።',
     suggestions: ['company overview', 'contact information', 'infrastructure'],
   },
   {
     keywords: ['career', 'job', 'employment', 'work', 'talent', 'vacancy', 'join'],
-    en: 'BYKM is building towards 5,000+ career opportunities by 2030. We welcome talented professionals in engineering, trade, digital, hospitality, and management. Please send your inquiry through our contact form selecting "Careers & Capacity Building" or email talent@bykmtrading.com.',
-    am: 'ቢኬኤም በ2030 5,000+ የስራ ዕድሎችን ለመፍጠር እየሰራ ነው። በምህንድስና፣ ንግድ፣ ዲጂታል፣ ሆስፒታሊቲ እና አስተዳደር ዘርፎች ችሎታ ያላቸው ባለሙያዎችን እንቀበላለን። እባክዎ ጥያቄዎን በእውቂያ ቅጻችን "ሙያ እና አቅም ግንባታ" የሚለውን በመምረጥ ወይም በ talent@bykmtrading.com ኢሜይል ያስገቡ።',
+    en: 'BYKM is building towards 5,000+ career opportunities by 2030. We welcome talented professionals in engineering, trade, digital, hospitality, and management. Please send your inquiry through our contact form selecting "Careers & Capacity Building" or email talent@bykmgroup.com.',
+    am: 'ቢኬኤም በ2030 5,000+ የስራ ዕድሎችን ለመፍጠር እየሰራ ነው። በምህንድስና፣ ንግድ፣ ዲጂታል፣ ሆስፒታሊቲ እና አስተዳደር ዘርፎች ችሎታ ያላቸው ባለሙያዎችን እንቀበላለን። እባክዎ ጥያቄዎን በእውቂያ ቅጻችን "ሙያ እና አቅም ግንባታ" የሚለውን በመምረጥ ወይም በ talent@bykmgroup.com ኢሜይል ያስገቡ።',
     suggestions: ['company overview', 'vision mission', 'contact information'],
   },
   {
