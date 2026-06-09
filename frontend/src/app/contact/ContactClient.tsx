@@ -33,11 +33,11 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const inquiryOptions = [
-  { value: 'partnership', labelEn: 'Partnerships & JV Investment',   labelAm: 'አጋርነት እና ጁንቲየር ቬንቸር', deptEn: 'Office of the General Manager',  deptAm: 'የአጠቃላይ ሥራ አስኪያጅ ቢሮ',  email: 'bykmtrading@gmail.com'       },
-  { value: 'construction', labelEn: 'Construction & Mega-Corridors', labelAm: 'ኮንስትራክሽን እና ሜጋ-ኮሪደሮች', deptEn: 'Engineering & Infrastructure Division', deptAm: 'የምህንድስና እና መሠረተ ልማት ክፍል', email: 'bykmtrading@gmail.com' },
-  { value: 'trade',        labelEn: 'Import/Export & Supply Chain',  labelAm: 'ማስመጣት/መላክ እና አቅርቦት ሰንሰለት',  deptEn: 'Global Trade & Logistics Hub',   deptAm: 'የአለም ንግድ እና ሎጂስቲክስ ማዕከል',   email: 'bykmtrading@gmail.com'    },
-  { value: 'careers',      labelEn: 'Careers & Capacity Building',   labelAm: 'ሙያ እና አቅም ማጎልበት',   deptEn: 'Human Capital & Social Services', deptAm: 'የሰው ካፒታል እና ማህበራዊ አገልግሎቶች', email: 'bykmtrading@gmail.com'  },
-  { value: 'general',      labelEn: 'General Inquiry',               labelAm: 'አጠቃላይ ጥያቄ',               deptEn: 'Corporate Communications',       deptAm: 'የኮርፖሬት ኮሙኒኬሽን',       email: 'bykmtrading@gmail.com'    },
+  { value: 'partnership', labelEn: 'Partnerships & JV Investment',   labelAm: 'አጋርነት እና ጁንቲየር ቬንቸር', deptEn: 'Office of the General Manager',  deptAm: 'የአጠቃላይ ሥራ አስኪያጅ ቢሮ',  email: 'bykmgroup@gmail.com'       },
+  { value: 'construction', labelEn: 'Construction & Mega-Corridors', labelAm: 'ኮንስትራክሽን እና ሜጋ-ኮሪደሮች', deptEn: 'Engineering & Infrastructure Division', deptAm: 'የምህንድስና እና መሠረተ ልማት ክፍል', email: 'bykmgroup@gmail.com' },
+  { value: 'trade',        labelEn: 'Import/Export & Supply Chain',  labelAm: 'ማስመጣት/መላክ እና አቅርቦት ሰንሰለት',  deptEn: 'Global Trade & Logistics Hub',   deptAm: 'የአለም ንግድ እና ሎጂስቲክስ ማዕከል',   email: 'bykmgroup@gmail.com'    },
+  { value: 'careers',      labelEn: 'Careers & Capacity Building',   labelAm: 'ሙያ እና አቅም ማጎልበት',   deptEn: 'Human Capital & Social Services', deptAm: 'የሰው ካፒታል እና ማህበራዊ አገልግሎቶች', email: 'bykmgroup@gmail.com'  },
+  { value: 'general',      labelEn: 'General Inquiry',               labelAm: 'አጠቃላይ ጥያቄ',               deptEn: 'Corporate Communications',       deptAm: 'የኮርፖሬት ኮሙኒኬሽን',       email: 'bykmgroup@gmail.com'    },
 ];
 
 const contactInfo = [
@@ -53,13 +53,13 @@ const contactInfo = [
   },
   {
     icon: Mail, titleEn: 'Email', titleAm: 'ኢሜይል',
-    linesEn: ['bykmtrading@gmail.com'],
-    linesAm: ['bykmtrading@gmail.com'],
+    linesEn: ['bykmgroup@gmail.com'],
+    linesAm: ['bykmgroup@gmail.com'],
   },
   {
     icon: Globe, titleEn: 'Digital', titleAm: 'ዲጂታል',
-    linesEn: ['www.bykmtrading.com', 'LinkedIn: /company/bykm-trading-plc'],
-    linesAm: ['www.bykmtrading.com', 'LinkedIn: /company/bykm-trading-plc'],
+    linesEn: ['www.bykmgroup.com', 'LinkedIn: /company/bykm-trading-plc'],
+    linesAm: ['www.bykmgroup.com', 'LinkedIn: /company/bykm-trading-plc'],
   },
 ];
 

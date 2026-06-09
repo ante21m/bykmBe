@@ -5,10 +5,9 @@ import { useRouter } from 'next/navigation';
 import {
   TextInput, Textarea, NumberInput, Switch, Button, Group, Stack, Title, Paper, SimpleGrid, Text, ActionIcon,
 } from '@mantine/core';
-import { RichTextEditor, Link } from '@mantine/tiptap';
+import { RichTextEditor } from '@mantine/tiptap';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import Underline from '@tiptap/extension-underline';
 import { useUploadFileMutation } from '@/lib/redux/api';
 
 interface NewsFormData {
@@ -35,7 +34,8 @@ interface Props {
 
 function RTEditor({ value, onChange, label, required }: { value: string; onChange: (v: string) => void; label: string; required?: boolean }) {
   const editor = useEditor({
-    extensions: [StarterKit, Underline, Link],
+    extensions: [StarterKit],
+    immediatelyRender: true,
     content: value,
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
   });

@@ -4,7 +4,7 @@
 //   images: {
 //     remotePatterns: [
 //       { protocol: 'http', hostname: 'localhost' },
-//       { protocol: 'https', hostname: 'bykmtrading.com' },
+//       { protocol: 'https', hostname: 'bykmgroup.com' },
 //     ],
 //   },
 //   env: {
@@ -19,7 +19,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       { protocol: 'http', hostname: 'localhost' },
-      { protocol: 'https', hostname: 'bykmtrading.com' },
+      { protocol: 'https', hostname: 'bykmgroup.com' },
     ],
   },
   env: {
