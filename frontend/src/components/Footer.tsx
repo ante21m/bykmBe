@@ -137,6 +137,11 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-custom py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="text-white/40 hover:text-white/70 text-xs transition-colors">Privacy Policy</Link>
+            <span className="text-white/20">|</span>
+            <Link href="/terms" className="text-white/40 hover:text-white/70 text-xs transition-colors">Terms of Service</Link>
+          </div>
           <p className="text-white/40 text-xs sm:text-sm">{f.copyright[lang]}</p>
           <p className="text-white/30 text-xs sm:text-sm font-mono">{f.statutory[lang]}</p>
         </div>

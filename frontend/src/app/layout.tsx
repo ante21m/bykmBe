@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Lato, JetBrains_Mono } from 'next/font/google';
+import '@mantine/core/styles.css';
 import '@/styles/globals.css';
+import { MantineProvider } from '@mantine/core';
 import { Toaster } from '@/components/ui/Toaster';
 import { SmartChat } from '@/components/SmartChat';
 import { LanguageProvider } from '@/lib/i18n/LanguageProvider';
@@ -51,7 +53,16 @@ export const metadata: Metadata = {
     'industrial development',
     'Grade-4 contractor',
     'Green Legacy',
+    'trading',
+    'group',
+    'bykm construction',
+    'general contractor Ethiopia',
+    'coffee export Ethiopia',
   ],
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_ET',
@@ -83,6 +94,7 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
@@ -110,16 +122,19 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${playfair.variable} ${lato.variable} ${jetbrains.variable}`}
+      data-scroll-behavior="smooth"
     >
       <body className="bg-[#f5f4ef] text-navy-900 font-body antialiased">
-        <ReduxProvider>
-          <LanguageProvider>
-            <JsonLd />
-            <SiteShell>{children}</SiteShell>
-            <Toaster />
-            <SmartChat />
-          </LanguageProvider>
-        </ReduxProvider>
+        <MantineProvider>
+          <ReduxProvider>
+            <LanguageProvider>
+              <JsonLd />
+              <SiteShell>{children}</SiteShell>
+              <Toaster />
+              <SmartChat />
+            </LanguageProvider>
+          </ReduxProvider>
+        </MantineProvider>
       </body>
     </html>
   );

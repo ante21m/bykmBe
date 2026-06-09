@@ -1,24 +1,26 @@
-import { Controller, Post, Body, HttpCode, HttpStatus, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
+import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
+import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly jwtService: JwtService,
-    private readonly configService: ConfigService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('login')
+  @Throttle({ default: { limit: 5, ttl: 60000 } })
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Admin login' })
   login(@Body() dto: LoginDto) {
-    const adminUsername = this.configService.get<string>('ADMIN_USERNAME', 'admin');
-    const adminPassword = this.configService.get<string>('ADMIN_PASSWORD', 'admin123');
-    if (dto.username !== adminUsername || dto.password !== adminPassword) {
-      throw new UnauthorizedException('Invalid username or password');
-    }
-    const token = this.jwtService.sign({ role: 'admin', username: dto.username });
-    return { token };
+    return this.authService.login(dto.username, dto.password);
+  }
+
+  @Post('setup')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Create or update admin user from env vars' })
+  setup() {
+    return this.authService.setupAdmin();
   }
 }

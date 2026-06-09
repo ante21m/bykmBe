@@ -1,16 +1,23 @@
 import type { Metadata } from 'next';
 import { NewsContent } from '@/components/NewsContent';
 
+const TITLE = 'News — BYKM Trading PLC';
+const DESC = 'Latest news, announcements, and corporate updates from BYKM Trading PLC.';
+const OG_IMAGE = { url: '/images/logo-bykm.jpg', width: 600, height: 600, alt: 'BYKM Trading PLC' };
+
 export const metadata: Metadata = {
-  title: 'News — BYKM Trading PLC',
-  description: 'Latest news, announcements, and corporate updates from BYKM Trading PLC.',
+  title: TITLE,
+  description: DESC,
   openGraph: {
-    title: 'News — BYKM Trading PLC',
-    description: 'Latest news, announcements, and corporate updates from BYKM Trading PLC.',
+    title: TITLE,
+    description: DESC,
+    images: [OG_IMAGE],
   },
   twitter: {
-    title: 'News — BYKM Trading PLC',
-    description: 'Latest news, announcements, and corporate updates from BYKM Trading PLC.',
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESC,
+    images: ['/images/logo-bykm.jpg'],
   },
 };
 

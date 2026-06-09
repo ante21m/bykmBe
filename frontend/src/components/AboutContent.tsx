@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
 
@@ -13,55 +13,23 @@ const timeline = [
   { year: '2024–2030', titleEn: 'Vision 2030 Active Execution', titleAm: 'ራዕይ 2030 ንቁ ትግበራ', descEn: 'Coffee Export Initiative, Digital Infrastructure Pivot, Retail Network Expansion, and Industrial Value-Addition Hubs all in active execution.', descAm: 'የቡና ኤክስፖርት ተነሳሽነት፣ የዲጂታል መሠረተ ልማት ማዞሪያ፣ የችርቻሮ አውታር ማስፋፊያ እና የኢንዱስትሪ እሴት ተጨማሪ ማዕከላት ሁሉም በንቁ ትግበራ ላይ ናቸው።' },
 ];
 
-const esgGoals = [
-  { pillarEn: 'Environmental', pillarAm: 'አካባቢ', color: 'bg-forest-500', goalEn: 'Execute 100km of carbon-neutral urban infrastructure', goalAm: '100 ኪሎ ሜትር የካርቦን-ገለልተኛ የከተማ መሠረተ ልማት መሥራት', commitmentEn: 'Green Legacy Alignment', commitmentAm: 'አረንጓዴ አሻራ አቀማመጥ' },
-  { pillarEn: 'Social', pillarAm: 'ማህበራዊ', color: 'bg-navy-600', goalEn: 'Create 5,000+ sustainable career opportunities', goalAm: 'ከ5,000 በላይ ዘላቂ የሙያ ዕድሎችን መፍጠር', commitmentEn: 'Human Capital Empowerment', commitmentAm: 'የሰው ካፒታል አቅም ማጎልበት' },
-  { pillarEn: 'Governance', pillarAm: 'አስተዳደር', color: 'bg-gold-500', goalEn: 'Achieve 100% ISO-compliance, Grade-1 status', goalAm: '100% የISO ተገዢነት፣ የደረጃ-1 ደረጃ ማሳካት', commitmentEn: 'Ethical & Technical Excellence', commitmentAm: 'ሥነ-ምግባራዊ እና ቴክኒክ የላቀነት' },
-  { pillarEn: 'Economic', pillarAm: 'ኢኮኖሚያዊ', color: 'bg-navy-800', goalEn: '40% increase in local value-addition by 2027', goalAm: 'በ2027 የአገር ውስጥ እሴት ተጨማሪ 40% መጨመር', commitmentEn: 'Industrial Sovereignty', commitmentAm: 'ኢንዱስትሪያል ሉዓላዊነት' },
-];
+const greenLegacyText = {
+  en: 'We believe that industrial progress is meaningless if it compromises the environment. As a steadfast partner in Ethiopia\'s National Green Legacy Initiative, BYKM pioneers "Living Infrastructure." By integrating ecological restoration into our construction and mining protocols, we ensure that every project we execute contributes to the biodiversity and environmental health of our nation.',
+  am: 'ኢንዱስትሪያል እድገት አካባቢን የሚጎዳ ከሆነ ትርጉም የለሽ ነው ብለን እናምናለን። የኢትዮጵያ ብሔራዊ አረንጓዴ አሻራ ተነሳሽነት ታማኝ አጋር እንደመሆናችን፣ BYKM "የቀጥታ መሠረተ ልማት"ን በአቅኚነት ያስተዋውቃል።',
+};
 
-const isoStandards = [
-  { std: 'ISO 9001:2015', areaEn: 'Quality', areaAm: 'ጥራት', strategyEn: 'TQM & Kaizen', strategyAm: 'TQM እና ካይዘን' },
-  { std: 'ISO 45001:2018', areaEn: 'Safety', areaAm: 'ደህንነት', strategyEn: 'Behavior-Based Safety & Zero-Harm', strategyAm: 'በባህርይ ላይ የተመሠረተ ደህንነት እና ዜሮ-ጉዳት' },
-  { std: 'ISO 14001:2015', areaEn: 'Environment', areaAm: 'አካባቢ', strategyEn: 'Active Reforestation & Circular Economy', strategyAm: 'ንቁ የደን መልሶ ማልማት እና ክብ ኢኮኖሚ' },
-  { std: 'ISO 20400', areaEn: 'Procurement', areaAm: 'ግዥ', strategyEn: 'Vertical Integration & Ethical Sourcing', strategyAm: 'አቀባዊ ውህደት እና ሥነ-ምግባራዊ ምንጭ ማፈላለግ' },
-];
 
-const statutoryRows = [
-  { dtEn: 'Legal Entity', dtAm: 'ህጋዊ አካል', dd: 'Private Limited Company (P.L.C.)' },
-  { dtEn: 'Registration', dtAm: 'ምዝገባ', dd: 'AACATB/2/0257491/2018' },
-  { dtEn: 'Paid-up Capital', dtAm: 'የተከፈለ ካፒታል', dd: 'More than 10,000,000.00 ETB' },
-  { dtEn: 'TIN', dtAm: 'ቲን', dd: '0103921383' },
-  { dtEn: 'VAT No.', dtAm: 'የቫት ቁጥር', dd: '35205580010' },
-  { dtEn: 'Tax Category', dtAm: 'የግብር ምድብ', dd: 'Category "A" Taxpayer' },
-  { dtEn: 'Technical Grade', dtAm: 'ቴክኒክ ደረጃ', dd: 'Grade-4 General Contractor (GC-4)' },
-  { dtEn: 'Certificate', dtAm: 'የምስክር ወረቀት', dd: 'CON/32486 · Ethiopian Construction Authority' },
-  { dtEn: 'General Manager', dtAm: 'አጠቃላይ ሥራ አስኪያጅ', dd: 'Eng. Besufekad Molla Wube' },
-  { dtEn: 'Deputy GM', dtAm: 'ምክትል ሥራ አስኪያጅ', dd: 'W/ro Yeshiye Semeňew Bogale' },
-];
+const governanceDesc = {
+  en: 'BYKM operates under a rigorous framework of transparency, statutory compliance, and fiscal discipline. As a Category "A" taxpayer and a legally chartered PLC, we provide our partners, financial institutions, and international joint-venture consortia with the absolute confidence of solvency, reliability, and institutional integrity.',
+  am: 'BYKM በግልጽነት፣ በህጋዊ ተገዢነት እና በበጀት ተግሣጽ ጥብቅ ማዕቀፍ ውስጥ ይሰራል። እንደ ምድብ "A" ግብር ከፋይ እና በህጋዊ መንገድ የተመዘገበ ኃላፊነቱ የተወሰነ የግል ማህበር፣ ለአጋሮቻችን፣ ለፋይናንስ ተቋማት እና ለአለም አቀፍ የጋራ ቬንቸር ኮንሰርቲያ የመክፈል አቅም፣ አስተማማኝነት እና ተቋማዊ ታማኝነት ሙሉ እምነት እንሰጣለን።',
+};
 
-const governanceLevels = [
-  { level: 'Level I', titleEn: 'Sovereign Authority', titleAm: 'ሉዓላዊ ባለስልጣን', subtitleEn: 'The General Assembly', subtitleAm: 'ጠቅላላ ጉባኤ', descEn: 'Supreme governing body setting long-term vision, approving capital investments, maintaining founding MoA alignment with 3/4 capital quorum requirement.', descAm: 'የረዥም ጊዜ ራዕይን የሚያወጣ፣ የካፒታል ኢንቨስትመንቶችን የሚያጸድቅ፣ ከ3/4 ካፒታል የምልአተ ጉባኤ መስፈርት ጋር የማቋቋሚያ ሞአ አሰላለፍን የሚጠብቅ ከፍተኛ የአስተዳደር አካል።' },
-  { level: 'Level II', titleEn: 'Executive Command', titleAm: 'አስፈጻሚ ትዕዛዝ', subtitleEn: 'GM & Deputy GM', subtitleAm: 'ሥራ አስኪያጅ እና ምክትል ሥራ አስኪያጅ', descEn: 'General Manager Eng. Besufekad Molla Wube and Deputy GM W/ro Yeshiye Semeňew Bogale translate vision into actionable strategy.', descAm: 'አጠቃላይ ሥራ አስኪያጅ ኢንጂነር በሱፍቃድ ሞላ ዉቤ እና ምክትል ሥራ አስኪያጅ ወ/ሮ የሺየ ሰማነው ቦጋሌ ራእይን ወደ ተግባራዊ ስትራቴጂ ይተረጉማሉ።' },
-  { level: 'Level III', titleEn: 'Sectoral Execution', titleAm: 'የዘርፍ አፈጻጸም', subtitleEn: 'Sector Managers & Shared Services', subtitleAm: 'የዘርፍ አስተዳዳሪዎች እና የጋራ አገልግሎቶች', descEn: 'Specialized managers drive KPIs across five clusters, supported by Finance, Audit, and Asset Management.', descAm: 'ልዩ አስተዳዳሪዎች በአምስቱ ክላስተሮች ውስጥ ኬፒአይዎችን ያሽከረክራሉ፣ በፋይናንስ፣ ኦዲት እና ንብረት አስተዳደር የተደገፉ።' },
+const missionCards = [
+  { icon: '💰', titleEn: 'Unlocking Wealth', titleAm: 'ሀብትን መክፈት', statEn: '+40% value-add by 2027', statAm: 'በ2027 +40% የእሴት ተጨማሪ' },
+  { icon: '🏗️', titleEn: 'Building Resiliency', titleAm: 'መቋቋምን መገንባት', statEn: 'Green infra by 2030', statAm: 'በ2030 አረንጓዴ መሠረተ ልማት' },
+  { icon: '🌐', titleEn: 'Connecting Markets', titleAm: 'ገበያዎችን ማገናኘት', statEn: '3 digital pivots by 2028', statAm: 'በ2028 3 ዲጂታል ለውጦች' },
+  { icon: '👥', titleEn: 'Empowering People', titleAm: 'ሰዎችን ማብቃት', statEn: '5,000+ careers by 2030', statAm: 'በ2030 ከ5,000 በላይ ሙያዎች' },
 ];
-
-const missionItemsEn = [
-  'Unlocking Wealth — 40% value-addition increase by 2027',
-  'Building Resiliency — Green, high-durability infrastructure by 2030',
-  'Connecting Markets — Three digital trade pivots by 2028',
-  'Empowering People — 5,000+ career opportunities by 2030',
-];
-
-const missionItemsAm = [
-  'ሀብትን መክፈት — በ2027 40% የእሴት ተጨማሪ መጨመር',
-  'መቋቋምን መገንባት — በ2030 አረንጓዴ፣ ከፍተኛ ጥንካሬ ያለው መሠረተ ልማት',
-  'ገበያዎችን ማገናኘት — በ2028 ሶስት ዲጂታል የንግድ ለውጦች',
-  'ሰዎችን ማብቃት — በ2030 ከ5,000 በላይ የሙያ ዕድሎች',
-];
-
-const isoHeadersEn = ['Pillar', 'Benchmark', 'BYKM Strategy'];
-const isoHeadersAm = ['ምሰሶ', 'መለኪያ', 'የቢኬኤም ስትራቴጂ'];
 
 export function AboutContent() {
   const { lang, translations: t } = useTranslation();
@@ -70,7 +38,7 @@ export function AboutContent() {
   return (
     <>
       <ScrollReveal>
-        <section className="relative overflow-hidden bg-[#080616] text-white pt-40 pb-20">
+        <section className="relative overflow-hidden bg-[#080616] text-white pt-28 pb-16">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_40%,rgba(30,50,150,0.5)_0%,rgba(8,6,22,0.2)_40%,transparent_70%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_70%,rgba(40,70,180,0.3)_0%,transparent_50%)]" />
@@ -81,9 +49,9 @@ export function AboutContent() {
           <div className="geo-shape w-40 h-40 bottom-16 right-32 rotate-6 opacity-15" />
           <div className="geo-shape w-24 h-24 top-1/3 right-1/4 opacity-10" />
           <div className="container-custom relative z-10">
-            <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-400 uppercase">{a.header.label[lang]}</span>
+            <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-gold-400 uppercase">{a.header.label[lang]}</span>
             <h1 className="font-display text-5xl md:text-6xl font-bold mt-4 mb-6 max-w-3xl">{a.header.title[lang]}</h1>
-            <p className="text-white/60 max-w-2xl text-lg leading-relaxed">{a.header.desc[lang]}</p>
+            <p className="text-white/60 max-w-2xl text-lg leading-relaxed text-justify">{a.header.desc[lang]}</p>
           </div>
         </section>
       </ScrollReveal>
@@ -91,28 +59,42 @@ export function AboutContent() {
       <ScrollReveal>
         <section className="section-padding bg-white">
           <div className="container-custom">
-            <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div>
-                <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase">{a.executive.label[lang]}</span>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-navy-900 mt-3 mb-6">{a.executive.title[lang]}</h2>
-                <div className="space-y-4 text-navy-700/70 leading-relaxed">
-                  <p>{a.executive.p1[lang]} <strong className="text-navy-900">{a.executive.p1Bold[lang]}</strong>{a.executive.p1End[lang]}</p>
-                  <p>{a.executive.p2[lang]}</p>
-                  <p>{a.executive.p3[lang]}</p>
+            <div>
+                <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-forest-600 uppercase">{a.executive.label[lang]}</span>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-navy-900 mt-3 mb-10">{a.executive.title[lang]}</h2>
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 p-6 hover-lift group flex flex-col">
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-navy-900 -skew-x-[30deg] -translate-y-1/2 translate-x-4 flex items-center justify-center">
+                      <span className="skew-x-[30deg] text-gold-400 font-bold text-lg">01</span>
+                    </div>
+                    <div className="mt-4 flex-1 flex flex-col">
+                      <div className="w-10 h-1 bg-navy-900 mb-4" />
+                      <h3 className="font-display text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{lang === 'en' ? 'The Foundation' : 'መሠረቱ'}</h3>
+                      <p className="text-navy-700/70 text-base leading-relaxed text-justify flex-1">{a.executive.p1[lang]}</p>
+                    </div>
+                  </div>
+                  <div className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 p-6 hover-lift group flex flex-col">
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-navy-800 -skew-x-[30deg] -translate-y-1/2 translate-x-4 flex items-center justify-center">
+                      <span className="skew-x-[30deg] text-gold-400 font-bold text-lg">02</span>
+                    </div>
+                    <div className="mt-4 flex-1 flex flex-col">
+                      <div className="w-10 h-1 bg-navy-800 mb-4" />
+                      <h3 className="font-display text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{lang === 'en' ? 'The Strategic Transition' : 'ስትራቴጂካዊ ሽግግሩ'}</h3>
+                      <p className="text-navy-700/70 text-base leading-relaxed text-justify flex-1">{a.executive.p2[lang]}</p>
+                    </div>
+                  </div>
+                  <div className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 p-6 hover-lift group flex flex-col">
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-forest-600 -skew-x-[30deg] -translate-y-1/2 translate-x-4 flex items-center justify-center">
+                      <span className="skew-x-[30deg] text-white font-bold text-lg">03</span>
+                    </div>
+                    <div className="mt-4 flex-1 flex flex-col">
+                      <div className="w-10 h-1 bg-forest-600 mb-4" />
+                      <h3 className="font-display text-xl font-bold text-navy-900 mb-3 group-hover:text-forest-600 transition-colors">{lang === 'en' ? 'The Engineering Mindset' : 'የምህንድስና አስተሳሰብ'}</h3>
+                      <p className="text-navy-700/70 text-base leading-relaxed text-justify flex-1">{a.executive.p3[lang]}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="bg-[#f5f4ef] p-8">
-                <h3 className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase mb-6">{a.executive.statutoryTitle[lang]}</h3>
-                <dl className="space-y-4">
-                  {statutoryRows.map((row) => (
-                    <div key={row.dtEn} className="flex gap-4 text-sm border-b border-navy-100 pb-3">
-                      <dt className="text-navy-700/50 font-bold w-32 shrink-0">{lang === 'en' ? row.dtEn : row.dtAm}</dt>
-                      <dd className="text-navy-900 font-mono">{row.dd}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </div>
           </div>
         </section>
       </ScrollReveal>
@@ -129,21 +111,27 @@ export function AboutContent() {
           <div className="container-custom relative z-10">
             <div className="grid md:grid-cols-2 gap-12">
               <div className="bg-navy-900/60 border border-white/10 p-8">
-                <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-400 uppercase">{a.visionMission.visionLabel[lang]}</span>
+                <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-gold-400 uppercase">{a.visionMission.visionLabel[lang]}</span>
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-white mt-4 mb-4">{a.visionMission.visionTitle[lang]}</h2>
-                <p className="text-white/60 leading-relaxed">{a.visionMission.visionDesc[lang]}</p>
+                <p className="text-white/60 leading-relaxed text-justify">{a.visionMission.visionDesc[lang]}</p>
               </div>
               <div className="bg-gradient-to-br from-forest-600/20 to-navy-900/60 border border-forest-500/20 p-8">
-                <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-400 uppercase">{a.visionMission.missionLabel[lang]}</span>
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-white mt-4 mb-4">{a.visionMission.missionTitle[lang]}</h2>
-                <ul className="space-y-3">
-                  {(lang === 'en' ? missionItemsEn : missionItemsAm).map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-base text-white/70">
-                      <CheckCircle2 size={18} className="text-forest-400 mt-0.5 shrink-0" />
-                      {item}
-                    </li>
+                <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-gold-400 uppercase">{a.visionMission.missionLabel[lang]}</span>
+                <h2 className="font-display text-xl md:text-2xl font-bold text-white mt-4 mb-6">{a.visionMission.missionTitle[lang]}</h2>
+                <div className="grid grid-cols-2 gap-4">
+                  {missionCards.map((card) => (
+                    <div key={card.titleEn} className="relative bg-white/5 border border-white/10 p-5 hover:bg-white/10 hover:border-forest-500/30 transition-all group overflow-hidden">
+                      <div className="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-forest-500/10 group-hover:bg-forest-500/20 transition-colors" />
+                      <div className="relative z-10">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-forest-400 to-forest-600 flex items-center justify-center mb-3 shadow-lg shadow-forest-500/20">
+                          <span className="text-lg">{card.icon}</span>
+                        </div>
+                        <h3 className="font-display font-bold text-white text-sm mb-2 group-hover:text-gold-400 transition-colors">{lang === 'en' ? card.titleEn : card.titleAm}</h3>
+                        <p className="text-forest-400 text-sm font-mono font-bold tracking-wide">{lang === 'en' ? card.statEn : card.statAm}</p>
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -151,68 +139,58 @@ export function AboutContent() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="section-padding bg-[#f5f4ef]">
+        <section className="py-16 bg-[#f5f4ef]">
           <div className="container-custom">
-            <div className="text-center mb-16">
-              <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase">{a.timeline.label[lang]}</span>
+            <div className="text-center mb-10">
+              <span className="font-mono text-sm sm:text-base font-bold tracking-[0.3em] text-forest-600 uppercase">{a.timeline.label[lang]}</span>
               <h2 className="font-display text-4xl font-bold text-navy-900 mt-3">{a.timeline.title[lang]}</h2>
             </div>
-            <div className="relative max-w-3xl mx-auto">
-              <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-navy-600 to-forest-500" />
-              <div className="space-y-10">
-                {timeline.map((item, i) => (
-                  <div key={i} className="relative pl-16">
-                    <div className="absolute left-4 top-1 w-5 h-5 rounded-full bg-gradient-to-br from-navy-600 to-forest-500 border-2 border-[#f5f4ef]" />
-                    <span className="font-mono text-xs text-gold-600 tracking-wider">{item.year}</span>
-                    <h3 className="font-display text-xl font-bold text-navy-900 mt-1 mb-2">{lang === 'en' ? item.titleEn : item.titleAm}</h3>
-                    <p className="text-navy-700/60 text-base leading-relaxed">{lang === 'en' ? item.descEn : item.descAm}</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {timeline.map((item, i) => {
+                const isKeyEvent = i === 1 || i === 3;
+                return (
+                  <div
+                    key={i}
+                    className={`group relative bg-white border border-navy-100 p-6 hover-lift ${isKeyEvent ? 'md:col-span-2 lg:col-span-1 md:col-start-1 lg:col-start-auto ring-1 ring-navy-200' : ''}`}
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="font-mono text-sm font-bold text-white bg-navy-900 px-3 py-1">{item.year}</span>
+                      {isKeyEvent && <span className="text-[10px] font-mono uppercase tracking-wider text-gold-600">{lang === 'en' ? 'Key Milestone' : 'ቁልፍ ምዕራፍ'}</span>}
+                    </div>
+                    <h3 className="font-display text-lg font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{lang === 'en' ? item.titleEn : item.titleAm}</h3>
+                    <p className="text-navy-700/70 text-base leading-relaxed text-justify">{lang === 'en' ? item.descEn : item.descAm}</p>
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
           </div>
         </section>
       </ScrollReveal>
 
       <ScrollReveal>
-        <section id="esg" className="section-padding bg-white">
-          <div className="container-custom">
-            <div className="text-center mb-16">
-              <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase">{a.esg.label[lang]}</span>
-              <h2 className="font-display text-4xl font-bold text-navy-900 mt-3">{a.esg.title[lang]}</h2>
-              <p className="text-navy-700/60 mt-4 max-w-2xl mx-auto">{a.esg.desc[lang]}</p>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-              {esgGoals.map((item) => (
-                <div key={item.pillarEn} className="border border-navy-100 p-6 hover-lift bg-white">
-                  <div className={`w-2 h-10 ${item.color} mb-4`} />
-                  <span className="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase text-navy-700/50">{lang === 'en' ? item.pillarEn : item.pillarAm}</span>
-                  <p className="font-bold text-navy-900 text-base mt-2 mb-1">{lang === 'en' ? item.commitmentEn : item.commitmentAm}</p>
-                  <p className="text-navy-700/60 text-sm leading-relaxed">{lang === 'en' ? item.goalEn : item.goalAm}</p>
+        <section id="esg" className="py-20 bg-white overflow-hidden">
+          <div className="text-center mb-8 px-4 container-custom">
+            <span className="font-mono text-sm sm:text-base font-bold tracking-[0.3em] text-forest-600 uppercase">{a.esg.label[lang]}</span>
+            <h2 className="font-display text-4xl font-bold text-navy-900 mt-3">{a.esg.title[lang]}</h2>
+          </div>
+          <div className="relative bg-[#0a1a0e] text-white overflow-hidden w-full">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(30,120,60,0.4)_0%,transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,rgba(200,168,75,0.1)_0%,transparent_40%)]" />
+            <div className="absolute top-0 right-0 w-48 h-48 opacity-5" style={{ backgroundImage: 'radial-gradient(circle, #16a34a 1px, transparent 1px)', backgroundSize: '12px 12px' }} />
+            <div className="relative z-10 max-w-5xl mx-auto px-4 py-14 md:py-16 flex flex-col md:flex-row gap-8 items-center">
+              <div className="shrink-0">
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-forest-400 to-forest-600 flex items-center justify-center shadow-lg shadow-forest-500/20">
+                  <svg className="w-10 h-10 md:w-12 md:h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
+                  </svg>
                 </div>
-              ))}
-            </div>
-            <div>
-              <h3 className="font-display text-2xl font-bold text-navy-900 mb-6 text-center">{a.esg.isoTitle[lang]}</h3>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="bg-[#080616] text-white">
-                      <th className="text-left p-4 font-mono text-xs sm:text-sm tracking-wider uppercase">{(lang === 'en' ? isoHeadersEn : isoHeadersAm)[0]}</th>
-                      <th className="text-left p-4 font-mono text-xs sm:text-sm tracking-wider uppercase">{(lang === 'en' ? isoHeadersEn : isoHeadersAm)[1]}</th>
-                      <th className="text-left p-4 font-mono text-xs sm:text-sm tracking-wider uppercase">{(lang === 'en' ? isoHeadersEn : isoHeadersAm)[2]}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {isoStandards.map((row, i) => (
-                      <tr key={row.std} className={i % 2 === 0 ? 'bg-[#f5f4ef]' : 'bg-white'}>
-                        <td className="p-4 font-bold text-navy-900">{lang === 'en' ? row.areaEn : row.areaAm}</td>
-                        <td className="p-4 font-mono text-gold-600">{row.std}</td>
-                        <td className="p-4 text-navy-700/70">{lang === 'en' ? row.strategyEn : row.strategyAm}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              </div>
+              <div>
+                <p className="text-white/85 text-base md:text-lg leading-relaxed text-justify">{lang === 'en' ? greenLegacyText.en : greenLegacyText.am}</p>
+                    <div className="mt-4 flex items-center gap-2 text-forest-400 text-base font-mono tracking-wider uppercase">
+                  <span className="w-6 h-px bg-forest-500" />
+                  {lang === 'en' ? 'Green Legacy Partner' : 'አረንጓዴ አሻራ አጋር'}
+                </div>
               </div>
             </div>
           </div>
@@ -230,18 +208,11 @@ export function AboutContent() {
           <div className="geo-shape w-36 h-36 bottom-1/4 left-[-20px] rotate-45 opacity-10" />
           <div className="container-custom relative z-10">
             <div className="text-center mb-12">
-              <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-400 uppercase">{a.leadership.label[lang]}</span>
+              <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-gold-400 uppercase">{a.leadership.label[lang]}</span>
               <h2 className="font-display text-4xl font-bold mt-3">{a.leadership.title[lang]}</h2>
             </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              {governanceLevels.map((item) => (
-                <div key={item.level} className="bg-navy-900/60 border border-white/10 p-8">
-                  <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-400 uppercase">{item.level}</span>
-                  <h3 className="font-display text-xl font-bold text-white mt-3 mb-1">{lang === 'en' ? item.titleEn : item.titleAm}</h3>
-                  <p className="text-forest-400 text-base mb-4">{lang === 'en' ? item.subtitleEn : item.subtitleAm}</p>
-                  <p className="text-white/50 text-base leading-relaxed">{lang === 'en' ? item.descEn : item.descAm}</p>
-                </div>
-              ))}
+            <div className="max-w-3xl mx-auto">
+              <p className="text-white/70 text-lg leading-relaxed text-justify text-center">{lang === 'en' ? governanceDesc.en : governanceDesc.am}</p>
             </div>
           </div>
         </section>
