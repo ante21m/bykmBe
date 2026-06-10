@@ -6,9 +6,9 @@ import { ScrollReveal } from './ScrollReveal';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
 
 const timeline = [
-  { year: '2014 EC', titleEn: 'Founded as Besufekad BC', titleAm: 'እንደ በሱፍቃድ ቢሲ ተመሠረተ', descEn: 'Established as a Grade-4 Building Contractor, pioneering urban transformation in Addis Ababa with engineering precision and First Mover spirit.', descAm: 'እንደ ክፍል-4 የሕንፃ ኮንትራክተር ተቋቁሞ፣ በምህንድስና ትክክለኛነት እና አቅኚ መንፈስ በአዲስ አበባ የከተማ ለውጥን አቅንቷል።' },
+  { year: '2014 EC', titleEn: 'The Beginning', titleAm: 'መጀመሪያ', descEn: 'Established as a Grade-4 Building Contractor, pioneering urban transformation in Addis Ababa with engineering precision and First Mover spirit.', descAm: 'እንደ ክፍል-4 የሕንፃ ኮንትራክተር ተቋቁሞ፣ በምህንድስና ትክክለኛነት እና አቅኚ መንፈስ በአዲስ አበባ የከተማ ለውጥን አቅንቷል።' },
   { year: '2018–2020', titleEn: 'Mega-Corridor Project', titleAm: 'ሜጋ-ኮሪደር ፕሮጀክት', descEn: 'Delivered 20.5km of integrated urban corridors for Addis Ababa\'s CBD — 15 days ahead of schedule — establishing BYKM\'s reputation for excellence.', descAm: 'ለአዲስ አበባ CBD 20.5 ኪሎ ሜትር የተቀናጀ የከተማ ኮሪደሮችን አድርሷል — ከቀጠሮው 15 ቀናት ቀደም ብሎ — የBYKMን የላቀነት ስም አስመሥርቷል።' },
-  { year: '2019–2021', titleEn: 'Green Legacy Initiative', titleAm: 'አረንጓዴ አሻራ ተነሳሽነት', descEn: 'Pioneered Living Infrastructure: transforming erosion-prone waterways into Urban Green Lungs, integrating 50,000+ sqm of indigenous flora.', descAm: 'የቀጥታ መሠረተ ልማትን አቅንቷል፦ ለአፈር መሸርሸር የተጋለጡ የውሃ መስመሮችን ወደ ከተማ አረንጓዴ ሳንባዎች መቀየር፣ ከ50,000 ካሬ ሜትር በላይ የሀገር በቀል እፅዋትን በማዋሃድ።' },
+  { year: '2019–2021', titleEn: 'Living Infrastructure', titleAm: 'የቀጥታ መሠረተ ልማት', descEn: 'Pioneered Living Infrastructure: transforming erosion-prone waterways into Urban Green Lungs, integrating 50,000+ sqm of indigenous flora.', descAm: 'የቀጥታ መሠረተ ልማትን አቅንቷል፦ ለአፈር መሸርሸር የተጋለጡ የውሃ መስመሮችን ወደ ከተማ አረንጓዴ ሳንባዎች መቀየር፣ ከ50,000 ካሬ ሜትር በላይ የሀገር በቀል እፅዋትን በማዋሃድ።' },
   { year: '2018 GC', titleEn: 'Strategic Transition to BYKM Trading PLC', titleAm: 'ወደ BYKM ትሬዲንግ ፒኤልሲ ስትራቴጂካዊ ሽግግር', descEn: 'Evolved from specialized contractor to diversified multi-sectoral powerhouse, spanning five integrated business pillars for a Modern Ethiopia.', descAm: 'ከልዩ ኮንትራክተርነት ወደ ተለያዩ ዘርፎች የተስፋፋ ኃያል ኃይል ተለወጠ፣ ለዘመናዊቷ ኢትዮጵያ አምስት የተቀናጁ የንግድ ምሰሶዎችን ያካተተ።' },
   { year: '2024–2030', titleEn: 'Vision 2030 Active Execution', titleAm: 'ራዕይ 2030 ንቁ ትግበራ', descEn: 'Coffee Export Initiative, Digital Infrastructure Pivot, Retail Network Expansion, and Industrial Value-Addition Hubs all in active execution.', descAm: 'የቡና ኤክስፖርት ተነሳሽነት፣ የዲጂታል መሠረተ ልማት ማዞሪያ፣ የችርቻሮ አውታር ማስፋፊያ እና የኢንዱስትሪ እሴት ተጨማሪ ማዕከላት ሁሉም በንቁ ትግበራ ላይ ናቸው።' },
 ];
@@ -25,10 +25,10 @@ const governanceDesc = {
 };
 
 const missionCards = [
-  { icon: '💰', titleEn: 'Unlocking Wealth', titleAm: 'ሀብትን መክፈት', statEn: '+40% value-add by 2027', statAm: 'በ2027 +40% የእሴት ተጨማሪ' },
-  { icon: '🏗️', titleEn: 'Building Resiliency', titleAm: 'መቋቋምን መገንባት', statEn: 'Green infra by 2030', statAm: 'በ2030 አረንጓዴ መሠረተ ልማት' },
-  { icon: '🌐', titleEn: 'Connecting Markets', titleAm: 'ገበያዎችን ማገናኘት', statEn: '3 digital pivots by 2028', statAm: 'በ2028 3 ዲጂታል ለውጦች' },
-  { icon: '👥', titleEn: 'Empowering People', titleAm: 'ሰዎችን ማብቃት', statEn: '5,000+ careers by 2030', statAm: 'በ2030 ከ5,000 በላይ ሙያዎች' },
+  { icon: '💰', titleEn: 'Unlocking Wealth', titleAm: 'ሀብትን መክፈት', descEn: 'Delivering the sustainable, high-durability foundations required to support the nation\'s urban metamorphosis and smart-city initiatives.', descAm: 'የሀገሪቱን የከተማ ለውጥ እና የስማርት ከተማ ተነሳሽነቶችን ለመደገፍ የሚያስፈልጉ ዘላቂ እና ከፍተኛ ጥንካሬ ያላቸውን መሠረቶች ማድረስ።', statEn: '+40% value-add by 2027', statAm: 'በ2027 +40% የእሴት ተጨማሪ' },
+  { icon: '🏗️', titleEn: 'Building Resiliency', titleAm: 'መቋቋምን መገንባት', descEn: 'Strengthening Ethiopia\'s position in the global market by creating seamless digital and logistical links for local producers.', descAm: 'ለአካባቢው አምራቾች እንከን የለሽ ዲጂታል እና ሎጂስቲክስ አገናኞችን በመፍጠር በዓለም ገበያ የኢትዮጵያን ቦታ ማጠናከር።', statEn: 'Green infra by 2030', statAm: 'በ2030 አረንጓዴ መሠረተ ልማት' },
+  { icon: '🌐', titleEn: 'Connecting Markets', titleAm: 'ገበያዎችን ማገናኘት', descEn: 'Driving industrial sovereignty by transitioning the economy from raw material dependence to processed-goods leadership.', descAm: 'ኢኮኖሚውን ከጥሬ ዕቃ ጥገኛነት ወደ ተቀነባበረ ዕቃ መሪነት በመቀየር የኢንዱስትሪ ሉዓላዊነትን ማሳደግ።', statEn: '3 digital pivots by 2028', statAm: 'በ2028 3 ዲጂታል ለውጦች' },
+  { icon: '👥', titleEn: 'Empowering People', titleAm: 'ሰዎችን ማብቃት', descEn: 'Contributing to national prosperity by cultivating a skilled professional class and creating 5,000+ sustainable jobs by 2030.', descAm: 'የተዋጣለት የባለሙያ ክፍልን በማዳበር እና በ2030 ከ5,000 በላይ ዘላቂ ሥራዎችን በመፍጠር ለብሔራዊ ብልጽግና አስተዋጽዖ ማድረግ።', statEn: '5,000+ careers by 2030', statAm: 'በ2030 ከ5,000 በላይ ሙያዎች' },
 ];
 
 export function AboutContent() {
@@ -62,8 +62,8 @@ export function AboutContent() {
             <div>
                 <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-forest-600 uppercase">{a.executive.label[lang]}</span>
                 <h2 className="font-display text-3xl md:text-4xl font-bold text-navy-900 mt-3 mb-10">{a.executive.title[lang]}</h2>
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 p-6 hover-lift group flex flex-col">
+                <div className="grid md:grid-cols-3 gap-14">
+                  <div className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 px-8 py-6 hover-lift group flex flex-col">
                     <div className="absolute top-0 right-0 w-16 h-16 bg-navy-900 -skew-x-[30deg] -translate-y-1/2 translate-x-4 flex items-center justify-center">
                       <span className="skew-x-[30deg] text-gold-400 font-bold text-lg">01</span>
                     </div>
@@ -73,7 +73,7 @@ export function AboutContent() {
                       <p className="text-navy-700/70 text-base leading-relaxed text-justify flex-1">{a.executive.p1[lang]}</p>
                     </div>
                   </div>
-                  <div className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 p-6 hover-lift group flex flex-col">
+                  <div className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 px-8 py-6 hover-lift group flex flex-col">
                     <div className="absolute top-0 right-0 w-16 h-16 bg-navy-800 -skew-x-[30deg] -translate-y-1/2 translate-x-4 flex items-center justify-center">
                       <span className="skew-x-[30deg] text-gold-400 font-bold text-lg">02</span>
                     </div>
@@ -83,13 +83,13 @@ export function AboutContent() {
                       <p className="text-navy-700/70 text-base leading-relaxed text-justify flex-1">{a.executive.p2[lang]}</p>
                     </div>
                   </div>
-                  <div className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 p-6 hover-lift group flex flex-col">
-                    <div className="absolute top-0 right-0 w-16 h-16 bg-forest-600 -skew-x-[30deg] -translate-y-1/2 translate-x-4 flex items-center justify-center">
-                      <span className="skew-x-[30deg] text-white font-bold text-lg">03</span>
+                  <div className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 px-8 py-6 hover-lift group flex flex-col">
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-navy-900 -skew-x-[30deg] -translate-y-1/2 translate-x-4 flex items-center justify-center">
+                      <span className="skew-x-[30deg] text-gold-400 font-bold text-lg">03</span>
                     </div>
                     <div className="mt-4 flex-1 flex flex-col">
-                      <div className="w-10 h-1 bg-forest-600 mb-4" />
-                      <h3 className="font-display text-xl font-bold text-navy-900 mb-3 group-hover:text-forest-600 transition-colors">{lang === 'en' ? 'The Engineering Mindset' : 'የምህንድስና አስተሳሰብ'}</h3>
+                      <div className="w-10 h-1 bg-navy-900 mb-4" />
+                      <h3 className="font-display text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{lang === 'en' ? 'The Engineering Mindset' : 'የምህንድስና አስተሳሰብ'}</h3>
                       <p className="text-navy-700/70 text-base leading-relaxed text-justify flex-1">{a.executive.p3[lang]}</p>
                     </div>
                   </div>
@@ -109,7 +109,7 @@ export function AboutContent() {
           <div className="geo-shape w-56 h-56 top-10 right-[-40px] rotate-12 opacity-25" />
           <div className="geo-shape w-32 h-32 bottom-10 left-1/4 rotate-45 opacity-10" />
           <div className="container-custom relative z-10">
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="grid md:grid-cols-2 gap-14">
               <div className="bg-navy-900/60 border border-white/10 p-8">
                 <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-gold-400 uppercase">{a.visionMission.visionLabel[lang]}</span>
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-white mt-4 mb-4">{a.visionMission.visionTitle[lang]}</h2>
@@ -117,17 +117,19 @@ export function AboutContent() {
               </div>
               <div className="bg-gradient-to-br from-forest-600/20 to-navy-900/60 border border-forest-500/20 p-8">
                 <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-gold-400 uppercase">{a.visionMission.missionLabel[lang]}</span>
-                <h2 className="font-display text-xl md:text-2xl font-bold text-white mt-4 mb-6">{a.visionMission.missionTitle[lang]}</h2>
+                <h2 className="font-display text-xl md:text-2xl font-bold text-white mt-4 mb-4">{a.visionMission.missionTitle[lang]}</h2>
+                <p className="text-white/70 text-sm leading-relaxed mb-6">BYKM Trading PLC is committed to architecting the future of a Modern Ethiopia via four strategic imperatives:</p>
                 <div className="grid grid-cols-2 gap-4">
                   {missionCards.map((card) => (
                     <div key={card.titleEn} className="relative bg-white/5 border border-white/10 p-5 hover:bg-white/10 hover:border-forest-500/30 transition-all group overflow-hidden">
                       <div className="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-forest-500/10 group-hover:bg-forest-500/20 transition-colors" />
                       <div className="relative z-10">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-forest-400 to-forest-600 flex items-center justify-center mb-3 shadow-lg shadow-forest-500/20">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-forest-600 to-forest-800 flex items-center justify-center mb-3 shadow-lg shadow-forest-700/20">
                           <span className="text-lg">{card.icon}</span>
                         </div>
-                        <h3 className="font-display font-bold text-white text-sm mb-2 group-hover:text-gold-400 transition-colors">{lang === 'en' ? card.titleEn : card.titleAm}</h3>
-                        <p className="text-forest-400 text-sm font-mono font-bold tracking-wide">{lang === 'en' ? card.statEn : card.statAm}</p>
+                        <h3 className="font-display font-bold text-white text-sm mb-1 group-hover:text-gold-400 transition-colors">{lang === 'en' ? card.titleEn : card.titleAm}</h3>
+                        <p className="text-white/60 text-sm leading-relaxed mb-2">{lang === 'en' ? card.descEn : card.descAm}</p>
+                        <p className="text-forest-400 text-xs font-mono font-bold tracking-wide">{lang === 'en' ? card.statEn : card.statAm}</p>
                       </div>
                     </div>
                   ))}
@@ -145,20 +147,25 @@ export function AboutContent() {
               <span className="font-mono text-sm sm:text-base font-bold tracking-[0.3em] text-forest-600 uppercase">{a.timeline.label[lang]}</span>
               <h2 className="font-display text-4xl font-bold text-navy-900 mt-3">{a.timeline.title[lang]}</h2>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-14">
               {timeline.map((item, i) => {
-                const isKeyEvent = i === 1 || i === 3;
+                const badgeBg = 'bg-navy-900';
+                const badgeText = 'text-gold-400';
+                const accentColor = 'bg-navy-900';
+                const num = String(i + 1).padStart(2, '0');
                 return (
                   <div
                     key={i}
-                    className={`group relative bg-white border border-navy-100 p-6 hover-lift ${isKeyEvent ? 'md:col-span-2 lg:col-span-1 md:col-start-1 lg:col-start-auto ring-1 ring-navy-200' : ''}`}
+                    className="group relative bg-white border border-navy-100 border-t-4 border-t-forest-700 px-8 py-6 hover-lift flex flex-col"
                   >
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="font-mono text-sm font-bold text-white bg-navy-900 px-3 py-1">{item.year}</span>
-                      {isKeyEvent && <span className="text-[10px] font-mono uppercase tracking-wider text-gold-600">{lang === 'en' ? 'Key Milestone' : 'ቁልፍ ምዕራፍ'}</span>}
+                    <div className={`absolute top-0 right-0 w-16 h-16 ${badgeBg} -skew-x-[30deg] -translate-y-1/2 translate-x-4 flex items-center justify-center`}>
+                      <span className={`skew-x-[30deg] ${badgeText} font-bold text-lg`}>{num}</span>
                     </div>
-                    <h3 className="font-display text-lg font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{lang === 'en' ? item.titleEn : item.titleAm}</h3>
-                    <p className="text-navy-700/70 text-base leading-relaxed text-justify">{lang === 'en' ? item.descEn : item.descAm}</p>
+                    <div className="mt-4 flex-1 flex flex-col">
+                      <div className={`w-10 h-1 ${accentColor} mb-4`} />
+                      <h3 className="font-display text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{lang === 'en' ? item.titleEn : item.titleAm}</h3>
+                      <p className="text-navy-700/70 text-base leading-relaxed text-justify flex-1">{lang === 'en' ? item.descEn : item.descAm}</p>
+                    </div>
                   </div>
                 );
               })}
@@ -177,11 +184,12 @@ export function AboutContent() {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(30,120,60,0.4)_0%,transparent_60%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,rgba(200,168,75,0.1)_0%,transparent_40%)]" />
             <div className="absolute top-0 right-0 w-48 h-48 opacity-5" style={{ backgroundImage: 'radial-gradient(circle, #16a34a 1px, transparent 1px)', backgroundSize: '12px 12px' }} />
-            <div className="relative z-10 max-w-5xl mx-auto px-4 py-14 md:py-16 flex flex-col md:flex-row gap-8 items-center">
+            <div className="relative z-10 max-w-5xl mx-auto px-4 py-14 md:py-16 flex flex-col md:flex-row gap-14 items-center">
               <div className="shrink-0">
-                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-forest-400 to-forest-600 flex items-center justify-center shadow-lg shadow-forest-500/20">
-                  <svg className="w-10 h-10 md:w-12 md:h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-forest-600 to-forest-800 flex items-center justify-center shadow-lg shadow-forest-700/20">
+                  <svg className="w-10 h-10 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C9 2 5 5 5 9.5c0 2.8 1.7 5.2 4 6.3V21h6v-5.2c2.3-1.1 4-3.5 4-6.3C19 5 15 2 12 2z" />
+                    <rect x="11" y="15" width="2" height="6.5" rx="0.5" />
                   </svg>
                 </div>
               </div>

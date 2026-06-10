@@ -61,6 +61,7 @@ export function HomeContent({ sections }: Props) {
       items: api.mission.items.length > 0 ? api.mission.items.map(item => ({
         label: { en: item.label.en, am: item.label.am },
         sub: { en: item.sub.en, am: item.sub.am },
+        desc: { en: item.desc?.en || '', am: item.desc?.am || '' },
       })) : t.home.mission.items,
     },
     pillars: {
@@ -176,12 +177,18 @@ export function HomeContent({ sections }: Props) {
                 <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase block mb-1">{h.mission.label[lang]}</span>
                 <p className="font-display text-xl md:text-2xl font-semibold text-navy-900 max-w-md">{h.mission.title[lang]}</p>
               </div>
-              <div className="hidden md:block h-16 w-px bg-navy-100" />
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 flex-1">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 flex-1">
                 {h.mission.items.map((item, i) => (
-                  <div key={i} className="border-l-2 border-gold-400 pl-3">
-                    <p className="font-bold text-navy-900 text-sm">{item.label[lang]}</p>
-                    <p className="text-navy-700/60 text-sm mt-0.5">{item.sub[lang]}</p>
+                  <div key={i} className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 px-4 py-5 hover-lift group flex flex-col">
+                    <div className="absolute top-0 right-0 w-12 h-12 bg-navy-900 -skew-x-[30deg] -translate-y-1/2 translate-x-3 flex items-center justify-center">
+                      <span className="skew-x-[30deg] text-gold-400 font-bold text-sm">0{i + 1}</span>
+                    </div>
+                    <div className="mt-3 flex-1 flex flex-col">
+                      <div className="w-8 h-0.5 bg-navy-900 mb-3" />
+                      <p className="font-display font-bold text-navy-900 text-sm mb-1 group-hover:text-gold-600 transition-colors">{item.label[lang]}</p>
+                      <p className="text-navy-700/60 text-xs leading-relaxed mb-2 flex-1">{item.desc[lang]}</p>
+                      <p className="text-forest-600 text-[11px] font-mono font-bold tracking-wide">{item.sub[lang]}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -202,17 +209,20 @@ export function HomeContent({ sections }: Props) {
               {pillars.map((pillar, i) => {
                 const Icon = pillar.icon;
                 return (
-                  <Link key={pillar.key} href={pillar.href} className="block bg-white border border-navy-100 border-t-4 border-t-forest-600 p-6 md:p-8 group hover-lift select-text">
-                    <div className="flex items-start gap-4 mb-5">
-                      <span className="font-display text-4xl font-bold text-navy-100">{String(i + 1).padStart(2, '0')}</span>
+                  <Link key={pillar.key} href={pillar.href} className="block relative bg-white border border-navy-100 border-t-4 border-t-forest-700 p-6 md:p-8 group hover-lift select-text">
+                    <div className="absolute top-0 right-0 w-16 h-16 bg-navy-900 -skew-x-[30deg] -translate-y-1/2 translate-x-4 flex items-center justify-center">
+                      <span className="skew-x-[30deg] text-gold-400 font-bold text-lg">{String(i + 1).padStart(2, '0')}</span>
+                    </div>
+                    <div className="w-8 h-0.5 bg-navy-900 mb-4" />
+                    <div className="flex items-center gap-3 mb-4">
                       <div className="w-10 h-10 flex items-center justify-center shrink-0 rounded-full" style={{ backgroundColor: `${pillar.accent}15` }}>
                         <Icon size={18} style={{ color: pillar.accent }} />
                       </div>
+                      <span className="font-mono text-xs tracking-[0.3em] uppercase font-semibold text-[#1a237e]">{h.pillarsData[i].tagline[lang]}</span>
                     </div>
-                    <span className="font-mono text-xs tracking-[0.3em] uppercase font-semibold text-[#1a237e]">{h.pillarsData[i].tagline[lang]}</span>
-                    <h3 className="font-display text-lg md:text-xl font-bold text-navy-900 mt-1 mb-3">{lang === 'en' ? pillar.titleEn : ''}</h3>
+                    <h3 className="font-display text-lg md:text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{lang === 'en' ? pillar.titleEn : ''}</h3>
                     <p className="text-navy-700/60 text-sm md:text-base leading-relaxed">{lang === 'en' ? pillar.descEn : pillar.descAm}</p>
-                    <span className="inline-flex items-center gap-1.5 mt-4 text-xs font-bold uppercase tracking-wider text-[#1a237e] hover:text-forest-600 hover:translate-x-1 transition-all duration-200">
+                    <span className="inline-flex items-center gap-1.5 mt-4 text-xs font-bold uppercase tracking-wider text-[#1a237e] group-hover:text-forest-600 group-hover:translate-x-1 transition-all duration-200">
                       <span>{lang === 'en' ? 'View Detail' : 'ዝርዝር ይመልከቱ'}</span>
                       <ArrowRight size={12} />
                     </span>
@@ -273,13 +283,16 @@ export function HomeContent({ sections }: Props) {
               {values.map((val, i) => {
                 const Icon = val.icon;
                 return (
-                  <div key={val.titleEn} className="bg-white border border-navy-100 border-t-4 border-t-forest-600 p-6 md:p-8 group hover-lift">
-                    <span className="font-display text-4xl font-bold text-navy-100 mb-4 block">{String(i + 1).padStart(2, '0')}</span>
+                  <div key={val.titleEn} className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 p-6 md:p-8 group hover-lift">
+                    <div className="absolute top-0 right-0 w-14 h-14 bg-navy-900 -skew-x-[30deg] -translate-y-1/2 translate-x-3 flex items-center justify-center">
+                      <span className="skew-x-[30deg] text-gold-400 font-bold text-base">{String(i + 1).padStart(2, '0')}</span>
+                    </div>
+                    <div className="w-8 h-0.5 bg-navy-900 mb-4" />
                     <div className="flex items-center gap-3 mb-3">
                       <div className="w-9 h-9 flex items-center justify-center shrink-0 rounded-full" style={{ backgroundColor: '#2e7d3215' }}>
                         <Icon size={16} className="text-forest-500" />
                       </div>
-                      <h3 className="font-bold text-navy-900 text-base">{lang === 'en' ? val.titleEn : val.titleAm}</h3>
+                      <h3 className="font-bold text-navy-900 text-base group-hover:text-gold-600 transition-colors">{lang === 'en' ? val.titleEn : val.titleAm}</h3>
                     </div>
                     <p className="text-navy-700/60 text-sm md:text-base leading-relaxed">{lang === 'en' ? val.descEn : val.descAm}</p>
                   </div>
@@ -313,8 +326,11 @@ export function HomeContent({ sections }: Props) {
             <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase">{h.partners.label[lang]}</span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-navy-900 mt-3 mb-12">{h.partners.title[lang]}</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {partnerNames.map((partner) => (
-                <div key={partner.en} className="bg-white border border-navy-100 p-6 flex items-center justify-center text-center hover-lift">
+              {partnerNames.map((partner, i) => (
+                <div key={partner.en} className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 p-6 flex items-center justify-center text-center hover-lift group">
+                  <div className="absolute top-0 right-0 w-12 h-12 bg-navy-900 -skew-x-[30deg] -translate-y-1/2 translate-x-3 flex items-center justify-center">
+                    <span className="skew-x-[30deg] text-gold-400 font-bold text-xs">{String(i + 1).padStart(2, '0')}</span>
+                  </div>
                   <p className="text-navy-700/70 text-sm font-bold uppercase tracking-wide leading-snug">{lang === 'en' ? partner.en : partner.am}</p>
                 </div>
               ))}
