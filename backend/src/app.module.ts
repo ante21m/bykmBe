@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { ContactModule } from './modules/contact/contact.module';
 import { ProjectsModule } from './modules/projects/projects.module';
 import { ServicesModule } from './modules/services/services.module';
@@ -25,6 +27,7 @@ import { UnansweredQuery } from './entities/unanswered-query.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    ThrottlerModule.forRoot([{ ttl: 60000, limit: 60 }]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -32,10 +35,10 @@ import { UnansweredQuery } from './entities/unanswered-query.entity';
         host: configService.get('DB_HOST', 'localhost'),
         port: configService.get('DB_PORT', 5432),
         username: configService.get('DB_USERNAME', 'postgres'),
-        password: configService.get('DB_PASSWORD', 'root'),
+        password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE', 'bykm_trading'),
         entities: [ContactSubmission, Project, Service, AboutSection, News, HomeSection, Gallery, UnansweredQuery],
-        synchronize: true,
+        synchronize: configService.get('NODE_ENV') !== 'production',
         logging: configService.get('NODE_ENV') === 'development',
       }),
       inject: [ConfigService],
@@ -52,6 +55,12 @@ import { UnansweredQuery } from './entities/unanswered-query.entity';
     HomeModule,
     GalleryModule,
     UnansweredQueriesModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
   ],
 })
 export class AppModule {}

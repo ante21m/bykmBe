@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
 import { useGetNewsItemQuery } from '@/lib/redux/api';
+import DOMPurify from 'isomorphic-dompurify';
 
 export function NewsDetailContent() {
   const { id } = useParams<{ id: string }>();
@@ -103,7 +104,7 @@ export function NewsDetailContent() {
 
           <div
             className="rich-text text-white/80 text-base leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: lang === 'am' && article.contentAm ? article.contentAm : article.content }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(lang === 'am' && article.contentAm ? article.contentAm : article.content) }}
           />
 
           {article.tags && (

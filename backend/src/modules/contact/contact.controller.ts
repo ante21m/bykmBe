@@ -16,6 +16,7 @@ import {
   ApiResponse,
   ApiQuery,
 } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { ContactService } from './contact.service';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { SubmissionStatus } from '../../entities/contact-submission.entity';
@@ -28,6 +29,7 @@ export class ContactController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
+  @Throttle({ default: { limit: 5, ttl: 60000 } })
   @ApiOperation({ summary: 'Submit contact form' })
   @ApiResponse({ status: 201, description: 'Submission received successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })

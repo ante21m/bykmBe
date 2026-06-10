@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { MapPin, Phone, Mail, Globe, Linkedin } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
+import DOMPurify from 'isomorphic-dompurify';
 
 export function Footer() {
   const { lang, translations: t } = useTranslation();
@@ -116,7 +117,7 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-sm text-white/60">
                 <MapPin size={15} className="text-gold-400 mt-0.5 shrink-0" />
-                <span dangerouslySetInnerHTML={{ __html: f.address[lang] }} />
+                <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(f.address[lang]) }} />
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <Phone size={15} className="text-gold-400 shrink-0" />

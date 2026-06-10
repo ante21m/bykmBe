@@ -14,6 +14,8 @@ import {
 import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { ServicesDataService } from './services.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CreateServiceDto } from './dto/create-service.dto';
+import { UpdateServiceDto } from './dto/update-service.dto';
 
 @ApiTags('services')
 @Controller('services')
@@ -43,15 +45,15 @@ export class ServicesController {
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Create a service' })
-  create(@Body() data: any) {
-    return this.servicesService.create(data);
+  create(@Body() dto: CreateServiceDto) {
+    return this.servicesService.create(dto);
   }
 
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Update a service' })
-  update(@Param('id') id: string, @Body() data: any) {
-    return this.servicesService.update(id, data);
+  update(@Param('id') id: string, @Body() dto: UpdateServiceDto) {
+    return this.servicesService.update(id, dto);
   }
 
   @Delete(':id')
