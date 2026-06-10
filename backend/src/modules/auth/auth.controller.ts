@@ -1,7 +1,7 @@
-import { Controller, Post, Body, HttpCode, HttpStatus, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
+import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
+import { ApiTags } from '@nestjs/swagger';
+import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 
 @ApiTags('Auth')
@@ -12,17 +12,7 @@ export class AuthController {
   @Post('login')
   @Throttle({ default: { limit: 5, ttl: 60000 } })
   @HttpCode(HttpStatus.OK)
-  @Throttle({ default: { limit: 10, ttl: 60000 } })
   login(@Body() dto: LoginDto) {
-    const adminUsername = this.configService.get<string>('ADMIN_USERNAME');
-    const adminPassword = this.configService.get<string>('ADMIN_PASSWORD');
-    if (!adminUsername || !adminPassword) {
-      throw new UnauthorizedException('Server misconfiguration: admin credentials not set');
-    }
-    if (dto.username !== adminUsername || dto.password !== adminPassword) {
-      throw new UnauthorizedException('Invalid username or password');
-    }
-    const token = this.jwtService.sign({ role: 'admin', username: dto.username });
-    return { token };
+    return this.authService.login(dto.username, dto.password);
   }
 }
