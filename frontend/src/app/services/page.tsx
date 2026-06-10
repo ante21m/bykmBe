@@ -1,16 +1,23 @@
 import type { Metadata } from 'next';
 import { ServicesContent } from '@/components/ServicesContent';
 
+const TITLE = 'Services — BYKM Trading PLC';
+const DESC = 'Five integrated business pillars — Infrastructure, Global Trade & Logistics, Agro-Industrialization, Digital Economy, and Hospitality — delivering industrial sovereignty.';
+const OG_IMAGE = { url: '/images/logo-bykm.jpg', width: 600, height: 600, alt: 'BYKM Trading PLC' };
+
 export const metadata: Metadata = {
-  title: 'Services — BYKM Trading PLC',
-  description: 'Five integrated business pillars — Infrastructure, Global Trade & Logistics, Agro-Industrialization, Digital Economy, and Hospitality — delivering industrial sovereignty.',
+  title: TITLE,
+  description: DESC,
   openGraph: {
-    title: 'Services — BYKM Trading PLC',
-    description: 'Five integrated business pillars delivering industrial sovereignty across Ethiopia.',
+    title: TITLE,
+    description: DESC,
+    images: [OG_IMAGE],
   },
   twitter: {
-    title: 'Services — BYKM Trading PLC',
-    description: 'Five integrated business pillars delivering industrial sovereignty across Ethiopia.',
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESC,
+    images: ['/images/logo-bykm.jpg'],
   },
 };
 

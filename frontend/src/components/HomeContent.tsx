@@ -8,18 +8,18 @@ import { useTranslation } from '@/lib/i18n/LanguageProvider';
 import { transformHomeSections, type RawHomeSection } from '@/lib/home-data';
 
 const pillars = [
-  { key: 'infra', icon: Shield, titleEn: 'Infrastructure, Engineering & Urban Development', descEn: 'Grade-4 General Contracting excellence: mega-corridors, eco-urban development, real estate, and technical consultancy shaping Ethiopia\'s smart cities.', descAm: 'የደረጃ-4 አጠቃላይ ኮንትራክተር የላቀነት፦ ሜጋ ኮሪደሮች፣ ኢኮ-ከተማ ልማት፣ ሪል እስቴት እና የኢትዮጵያን ስማርት ከተሞች የሚቀርጽ ቴክኒክ አማካሪነት።', accent: '#1a237e', href: '/services?pillar=infrastructure' },
-  { key: 'logistics', icon: Globe, titleEn: 'Global Trade, Logistics & Transport', descEn: 'Strategic import/export, freight forwarding, warehousing, and fleet management connecting Ethiopian producers with international markets.', descAm: 'ስትራቴጂካዊ ማስመጣት/መላክ፣ የጭነት ዝውውር፣ መጋዘን እና የኢትዮጵያን አምራቾች ከአለም አቀፍ ገበያ ጋር የሚያገናኝ የመርከብ አስተዳደር።', accent: '#3949ab', href: '/services?pillar=logistics' },
-  { key: 'agro', icon: Leaf, titleEn: 'Agro-Industrialization & Natural Resources', descEn: 'Managing the full value chain of Ethiopia\'s agricultural wealth — coffee, minerals, oilseeds — transforming raw resources into premium "Made in Ethiopia" exports.', descAm: 'የኢትዮጵያን የግብርና ሀብት ሙሉ ሰንሰለት ማስተዳደር — ቡና፣ ማዕድን፣ ቅባት እህሎች — ጥሬ ሀብቶችን ወደ ከፍተኛ "በኢትዮጵያ የተሰራ" ምርቶች መቀየር።', accent: '#2e7d32', href: '/services?pillar=agro' },
-  { key: 'digital', icon: Zap, titleEn: 'Digital Economy, Media & Technical Services', descEn: 'ICT infrastructure, telecommunications, printing, publishing, and digital training services powering Ethiopia\'s knowledge economy.', descAm: 'የኢትዮጵያን የእውቀት ኢኮኖሚ የሚያጎለብቱ አይሲቲ መሠረተ ልማት፣ ቴሌኮሙኒኬሽን፣ ህትመት፣ እና ዲጂታል ስልጠና አገልግሎቶች።', accent: '#2e7d32', href: '/services?pillar=digital' },
-  { key: 'hospitality', icon: TrendingUp, titleEn: 'Hospitality, Retail & Consumer Ecosystems', descEn: 'Luxury hotels, eco-resorts, tiered retail networks, and agricultural input supply elevating consumption standards for Modern Ethiopia.', descAm: 'የቅንጦት ሆቴሎች፣ ኢኮ-ሪዞርቶች፣ የተደራጁ የችርቻሮ አውታሮች እና ለዘመናዊቷ ኢትዮጵያ የፍጆታ ደረጃዎችን ከፍ የሚያደርግ የግብርና ግብዓት አቅርቦት።', accent: '#c8a84b', href: '/services?pillar=hospitality' },
+  { key: 'infra', icon: Shield, titleEn: 'Infrastructure, Engineering & Urban Development', descEn: 'We build Ethiopia\'s future with Grade-4 General Contracting — roads, buildings, water systems, and smart city solutions that improve everyday life.', descAm: 'የኢትዮጵያን የወደፊት እጣ ፈንታ በደረጃ-4 አጠቃላይ ኮንትራክተርነት እንገነባለን — መንገዶች፣ ህንፃዎች፣ የውሃ ሥርዓቶች እና የዕለት ተዕለት ኑሮን የሚያሻሽሉ ስማርት ከተማ መፍትሄዎች።', accent: '#1a237e', href: '/services?pillar=infrastructure' },
+  { key: 'logistics', icon: Globe, titleEn: 'Global Trade, Logistics & Transport', descEn: 'We connect Ethiopian businesses to the world through smart trade, reliable shipping, and modern warehousing solutions.', descAm: 'የኢትዮጵያን ንግዶች በዘመናዊ ንግድ፣ አስተማማኝ መላኪያ እና ዘመናዊ የመጋዘን መፍትሄዎች ከዓለም ጋር እናገናኛለን።', accent: '#3949ab', href: '/services?pillar=logistics' },
+  { key: 'agro', icon: Leaf, titleEn: 'Agro-Industrialization & Natural Resources', descEn: 'We turn Ethiopia\'s finest coffee, minerals, and oilseeds into world-class products — from farm to global shelf.', descAm: 'የኢትዮጵያን ምርጥ ቡና፣ ማዕድናት እና ቅባት እህሎች ከእርሻ እስከ ዓለም አቀፍ መደርደሪያ ድረስ ወደ ዓለም ደረጃ ምርቶች እንለውጣለን።', accent: '#2e7d32', href: '/services?pillar=agro' },
+  { key: 'digital', icon: Zap, titleEn: 'Digital Economy, Media & Technical Services', descEn: 'We power Ethiopia\'s digital future with ICT infrastructure, telecom solutions, and skills training for the next generation.', descAm: 'የኢትዮጵያን ዲጂታል የወደፊት እጣ ፈንታ በአይሲቲ መሠረተ ልማት፣ ቴሌኮም መፍትሄዎች እና ለቀጣዩ ትውልድ የክህሎት ስልጠና እናበረታታለን።', accent: '#2e7d32', href: '/services?pillar=digital' },
+  { key: 'hospitality', icon: TrendingUp, titleEn: 'Hospitality, Retail & Consumer Ecosystems', descEn: 'We create unforgettable experiences through luxury hotels, eco-resorts, and retail networks that elevate everyday living.', descAm: 'የማይረሱ ተሞክሮዎችን በቅንጦት ሆቴሎች፣ ኢኮ-ሪዞርቶች እና የዕለት ተዕለት ኑሮን በሚያሻሽሉ የችርቻሮ አውታሮች እንፈጥራለን።', accent: '#c8a84b', href: '/services?pillar=hospitality' },
 ];
 
 const values = [
-  { icon: Leaf, titleEn: 'The Green Legacy', titleAm: 'አረንጓዴ አሻራ', descEn: 'Green Engineering across every sector — from mining to manufacturing.', descAm: 'አረንጓዴ ምህንድስና በሁሉም ዘርፎች — ከማዕድን እስከ ማምረት።' },
-  { icon: Shield, titleEn: 'Operational Excellence', titleAm: 'የአሰራር የላቀነት', descEn: 'Uncompromising precision and international quality in everything we do.', descAm: 'በምንሰራው ሁሉ የማይደራደር ትክክለኛነት እና ዓለም አቀፍ ጥራት።' },
-  { icon: Zap, titleEn: 'Synergetic Innovation', titleAm: 'ተመሳሳሪ ፈጠራ', descEn: 'Integrated strengths powering factories and global supply chains.', descAm: 'ፋብሪካዎችን እና ዓለም አቀፍ አቅርቦት ሰንሰለቶችን የሚያጎለብቱ የተቀናጁ ጥንካሬዎች።' },
-  { icon: Users, titleEn: 'National Pride & Impact', titleAm: 'ብሄራዊ ኩራት እና ተጽእኖ', descEn: 'Building Ethiopia through job creation and nationwide transformation.', descAm: 'የስራ ዕድል በመፍጠር እና በሀገር አቀፍ ለውጥ ኢትዮጵያን መገንባት።' },
+  { icon: Leaf, titleEn: 'The Green Legacy', titleAm: 'አረንጓዴ አሻራ', descEn: 'Protecting our planet through sustainable practices in everything we build and make.', descAm: 'በምንገነባው እና በምንሰራው ሁሉ ዘላቂ በሆኑ ተግባራት ፕላኔታችንን መጠበቅ።' },
+  { icon: Shield, titleEn: 'Operational Excellence', titleAm: 'የአሰራር የላቀነት', descEn: 'Delivering quality you can trust — every project, every time.', descAm: 'ሊተማመኑበት የሚችሉትን ጥራት ማቅረብ — በእያንዳንዱ ፕሮጀክት፣ በእያንዳንዱ ጊዜ።' },
+  { icon: Zap, titleEn: 'Synergetic Innovation', titleAm: 'ተመሳሳሪ ፈጠራ', descEn: 'Combining our strengths to create smarter solutions for industry and trade.', descAm: 'ለኢንዱስትሪ እና ለንግድ የተሻሉ መፍትሄዎችን ለመፍጠር ጥንካሬያችንን ማጣመር።' },
+  { icon: Users, titleEn: 'National Pride & Impact', titleAm: 'ብሄራዊ ኩራት እና ተጽእኖ', descEn: 'Creating jobs, building communities, and shaping a brighter future for Ethiopia.', descAm: 'የስራ ዕድሎችን መፍጠር፣ ማህበረሰቦችን መገንባት እና ለኢትዮጵያ የተሻለ የወደፊት እጣ ፈንታን መቅረጽ።' },
 ];
 
 const partnerNames = [
@@ -191,28 +191,31 @@ export function HomeContent({ sections }: Props) {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="section-padding bg-[#f5f4ef]">
+        <section className="py-16 md:py-20 bg-[#f5f4ef]">
           <div className="container-custom">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12">
               <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase">{h.pillars.label[lang]}</span>
               <h2 className="font-display text-4xl md:text-5xl font-bold text-navy-900 mt-3">{h.pillars.title[lang]}</h2>
               <p className="text-navy-700/60 mt-4 max-w-2xl mx-auto">{h.pillars.desc[lang]}</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {pillars.map((pillar, i) => {
                 const Icon = pillar.icon;
                 return (
-                  <Link key={pillar.key} href={pillar.href}
-                    className={`pillar-card hover-lift bg-white rounded-none p-8 group block ${i === 0 ? 'lg:col-span-2' : ''}`}>
-                    <div className="w-12 h-12 flex items-center justify-center mb-6" style={{ backgroundColor: `${pillar.accent}15` }}>
-                      <Icon size={22} style={{ color: pillar.accent }} />
+                  <Link key={pillar.key} href={pillar.href} className="block bg-white border border-navy-100 border-t-4 border-t-forest-600 p-6 md:p-8 group hover-lift select-text">
+                    <div className="flex items-start gap-4 mb-5">
+                      <span className="font-display text-4xl font-bold text-navy-100">{String(i + 1).padStart(2, '0')}</span>
+                      <div className="w-10 h-10 flex items-center justify-center shrink-0 rounded-full" style={{ backgroundColor: `${pillar.accent}15` }}>
+                        <Icon size={18} style={{ color: pillar.accent }} />
+                      </div>
                     </div>
-                    <span className="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase text-gold-600">{h.pillarsData[i].tagline[lang]}</span>
-                    <h3 className="font-display text-xl font-bold text-navy-900 mt-2 mb-3 group-hover:text-navy-600 transition-colors">{pillar.titleEn}</h3>
-                    <p className="text-navy-700/60 text-base leading-relaxed mb-4">{lang === 'en' ? pillar.descEn : pillar.descAm}</p>
-                    <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-navy-600 group-hover:text-gold-600 transition-colors">
-                      <span>{h.pillarsData[i].exploreLabel[lang]}</span><ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                    </div>
+                    <span className="font-mono text-xs tracking-[0.3em] uppercase font-semibold text-[#1a237e]">{h.pillarsData[i].tagline[lang]}</span>
+                    <h3 className="font-display text-lg md:text-xl font-bold text-navy-900 mt-1 mb-3">{lang === 'en' ? pillar.titleEn : ''}</h3>
+                    <p className="text-navy-700/60 text-sm md:text-base leading-relaxed">{lang === 'en' ? pillar.descEn : pillar.descAm}</p>
+                    <span className="inline-flex items-center gap-1.5 mt-4 text-xs font-bold uppercase tracking-wider text-[#1a237e] hover:text-forest-600 hover:translate-x-1 transition-all duration-200">
+                      <span>{lang === 'en' ? 'View Detail' : 'ዝርዝር ይመልከቱ'}</span>
+                      <ArrowRight size={12} />
+                    </span>
                   </Link>
                 );
               })}
@@ -260,20 +263,25 @@ export function HomeContent({ sections }: Props) {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="section-padding bg-white">
+        <section className="py-16 md:py-20 bg-white">
           <div className="container-custom">
-            <div className="max-w-3xl mx-auto text-center mb-16">
+            <div className="text-center mb-12">
               <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase">{h.values.label[lang]}</span>
               <h2 className="font-display text-4xl md:text-5xl font-bold text-navy-900 mt-3">{h.values.title[lang]}</h2>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {values.map((val, i) => {
                 const Icon = val.icon;
                 return (
-                  <div key={val.titleEn} className="group">
-                    <div className="text-4xl font-display font-bold text-navy-100 mb-3 group-hover:text-gold-200 transition-colors">0{i + 1}</div>
-                    <div className="flex items-center gap-2 mb-3"><Icon size={18} className="text-forest-500" /><h3 className="font-bold text-navy-900">{lang === 'en' ? val.titleEn : val.titleAm}</h3></div>
-                    <p className="text-navy-700/60 text-base leading-relaxed">{lang === 'en' ? val.descEn : val.descAm}</p>
+                  <div key={val.titleEn} className="bg-white border border-navy-100 border-t-4 border-t-forest-600 p-6 md:p-8 group hover-lift">
+                    <span className="font-display text-4xl font-bold text-navy-100 mb-4 block">{String(i + 1).padStart(2, '0')}</span>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-9 h-9 flex items-center justify-center shrink-0 rounded-full" style={{ backgroundColor: '#2e7d3215' }}>
+                        <Icon size={16} className="text-forest-500" />
+                      </div>
+                      <h3 className="font-bold text-navy-900 text-base">{lang === 'en' ? val.titleEn : val.titleAm}</h3>
+                    </div>
+                    <p className="text-navy-700/60 text-sm md:text-base leading-relaxed">{lang === 'en' ? val.descEn : val.descAm}</p>
                   </div>
                 );
               })}
