@@ -28,6 +28,7 @@ interface StatItem {
 interface MissionItem {
   label: BilingualField;
   sub: BilingualField;
+  desc?: BilingualField;
 }
 
 interface PillarMeta {
