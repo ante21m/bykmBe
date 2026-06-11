@@ -7,6 +7,7 @@ export const translations = {
     news: { en: 'News', am: 'ዜና' },
     gallery: { en: 'Gallery', am: 'ማዕከለ-ስዕላት' },
     contact: { en: 'Contact', am: 'ያግኙን' },
+    history: { en: 'History', am: 'ታሪክ' },
     partnerCta: { en: 'Partner With Us', am: 'ከእኛ ጋር አጋር ይሁኑ' },
   },
   footer: {
@@ -55,10 +56,10 @@ export const translations = {
       label: { en: 'Our Mission', am: 'ተልዕኳችን' },
       title: { en: 'Synergizing Progress, Sustaining Nature', am: 'እድገትን በማጣመር፣ ተፈጥሮን በመጠበቅ' },
       items: [
-        { label: { en: 'Unlocking Wealth', am: 'ሀብትን መፍታት' }, sub: { en: '+40% value-add by 2027', am: 'በ2027 +40% እሴት መጨመር' } },
-        { label: { en: 'Building Resiliency', am: 'መቋቋም መገንባት' }, sub: { en: 'Green infra by 2030', am: 'በ2030 አረንጓዴ መሠረተ ልማት' } },
-        { label: { en: 'Connecting Markets', am: 'ገበያዎችን ማገናኘት' }, sub: { en: '3 digital pivots by 2028', am: 'በ2028 3 ዲጂታል ለውጦች' } },
-        { label: { en: 'Empowering People', am: 'ህዝቡን ማብቃት' }, sub: { en: '5,000+ careers by 2030', am: 'በ2030 5,000+ ሙያዎች' } },
+        { label: { en: 'Unlocking Wealth', am: 'ሀብትን መፍታት' }, sub: { en: '+40% value-add by 2027', am: 'በ2027 +40% እሴት መጨመር' }, desc: { en: 'Building sustainable foundations for urban and smart-city growth.', am: 'ለከተማ እና ለስማርት ከተማ እድገት ዘላቂ መሠረቶችን መገንባት።' } },
+        { label: { en: 'Building Resiliency', am: 'መቋቋም መገንባት' }, sub: { en: 'Green infra by 2030', am: 'በ2030 አረንጓዴ መሠረተ ልማት' }, desc: { en: 'Connecting local producers to global markets through digital and logistics networks.', am: 'የሀገር ውስጥ አምራቾችን በዲጂታል እና ሎጂስቲክስ አውታሮች ከዓለም ገበያ ጋር ማገናኘት።' } },
+        { label: { en: 'Connecting Markets', am: 'ገበያዎችን ማገናኘት' }, sub: { en: '3 digital pivots by 2028', am: 'በ2028 3 ዲጂታል ለውጦች' }, desc: { en: 'Advancing industrial sovereignty through value addition and processed goods.', am: 'በእሴት ተጨማሪ እና በተቀነባበሩ ዕቃዎች የኢንዱስትሪ ሉዓላዊነትን ማሳደግ።' } },
+        { label: { en: 'Empowering People', am: 'ህዝቡን ማብቃት' }, sub: { en: '5,000+ careers by 2030', am: 'በ2030 5,000+ ሙያዎች' }, desc: { en: 'Creating 5,000+ sustainable jobs and building a skilled workforce.', am: 'ከ5,000 በላይ ዘላቂ ሥራዎችን በመፍጠር የተዋጣለት የሰው ኃይል መገንባት።' } },
       ],
     },
     pillars: {
