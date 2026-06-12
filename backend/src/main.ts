@@ -8,10 +8,16 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.use(helmet());
+  app.use(helmet({
+    crossOriginResourcePolicy: {
+      policy: 'cross-origin',
+    },
+  }));
 
   const frontendUrl = process.env.FRONTEND_URL;
-  const origins: string[] = [];
+  const origins: string[] = [ 
+    'https://backoffice.bykmgroup.com',
+    'https://bykmgroup.com'];
   if (frontendUrl) origins.push(frontendUrl);
   if (process.env.NODE_ENV !== 'production') {
     origins.push('http://localhost:3000');
