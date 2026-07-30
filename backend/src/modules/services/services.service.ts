@@ -79,9 +79,9 @@ export class ServicesDataService implements OnModuleInit {
         pillarTitle: 'Infrastructure, Engineering & Urban Development',
         pillarDescription:
           'Providing the physical foundation required for a modern, smart-city economy through integrated engineering excellence.',
-        title: 'Grade-4 General Contracting',
+        title: 'General Contracting',
         description:
-          'Complex works in Building, Road, Water, and Electro-mechanical engineering using our Grade-4 (GC-4) certification from the Ethiopian Construction Authority.',
+          'Complex works in Building, Road, Water, and Electro-mechanical engineering using our GC-4 certification from the Ethiopian Construction Authority.',
         features: [
           'Building construction',
           'Road & highway engineering',

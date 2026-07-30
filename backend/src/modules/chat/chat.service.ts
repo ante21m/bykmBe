@@ -17,8 +17,8 @@ function isAmharic(text: string): boolean {
 const companyData: BilingualQAPair[] = [
   {
     keywords: ['what is bykm', 'who is bykm', 'tell me about bykm', 'about bykm', 'what does bykm do', 'company', 'overview'],
-    en: 'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation established in 2018. We operate through five integrated strategic pillars: Agro-Industrialization & Natural Resources, Infrastructure & Engineering, Global Trade & Logistics, Digital Economy & Media, and Hospitality & Retail. With a paid-up capital of more than 10,000,000 ETB and a Grade-4 General Contractor (GC-4) certification, we are committed to architecting Ethiopia\'s integrated future.',
-    am: 'ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር በ2018 ዓ.ም. የተመሰረተ ሁለገብ ዘርፍ የኢትዮጵያ ኮርፖሬሽን ነው። በአምስት የተቀናጁ ስትራቴጂካዊ ምሰሶዎች ይሰራል፦ አግሮ-ኢንዱስትሪላይዜሽን እና የተፈጥሮ ሀብት፣ መሠረተ ልማት እና ምህንድስና፣ ዓለም አቀፍ ንግድ እና ሎጂስቲክስ፣ ዲጂታል ኢኮኖሚ እና ሚዲያ፣ እንዲሁም ሆስፒታሊቲ እና ችርቻሮ። በmore than 10,000,000 ብር የተከፈለ ካፒታል እና በደረጃ-4 አጠቃላይ ኮንትራክተር (ጂሲ-4) የምስክር ወረቀት የተመሰከረለት ሲሆን፣ የኢትዮጵያን የተቀናጀ የወደፊት እድገት ለመቅረጽ ቆርጦ ይሰራል።',
+    en: 'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation established in 2018. We operate through five integrated strategic pillars: Agro-Industrialization & Natural Resources, Infrastructure & Engineering, Global Trade & Logistics, Digital Economy & Media, and Hospitality & Retail. With a paid-up capital of more than 10,000,000 ETB and a General Contractor (GC-4) certification, we are committed to architecting Ethiopia\'s integrated future.',
+    am: 'ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር በ2018 ዓ.ም. የተመሰረተ ሁለገብ ዘርፍ የኢትዮጵያ ኮርፖሬሽን ነው። በአምስት የተቀናጁ ስትራቴጂካዊ ምሰሶዎች ይሰራል፦ አግሮ-ኢንዱስትሪላይዜሽን እና የተፈጥሮ ሀብት፣ መሠረተ ልማት እና ምህንድስና፣ ዓለም አቀፍ ንግድ እና ሎጂስቲክስ፣ ዲጂታል ኢኮኖሚ እና ሚዲያ፣ እንዲሁም ሆስፒታሊቲ እና ችርቻሮ። በmore than 10,000,000 ብር የተከፈለ ካፒታል እና በአጠቃላይ ኮንትራክተር (ጂሲ-4) የምስክር ወረቀት የተመሰከረለት ሲሆን፣ የኢትዮጵያን የተቀናጀ የወደፊት እድገት ለመቅረጽ ቆርጦ ይሰራል።',
     suggestions: ['vision mission', 'business pillars', 'services offered'],
   },
   {
@@ -29,8 +29,8 @@ const companyData: BilingualQAPair[] = [
   },
   {
     keywords: ['service', 'what do you offer', 'business pillar', 'pillar', 'cluster'],
-    en: 'BYKM operates through five strategic business pillars: (1) Agro-Industrialization & Natural Resources — coffee value chain, high-value agriculture, mineral extraction; (2) Infrastructure, Engineering & Urban Development — Grade-4 contracting, mega-corridors, real estate; (3) Global Trade, Logistics & Transport — import/export, freight forwarding, warehousing; (4) Digital Economy, Media & Technical Services — ICT infrastructure, printing, digital training; (5) Hospitality, Retail & Consumer Ecosystems — hotels, eco-resorts, retail networks.',
-    am: 'ቢኬኤም በአምስት ስትራቴጂካዊ የንግድ ምሰሶዎች ይሰራል፦ (1) አግሮ-ኢንዱስትሪላይዜሽን እና የተፈጥሮ ሀብት — የቡና ሰንሰለት፣ ከፍተኛ ዋጋ ያለው እርሻ፣ የማዕድን ቁፋሮ፤ (2) መሠረተ ልማት፣ ምህንድስና እና የከተማ ልማት — ደረጃ-4 ኮንትራክተር፣ ሜጋ ኮሪደሮች፣ ሪል እስቴት፤ (3) ዓለም አቀፍ ንግድ፣ ሎጂስቲክስ እና ትራንስፖርት — ማስመጣት/መላክ፣ የጭነት ዝውውር፣ መጋዘን፤ (4) ዲጂታል ኢኮኖሚ፣ ሚዲያ እና ቴክኒክ አገልግሎቶች — አይሲቲ መሠረተ ልማት፣ ህትመት፣ ዲጂቫል ስልጠና፤ (5) ሆስፒታሊቲ፣ ችርቻሮ እና የሸማቾች ስነ-ምህዳር — ሆቴሎች፣ ኢኮ-ሪዞርቶች፣ የችርቻሮ አውታሮች።',
+    en: 'BYKM operates through five strategic business pillars: (1) Agro-Industrialization & Natural Resources — coffee value chain, high-value agriculture, mineral extraction; (2) Infrastructure, Engineering & Urban Development — contracting, mega-corridors, real estate; (3) Global Trade, Logistics & Transport — import/export, freight forwarding, warehousing; (4) Digital Economy, Media & Technical Services — ICT infrastructure, printing, digital training; (5) Hospitality, Retail & Consumer Ecosystems — hotels, eco-resorts, retail networks.',
+    am: 'ቢኬኤም በአምስት ስትራቴጂካዊ የንግድ ምሰሶዎች ይሰራል፦ (1) አግሮ-ኢንዱስትሪላይዜሽን እና የተፈጥሮ ሀብት — የቡና ሰንሰለት፣ ከፍተኛ ዋጋ ያለው እርሻ፣ የማዕድን ቁፋሮ፤ (2) መሠረተ ልማት፣ ምህንድስና እና የከተማ ልማት — ኮንትራክተር፣ ሜጋ ኮሪደሮች፣ ሪል እስቴት፤ (3) ዓለም አቀፍ ንግድ፣ ሎጂስቲክስ እና ትራንስፖርት — ማስመጣት/መላክ፣ የጭነት ዝውውር፣ መጋዘን፤ (4) ዲጂታል ኢኮኖሚ፣ ሚዲያ እና ቴክኒክ አገልግሎቶች — አይሲቲ መሠረተ ልማት፣ ህትመት፣ ዲጂቫል ስልጠና፤ (5) ሆስፒታሊቲ፣ ችርቻሮ እና የሸማቾች ስነ-ምህዳር — ሆቴሎች፣ ኢኮ-ሪዞርቶች፣ የችርቻሮ አውታሮች።',
     suggestions: ['agro-industrialization', 'infrastructure', 'digital economy'],
   },
   {
@@ -41,8 +41,8 @@ const companyData: BilingualQAPair[] = [
   },
   {
     keywords: ['infrastructure', 'construction', 'engineering', 'contractor', 'building', 'road', 'corridor'],
-    en: 'Our Infrastructure pillar delivers Grade-4 General Contracting excellence in building, road, water, and electro-mechanical engineering. We specialize in Mega-Corridor urban redevelopment, Living Infrastructure integrating ecological restoration, and Real Estate & Technical Consultancy. We delivered the landmark 20.5km Addis Ababa Mega-Corridor project 15 days ahead of schedule.',
-    am: 'የመሠረተ ልማት ምሰሳችን በህንፃ፣ መንገድ፣ ውሃ እና ኤሌክትሮ-መካኒካል ምህንድስና የደረጃ-4 አጠቃላይ ኮንትራክተር የላቀ አፈጻጸም ያቀርባል። በሜጋ ኮሪደር የከተማ ልማት፣ ኢኮሎጂካል መልሶ ማቋቋምን በሚያካትት ህያው መሠረተ ልማት፣ እንዲሁም ሪል እስቴት እና ቴክኒክ አማካሪነት ላይ ልዩ እውቀት አለን። ታዋቂውን 20.5ኪሜ የአዲስ አበባ ሜጋ ኮሪደር ፕሮጀክት ከተወሰነው ጊዜ 15 ቀናት ቀደም ብለን አጠናቀናል።',
+    en: 'Our Infrastructure pillar delivers General Contracting excellence in building, road, water, and electro-mechanical engineering. We specialize in Mega-Corridor urban redevelopment, Living Infrastructure integrating ecological restoration, and Real Estate & Technical Consultancy. We delivered the landmark 20.5km Addis Ababa Mega-Corridor project 15 days ahead of schedule.',
+    am: 'የመሠረተ ልማት ምሰሳችን በህንፃ፣ መንገድ፣ ውሃ እና ኤሌክትሮ-መካኒካል ምህንድስና የአጠቃላይ ኮንትራክተር የላቀ አፈጻጸም ያቀርባል። በሜጋ ኮሪደር የከተማ ልማት፣ ኢኮሎጂካል መልሶ ማቋቋምን በሚያካትት ህያው መሠረተ ልማት፣ እንዲሁም ሪል እስቴት እና ቴክኒክ አማካሪነት ላይ ልዩ እውቀት አለን። ታዋቂውን 20.5ኪሜ የአዲስ አበባ ሜጋ ኮሪደር ፕሮጀክት ከተወሰነው ጊዜ 15 ቀናት ቀደም ብለን አጠናቀናል።',
     suggestions: ['projects portfolio', 'company overview', 'contact information'],
   },
   {
@@ -101,8 +101,8 @@ const companyData: BilingualQAPair[] = [
   },
   {
     keywords: ['registration', 'tin', 'vat', 'license', 'certificate', 'legal', 'tax'],
-    en: 'BYKM Trading PLC statutory details: Registration No: AACATB/2/0257491/2018, TIN: 0103921383, VAT No: 35205580010, Tax Category: "A" Taxpayer, Technical Grade: Grade-4 General Contractor (GC-4), Certificate No: CON/32486 (Ethiopian Construction Authority).',
-    am: 'የቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር ህጋዊ መረጃ፦ የምዝገባ ቁጥር፦ AACATB/2/0257491/2018፣ ቲኢን፦ 0103921383፣ የቫት ቁጥር፦ 35205580010፣ የግብር ምድብ፦ ምድብ "ሀ" ግብር ከፋይ፣ የቴክኒክ ደረጃ፦ ደረጃ-4 አጠቃላይ ኮንትራክተር (ጂሲ-4)፣ የምስክር ወረቀት ቁጥር፦ CON/32486 (የኢትዮጵያ ኮንስትራክሽን ባለስልጣን)።',
+    en: 'BYKM Trading PLC statutory details: Registration No: AACATB/2/0257491/2018, TIN: 0103921383, VAT No: 35205580010, Tax Category: "A" Taxpayer, Technical Grade: General Contractor (GC-4), Certificate No: CON/32486 (Ethiopian Construction Authority).',
+    am: 'የቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር ህጋዊ መረጃ፦ የምዝገባ ቁጥር፦ AACATB/2/0257491/2018፣ ቲኢን፦ 0103921383፣ የቫት ቁጥር፦ 35205580010፣ የግብር ምድብ፦ ምድብ "ሀ" ግብር ከፋይ፣ የቴክኒክ ደረጃ፦ አጠቃላይ ኮንትራክተር (ጂሲ-4)፣ የምስክር ወረቀት ቁጥር፦ CON/32486 (የኢትዮጵያ ኮንስትራክሽን ባለስልጣን)።',
     suggestions: ['company overview', 'leadership', 'contact information'],
   },
   {

@@ -3,6 +3,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 import { ContactModule } from './modules/contact/contact.module';
 import { ProjectsModule } from './modules/projects/projects.module';
 import { ServicesModule } from './modules/services/services.module';
@@ -15,6 +17,7 @@ import { SearchModule } from './modules/search/search.module';
 import { GalleryModule } from './modules/gallery/gallery.module';
 import { HomeModule } from './modules/home/home.module';
 import { UnansweredQueriesModule } from './modules/unanswered-queries/unanswered-queries.module';
+import { TeamModule } from './modules/team/team.module';
 import { ContactSubmission } from './entities/contact-submission.entity';
 import { Project } from './entities/project.entity';
 import { Service } from './entities/service.entity';
@@ -24,9 +27,14 @@ import { Gallery } from './entities/gallery.entity';
 import { HomeSection } from './entities/home-content.entity';
 import { UnansweredQuery } from './entities/unanswered-query.entity';
 import { User } from './entities/user.entity';
+import { TeamMember } from './entities/team-member.entity';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), 'uploads'),
+      serveRoot: '/uploads',
+    }),
     ConfigModule.forRoot({ isGlobal: true }),
     ThrottlerModule.forRoot([{ ttl: 60000, limit: 60 }]),
     TypeOrmModule.forRootAsync({
@@ -38,7 +46,7 @@ import { User } from './entities/user.entity';
         username: configService.get('DB_USERNAME', 'postgres'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE', 'bykm_trading'),
-        entities: [ContactSubmission, Project, Service, AboutSection, News, HomeSection, Gallery, UnansweredQuery, User],
+        entities: [ContactSubmission, Project, Service, AboutSection, News, HomeSection, Gallery, UnansweredQuery, User, TeamMember],
         synchronize: configService.get('NODE_ENV') !== 'production',
         logging: configService.get('NODE_ENV') === 'development',
       }),
@@ -56,6 +64,7 @@ import { User } from './entities/user.entity';
     HomeModule,
     GalleryModule,
     UnansweredQueriesModule,
+    TeamModule,
   ],
   providers: [
     { provide: APP_GUARD, useClass: ThrottlerGuard },

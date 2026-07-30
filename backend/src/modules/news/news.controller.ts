@@ -28,6 +28,13 @@ export class NewsController {
     return this.newsService.findFeatured();
   }
 
+  @Get('recent')
+  @ApiOperation({ summary: 'Get recent news (within 14 days)' })
+  @ApiQuery({ name: 'limit', required: false })
+  findRecent(@Query('limit') limit?: string) {
+    return this.newsService.findRecent(limit ? parseInt(limit, 10) : 3);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get news by ID' })
   findOne(@Param('id') id: string) {

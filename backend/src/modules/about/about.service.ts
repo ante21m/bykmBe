@@ -25,9 +25,9 @@ export class AboutService implements OnModuleInit {
         title: 'Who We Are',
         titleAm: 'እኛ ማን ነን',
         content:
-          'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation, operating at the forefront of national development and industrial transformation. Registered under the Ethiopian Company Registration Proclamation and licensed by the Ethiopian Construction Authority — Grade-4 (GC-4) in Building, Road, Water, and Electro-mechanical works — BYKM is uniquely positioned to execute complex, cross-sectoral initiatives that drive Ethiopia toward its goal of becoming an upper-middle-income nation by 2030.',
+          'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation, operating at the forefront of national development and industrial transformation. Registered under the Ethiopian Company Registration Proclamation and licensed by the Ethiopian Construction Authority — GC-4 certified in Building, Road, Water, and Electro-mechanical works — BYKM is uniquely positioned to execute complex, cross-sectoral initiatives that drive Ethiopia toward its goal of becoming an upper-middle-income nation by 2030.',
         contentAm:
-          'ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር በብሔራዊ ልማት እና በኢንዱስትሪ ለውጥ ግንባር ቀደም ሆኖ የሚሰራ ሁለገብ ዘርፍ የኢትዮጵያ ኮርፖሬሽን ነው።',
+          'ቢዋይኬኤም ትሬዲንግ ኃ/የተ/የግ/ማ በብሔራዊ ልማት እና በኢንዱስትሪ ለውጥ ግንባር ቀደም ሆኖ የሚሰራ ሁለገብ ዘርፍ የኢትዮጵያ ኮርፖሬሽን ነው።',
         sortOrder: 1,
       },
       {
@@ -35,7 +35,7 @@ export class AboutService implements OnModuleInit {
         title: 'Our Mission',
         titleAm: 'ተልእኳችን',
         content:
-          'To architect and execute integrated, multi-sectoral initiatives that drive Ethiopia\'s industrial transformation — from infrastructure and agro-industrialization to global trade, digital economy, and modern consumer ecosystems — creating lasting value for stakeholders and communities.',
+          'To architect and execute integrated, multi-sectoral initiatives that drive Ethiopia\'s industrial transformation — from infrastructure and real estate to global trade, hospitality, and agro-industrialization — creating lasting value for stakeholders and communities.',
         contentAm:
           'የኢትዮጵያን የኢንዱስትሪ ለውጥ የሚያራምዱ የተቀናጁ ሁለገብ ዘርፍ ተነሳሽነቶችን መንደፍ እና ማስፈፀም።',
         sortOrder: 2,
@@ -55,9 +55,9 @@ export class AboutService implements OnModuleInit {
         title: 'Our Values',
         titleAm: 'እሴቶቻችን',
         content:
-          'Integrity, Innovation, Excellence, Sustainability, and Partnership — these five core values guide every decision and define every relationship.',
+          'Integrity, Innovation, Excellence, Sustainability, and Partnership — these core values guide every decision and define every relationship.',
         contentAm:
-          'ታማኝነት፣ ፈጠራ፣ የላቀ ደረጃ፣ ዘላቂነት እና አጋርነት — እነዚህ አምስት ዋና እሴቶች በየውሳኔያችን ይመሩናል።',
+          'ታማኝነት፣ ፈጠራ፣ የላቀ ደረጃ፣ ዘላቂነት እና አጋርነት — እነዚህ ዋና እሴቶች በየውሳኔያችን ይመሩናል።',
         sortOrder: 4,
       },
       {
@@ -65,9 +65,9 @@ export class AboutService implements OnModuleInit {
         title: 'Our Story',
         titleAm: 'ታሪካችን',
         content:
-          'Founded with a vision to participate in Ethiopia\'s transformative growth, BYKM Trading PLC has rapidly established itself across five strategic pillars. From mega-corridor infrastructure projects in Addis Ababa to coffee value chain development, our portfolio demonstrates a commitment to national industrial sovereignty.',
+          'Founded with a vision to participate in Ethiopia\'s transformative growth, BYKM Trading PLC has rapidly established itself across four strategic pillars. From mega-corridor infrastructure projects in Addis Ababa to coffee value chain development, our portfolio demonstrates a commitment to national industrial sovereignty.',
         contentAm:
-          'በኢትዮጵያ የትራንስፎርሜሽን እድገት ውስጥ ለመሳተፍ በራዕይ የተመሰረተው ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር በአምስት ስትራቴጂካዊ ምሰሶዎች ላይ በፍጥነት መመስረት ችሏል።',
+          'በኢትዮጵያ የትራንስፎርሜሽን እድገት ውስጥ ለመሳተፍ በራዕይ የተመሰረተው ቢዋይኬኤም ትሬዲንግ ኃ/የተ/የግ/ማ በአራት ስትራቴጂካዊ ምሰሶዎች ላይ በፍጥነት መመስረት ችሏል።',
         sortOrder: 5,
       },
     ];
