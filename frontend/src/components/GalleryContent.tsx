@@ -65,9 +65,12 @@ export function GalleryContent() {
                 <div className="aspect-video bg-navy-900/60 flex items-center justify-center overflow-hidden">
                   {item.imageUrl ? (
                     <img
-                      src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api'}${item.imageUrl}`}
+                      src={`${process.env.NEXT_PUBLIC_UPLOAD_URL || 'http://localhost:3001/api'}${item.imageUrl}`}
                       alt={item.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        console.error('Image failed:', `${process.env.NEXT_PUBLIC_UPLOAD_URL}${item.imageUrl}`);
+                      }}
                     />
                   ) : (
                     <div className="text-white/20 text-4xl font-display font-bold">BYKM</div>

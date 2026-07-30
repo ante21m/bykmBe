@@ -96,7 +96,7 @@ export default function AdminLoginPage() {
               <Text size="xs" c="dimmed" ta="center">
                 Contact:{' '}
                 <Anchor href="mailto:support@bykmgroup.com" size="xs">
-                  support@bykmgroup.com
+besufekad@bykmgroup.com
                 </Anchor>
               </Text>
 

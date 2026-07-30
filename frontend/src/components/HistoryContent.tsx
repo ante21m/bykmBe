@@ -2,6 +2,7 @@
 
 import { ScrollReveal } from './ScrollReveal';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
+import type { RawAboutSection } from '@/lib/about-data';
 
 const milestones = [
   {
@@ -9,8 +10,8 @@ const milestones = [
     year: '2014 EC',
     title: { en: 'The Beginning', am: 'መጀመሪያ' },
     desc: {
-      en: 'Established as a Grade-4 Building Contractor, pioneering urban transformation in Addis Ababa with engineering precision and First Mover spirit.',
-      am: 'እንደ ክፍል-4 የሕንፃ ኮንትራክተር ተቋቁሞ፣ በምህንድስና ትክክለኛነት እና አቅኚ መንፈስ በአዲስ አበባ የከተማ ለውጥን አቅንቷል።',
+      en: 'Established as a Building Contractor, pioneering urban transformation in Addis Ababa with engineering precision and First Mover spirit.',
+      am: 'እንደ የሕንፃ ኮንትራክተር ተቋቁሞ፣ በምህንድስና ትክክለኛነት እና አቅኚ መንፈስ በአዲስ አበባ የከተማ ለውጥን አቅንቷል።',
     },
     ribbonBg: 'bg-[#0B0F5A]',
     ribbonText: 'text-[#FFD32A]',
@@ -73,11 +74,11 @@ const evolutionCards = [
     paragraphs: {
       en: [
         'The foundation of BYKM is built upon a legacy of technical excellence. Our journey began with Besufekad BC, where we established ourselves as "First Movers" in Ethiopia\'s urban transformation.',
-        'As a Grade-4 General Contractor, we proved our operational velocity and technical precision through landmark projects, most notably the Addis Ababa Mega-Corridor Project, delivering critical urban infrastructure ahead of national deadlines.',
+        'As a General Contractor, we proved our operational velocity and technical precision through landmark projects, most notably the Addis Ababa Mega-Corridor Project, delivering critical urban infrastructure ahead of national deadlines.',
       ],
       am: [
         'የBYKM መሠረት በቴክኒክ የላቀነት ውርስ ላይ የተገነባ ነው።',
-        'እንደ ክፍል-4 አጠቃላይ ኮንትራክተር፣ የአዲስ አበባ ሜጋ-ኮሪደር ፕሮጀክትን ጨምሮ በታዋቂ ፕሮጀክቶች አማካኝነት የአሰራር ፍጥነታችንን እና የቴክኒክ ትክክለኛነታችንን አሳይተናል።',
+        'እንደ አጠቃላይ ኮንትራክተር፣ የአዲስ አበባ ሜጋ-ኮሪደር ፕሮጀክትን ጨምሮ በታዋቂ ፕሮጀክቶች አማካኝነት የአሰራር ፍጥነታችንን እና የቴክኒክ ትክክለኛነታችንን አሳይተናል።',
       ],
     },
     ribbonBg: 'bg-[#0B0F5A]',
@@ -90,10 +91,10 @@ const evolutionCards = [
     paragraphs: {
       en: [
         'Recognizing that a modern nation requires an integrated economic approach, we evolved into BYKM Trading PLC. This strategic transition expanded our mandate from specialized construction to a diversified ecosystem.',
-        'Today, we operate across five strategic pillars — Infrastructure, Global Trade, the Digital Economy, Agro-Industrialization, and Hospitality — creating a closed-loop value chain that maximizes efficiency and minimizes import reliance.',
+        'Today, we operate across four strategic pillars — Infrastructure & Real Estate Development, Global Trade, Logistics & Transport, Hospitality, Retail & Consumer Ecosystems, and Agro-Industrialization & Natural Resources — creating a closed-loop value chain that maximizes efficiency and minimizes import reliance.',
       ],
       am: [
-        'ዘመናዊ ሀገር የተቀናጀ ኢኮኖሚያዊ አቀራረብ እንደሚያስፈልገው በመገንዘብ ወደ BYKM ትሬዲንግ ፒኤልሲ ተለውጠናል።',
+        'ዘመናዊ ሀገር የተቀናጀ ኢኮኖሚያዊ አቀራረብ እንደሚያስፈልገው በመገንዘብ ወደ ቢዋይኬኤም ትሬዲንግ ኃ/የተ/የግ/ማ ተለውጠናል።',
         'ዛሬ በአምስት ስትራቴጂካዊ ምሰሶዎች ላይ እንሰራለን — መሠረተ ልማት፣ ዓለም አቀፍ ንግድ፣ ዲጂታል ኢኮኖሚ፣ አግሮ-ኢንዱስትሪላይዜሽን እና ሆስፒታሊቲ — ቅልጥፍናን ከፍ የሚያደርግ የተዘጋ ዑደት የእሴት ሰንሰለት ይፈጥራል።',
       ],
     },
@@ -120,7 +121,11 @@ const evolutionCards = [
   },
 ];
 
-export function HistoryContent() {
+interface Props {
+  sections?: RawAboutSection[];
+}
+
+export function HistoryContent({ sections }: Props) {
   const { lang, translations: t } = useTranslation();
   const a = t.about;
 

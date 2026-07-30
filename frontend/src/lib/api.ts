@@ -21,6 +21,18 @@ async function fetchAPI<T>(
 }
 
 export const api = {
+  // Home sections
+  getHomeSections: () =>
+    fetchAPI<HomeSection[]>('/home'),
+  getHomeSection: (id: string) =>
+    fetchAPI<HomeSection>(`/home/${id}`),
+
+  // About sections
+  getAboutSections: () =>
+    fetchAPI<AboutSection[]>('/about'),
+  getAboutSection: (id: string) =>
+    fetchAPI<AboutSection>(`/about/${id}`),
+
   // Projects
   getProjects: (params?: { pillar?: string; status?: string }) => {
     const query = params
@@ -50,6 +62,28 @@ export const api = {
 };
 
 // Types
+export interface HomeSection {
+  id: string;
+  sectionKey: string;
+  title: string;
+  titleAm?: string;
+  content: string;
+  contentAm?: string;
+  sortOrder: number;
+  active: boolean;
+}
+
+export interface AboutSection {
+  id: string;
+  sectionKey: string;
+  title: string;
+  titleAm?: string;
+  content: string;
+  contentAm?: string;
+  sortOrder: number;
+  active: boolean;
+}
+
 export interface Project {
   id: string;
   title: string;

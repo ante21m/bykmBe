@@ -9,7 +9,7 @@ import { useEffect, ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import {
-  LayoutDashboard, Building2, Info, Mail, LogOut, FolderKanban, ExternalLink, Newspaper, Home, Image, HelpCircle,
+  LayoutDashboard, Building2, Info, Mail, LogOut, FolderKanban, ExternalLink, Newspaper, Home, Image, HelpCircle, Users,
 } from 'lucide-react';
 
 const NAV_ITEMS = [
@@ -18,6 +18,7 @@ const NAV_ITEMS = [
   { href: '/admin/services', label: 'Services', icon: Building2 },
   { href: '/admin/about', label: 'About', icon: Info },
   { href: '/admin/news', label: 'News', icon: Newspaper },
+  { href: '/admin/team', label: 'Team', icon: Users },
   { href: '/admin/gallery', label: 'Gallery', icon: Image },
   { href: '/admin/unanswered-queries', label: 'Unanswered', icon: HelpCircle },
   { href: '/admin/contact', label: 'Contact', icon: Mail },
@@ -80,7 +81,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           <Stack justify="space-between" h="100%">
             <div>
               <Group gap={10} mb="xl" px={8}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/logo-bykm.jpg" alt="BYKM" style={{ height: 56, width: 'auto', objectFit: 'contain' }} />
                 <div>
                   <Text size="sm" fw={700} lh={1.2}>BYKM Admin</Text>
@@ -106,7 +106,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
               <UnstyledButton
                 component="a"
-                href="http://localhost:3000"
+                href="/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

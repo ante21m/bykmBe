@@ -164,6 +164,28 @@ export interface UnansweredQueryData {
   createdAt: string;
 }
 
+export interface TeamMemberData {
+  id: string;
+  nameEn: string;
+  nameAm?: string;
+  titleEn: string;
+  titleAm?: string;
+  descEn: string;
+  descAm?: string;
+  imageUrl?: string;
+  category: string;
+  active: boolean;
+  sortOrder: number;
+  linkedinUrl?: string;
+  email?: string;
+  education?: { degree: string; institution: string; year?: string; description?: string }[];
+  experience?: { role: string; organization: string; startYear?: string; endYear?: string; description?: string }[];
+  certificates?: { name: string; issuer: string; year?: string; url?: string }[];
+  awards?: { title: string; year?: string; description?: string }[];
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface LoginResponse {
   token: string;
 }
@@ -171,7 +193,7 @@ interface LoginResponse {
 export const api = createApi({
   reducerPath: 'api',
   baseQuery,
-  tagTypes: ['Projects', 'About', 'Home', 'Services', 'Contact', 'News', 'Gallery', 'UnansweredQueries'],
+  tagTypes: ['Projects', 'About', 'Home', 'Services', 'Contact', 'News', 'Gallery', 'UnansweredQueries', 'Team'],
   endpoints: (builder) => ({
     sendChat: builder.mutation<{ reply: string; suggestions: string[] }, { message: string; lang: string }>({
       query: (body) => ({ url: '/chat', method: 'POST', body }),
@@ -312,6 +334,13 @@ export const api = createApi({
       },
       providesTags: ['News'],
     }),
+    getRecentNews: builder.query<NewsData[], { limit?: number } | void>({
+      query: (params) => {
+        const qs = params?.limit ? `?limit=${params.limit}` : '';
+        return `/news/recent${qs}`;
+      },
+      providesTags: ['News'],
+    }),
     getNewsItem: builder.query<NewsData, string>({
       query: (id) => `/news/${id}`,
       providesTags: (_result, _error, id) => [{ type: 'News', id }],
@@ -352,6 +381,38 @@ export const api = createApi({
     deleteGallery: builder.mutation<void, string>({
       query: (id) => ({ url: `/gallery/${id}`, method: 'DELETE' }),
       invalidatesTags: ['Gallery'],
+    }),
+
+    // Team
+    getTeamMembers: builder.query<TeamMemberData[], { category?: string } | void>({
+      query: (params) => {
+        const qs = params?.category ? `?category=${params.category}` : '';
+        return `/team${qs}`;
+      },
+      providesTags: ['Team'],
+    }),
+    getActiveTeamMembers: builder.query<TeamMemberData[], { category?: string } | void>({
+      query: (params) => {
+        const qs = params?.category ? `?category=${params.category}` : '';
+        return `/team/active${qs}`;
+      },
+      providesTags: ['Team'],
+    }),
+    getTeamMember: builder.query<TeamMemberData, string>({
+      query: (id) => `/team/${id}`,
+      providesTags: (_result, _error, id) => [{ type: 'Team', id }],
+    }),
+    createTeamMember: builder.mutation<TeamMemberData, Partial<TeamMemberData>>({
+      query: (body) => ({ url: '/team', method: 'POST', body }),
+      invalidatesTags: ['Team'],
+    }),
+    updateTeamMember: builder.mutation<TeamMemberData, { id: string; data: Partial<TeamMemberData> }>({
+      query: ({ id, data }) => ({ url: `/team/${id}`, method: 'PUT', body: data }),
+      invalidatesTags: (_result, _error, { id }) => [{ type: 'Team', id }, 'Team'],
+    }),
+    deleteTeamMember: builder.mutation<void, string>({
+      query: (id) => ({ url: `/team/${id}`, method: 'DELETE' }),
+      invalidatesTags: ['Team'],
     }),
 
     // Upload
@@ -410,6 +471,7 @@ export const {
   useGetContactSubmissionQuery,
   useUpdateContactStatusMutation,
   useGetNewsQuery,
+  useGetRecentNewsQuery,
   useGetNewsItemQuery,
   useCreateNewsMutation,
   useUpdateNewsMutation,
@@ -419,6 +481,12 @@ export const {
   useCreateGalleryMutation,
   useUpdateGalleryMutation,
   useDeleteGalleryMutation,
+  useGetTeamMembersQuery,
+  useGetActiveTeamMembersQuery,
+  useGetTeamMemberQuery,
+  useCreateTeamMemberMutation,
+  useUpdateTeamMemberMutation,
+  useDeleteTeamMemberMutation,
   useGetUnansweredQueriesQuery,
   useDeleteUnansweredQueryMutation,
   useUploadFileMutation,

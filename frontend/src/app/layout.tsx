@@ -9,6 +9,7 @@ import { LanguageProvider } from '@/lib/i18n/LanguageProvider';
 import { ReduxProvider } from '@/components/ReduxProvider';
 import { SiteShell } from '@/components/SiteShell';
 import { JsonLd } from '@/components/JsonLd';
+import { SITE_URL } from '@/lib/siteConfig';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -30,8 +31,6 @@ const jetbrains = JetBrains_Mono({
   display: 'swap',
 });
 
-const SITE_URL = 'https://bykmgroup.com';
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
     default: 'BYKM Trading PLC — Architecting Ethiopia\'s Integrated Future',
   },
   description:
-    'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation driving industrial sovereignty through five integrated strategic pillars: Agro-Industrialization, Infrastructure, Global Trade, Digital Economy, and Hospitality.',
+    'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation driving industrial sovereignty through four integrated strategic pillars: Infrastructure & Real Estate Development, Global Trade, Logistics & Transport, Hospitality, Retail & Consumer Ecosystems, and Agro-Industrialization & Natural Resources.',
   keywords: [
     'BYKM Trading',
     'BYKM Trading PLC',
@@ -51,7 +50,7 @@ export const metadata: Metadata = {
     'Addis Ababa',
     'Ethiopian corporation',
     'industrial development',
-    'Grade-4 contractor',
+    'contractor',
     'Green Legacy',
     'trading',
     'group',

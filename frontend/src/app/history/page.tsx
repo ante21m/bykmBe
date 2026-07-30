@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { HistoryContent } from '@/components/HistoryContent';
+import { api, type AboutSection } from '@/lib/api';
 
 const TITLE = 'Corporate History — BYKM Trading PLC';
 const DESC = 'The evolution of BYKM Trading PLC — from Besufekad BC to a diversified multi-sectoral powerhouse.';
@@ -21,6 +22,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HistoryPage() {
-  return <HistoryContent />;
+export default async function HistoryPage() {
+  let sections: AboutSection[] = [];
+  try {
+    sections = await api.getAboutSections();
+  } catch {
+  }
+  return <HistoryContent sections={sections} />;
 }

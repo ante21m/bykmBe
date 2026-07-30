@@ -19,5 +19,5 @@ export default function EditAboutPage() {
     router.push('/admin/about');
   };
 
-  return <AboutSectionForm initial={section} onSave={handleSave} saving={saving} />;
+  return <AboutSectionForm initial={section} onSave={handleSave} saving={saving} cancelPath="/admin/about" />;
 }

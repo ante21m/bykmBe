@@ -38,7 +38,6 @@ export function RouteMap({ lang }: { lang?: 'en' | 'am' }) {
 
   return (
     <div>
-      {/* Embedded Google Maps showing the BYKM office location */}
       <div className="w-full border border-white/10 overflow-hidden" style={{ height: '400px' }}>
         <iframe
           width="100%"
@@ -51,7 +50,6 @@ export function RouteMap({ lang }: { lang?: 'en' | 'am' }) {
         />
       </div>
 
-      {/* Route buttons using Google Maps Directions */}
       <div className="mt-4">
         <p className="text-gold-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-3">
           {lang === 'am' ? 'አቅጣጫ ያግኙ' : 'Get Directions from Your Location'}

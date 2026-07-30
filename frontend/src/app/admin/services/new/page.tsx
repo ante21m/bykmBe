@@ -13,5 +13,7 @@ export default function NewServicePage() {
     router.push('/admin/services');
   };
 
-  return <ServiceForm onSave={handleSave} saving={isLoading} />;
+  return (
+<ServiceForm onSave={handleSave} saving={isLoading} cancelPath="/admin/services" />
+  );
 }

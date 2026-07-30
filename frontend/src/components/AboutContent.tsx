@@ -1,12 +1,14 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
+import { tr } from '@/lib/i18n/tr';
+import { transformAboutSections, type RawAboutSection } from '@/lib/about-data';
 
 const timeline = [
-  { year: '2014 EC', titleEn: 'The Beginning', titleAm: 'መጀመሪያ', descEn: 'Established as a Grade-4 Building Contractor, pioneering urban transformation in Addis Ababa with engineering precision and First Mover spirit.', descAm: 'እንደ ክፍል-4 የሕንፃ ኮንትራክተር ተቋቁሞ፣ በምህንድስና ትክክለኛነት እና አቅኚ መንፈስ በአዲስ አበባ የከተማ ለውጥን አቅንቷል።' },
+  { year: '2014 EC', titleEn: 'The Beginning', titleAm: 'መጀመሪያ', descEn: 'Established as a Building Contractor, pioneering urban transformation in Addis Ababa with engineering precision and First Mover spirit.', descAm: 'እንደ የሕንፃ ኮንትራክተር ተቋቁሞ፣ በምህንድስና ትክክለኛነት እና አቅኚ መንፈስ በአዲስ አበባ የከተማ ለውጥን አቅንቷል።' },
   { year: '2018–2020', titleEn: 'Mega-Corridor Project', titleAm: 'ሜጋ-ኮሪደር ፕሮጀክት', descEn: 'Delivered 20.5km of integrated urban corridors for Addis Ababa\'s CBD — 15 days ahead of schedule — establishing BYKM\'s reputation for excellence.', descAm: 'ለአዲስ አበባ CBD 20.5 ኪሎ ሜትር የተቀናጀ የከተማ ኮሪደሮችን አድርሷል — ከቀጠሮው 15 ቀናት ቀደም ብሎ — የBYKMን የላቀነት ስም አስመሥርቷል።' },
   { year: '2019–2021', titleEn: 'Living Infrastructure', titleAm: 'የቀጥታ መሠረተ ልማት', descEn: 'Pioneered Living Infrastructure: transforming erosion-prone waterways into Urban Green Lungs, integrating 50,000+ sqm of indigenous flora.', descAm: 'የቀጥታ መሠረተ ልማትን አቅንቷል፦ ለአፈር መሸርሸር የተጋለጡ የውሃ መስመሮችን ወደ ከተማ አረንጓዴ ሳንባዎች መቀየር፣ ከ50,000 ካሬ ሜትር በላይ የሀገር በቀል እፅዋትን በማዋሃድ።' },
   { year: '2018 GC', titleEn: 'Strategic Transition to BYKM Trading PLC', titleAm: 'ወደ BYKM ትሬዲንግ ፒኤልሲ ስትራቴጂካዊ ሽግግር', descEn: 'Evolved from specialized contractor to diversified multi-sectoral powerhouse, spanning five integrated business pillars for a Modern Ethiopia.', descAm: 'ከልዩ ኮንትራክተርነት ወደ ተለያዩ ዘርፎች የተስፋፋ ኃያል ኃይል ተለወጠ፣ ለዘመናዊቷ ኢትዮጵያ አምስት የተቀናጁ የንግድ ምሰሶዎችን ያካተተ።' },
@@ -21,7 +23,7 @@ const greenLegacyText = {
 
 const governanceDesc = {
   en: 'BYKM operates under a rigorous framework of transparency, statutory compliance, and fiscal discipline. As a Category "A" taxpayer and a legally chartered PLC, we provide our partners, financial institutions, and international joint-venture consortia with the absolute confidence of solvency, reliability, and institutional integrity.',
-  am: 'BYKM በግልጽነት፣ በህጋዊ ተገዢነት እና በበጀት ተግሣጽ ጥብቅ ማዕቀፍ ውስጥ ይሰራል። እንደ ምድብ "A" ግብር ከፋይ እና በህጋዊ መንገድ የተመዘገበ ኃላፊነቱ የተወሰነ የግል ማህበር፣ ለአጋሮቻችን፣ ለፋይናንስ ተቋማት እና ለአለም አቀፍ የጋራ ቬንቸር ኮንሰርቲያ የመክፈል አቅም፣ አስተማማኝነት እና ተቋማዊ ታማኝነት ሙሉ እምነት እንሰጣለን።',
+  am: 'BYKM በግልጽነት፣ በህጋዊ ተገዢነት እና በበጀት ተግሣጽ ጥብቅ ማዕቀፍ ውስጥ ይሰራል። እንደ ምድብ "A" ግብር ከፋይ እና በህጋዊ መንገድ የተመዘገበ ኃ/የተ/የግ/ማ፣ ለአጋሮቻችን፣ ለፋይናንስ ተቋማት እና ለአለም አቀፍ የጋራ ቬንቸር ኮንሰርቲያ የመክፈል አቅም፣ አስተማማኝነት እና ተቋማዊ ታማኝነት ሙሉ እምነት እንሰጣለን።',
 };
 
 const missionCards = [
@@ -31,27 +33,47 @@ const missionCards = [
   { icon: '👥', titleEn: 'Empowering People', titleAm: 'ሰዎችን ማብቃት', descEn: 'Contributing to national prosperity by cultivating a skilled professional class and creating 5,000+ sustainable jobs by 2030.', descAm: 'የተዋጣለት የባለሙያ ክፍልን በማዳበር እና በ2030 ከ5,000 በላይ ዘላቂ ሥራዎችን በመፍጠር ለብሔራዊ ብልጽግና አስተዋጽዖ ማድረግ።', statEn: '5,000+ careers by 2030', statAm: 'በ2030 ከ5,000 በላይ ሙያዎች' },
 ];
 
-export function AboutContent() {
+interface Props {
+  sections?: RawAboutSection[];
+}
+
+export function AboutContent({ sections }: Props) {
   const { lang, translations: t } = useTranslation();
   const a = t.about;
+
+  const apiData = sections ? transformAboutSections(sections) : null;
 
   return (
     <>
       <ScrollReveal>
-        <section className="relative overflow-hidden bg-[#080616] text-white pt-28 pb-16">
+        <section className="relative overflow-hidden bg-[#080616] text-white pt-32 pb-24 md:pb-32">
           <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_40%,rgba(30,50,150,0.5)_0%,rgba(8,6,22,0.2)_40%,transparent_70%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_70%,rgba(40,70,180,0.3)_0%,transparent_50%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(10,8,30,0.6)_0%,transparent_60%)]" />
-            <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(200,168,75,1) 1px, transparent 1px), linear-gradient(90deg, rgba(200,168,75,1) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_30%,rgba(30,50,150,0.6)_0%,rgba(8,6,22,0.2)_50%,transparent_80%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_70%,rgba(200,168,75,0.08)_0%,transparent_50%)]" />
+            <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(rgba(200,168,75,1) 1px, transparent 1px), linear-gradient(90deg, rgba(200,168,75,1) 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
           </div>
-          <div className="geo-shape w-72 h-72 top-10 right-[-60px] rotate-12 opacity-30" />
-          <div className="geo-shape w-40 h-40 bottom-16 right-32 rotate-6 opacity-15" />
-          <div className="geo-shape w-24 h-24 top-1/3 right-1/4 opacity-10" />
+          <div className="geo-shape w-96 h-96 top-[-80px] right-[-80px] rotate-12 opacity-10" />
+          <div className="geo-shape w-56 h-56 bottom-10 right-1/3 rotate-45 opacity-[0.06]" />
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-gold-500/5 blur-3xl" />
           <div className="container-custom relative z-10">
-            <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-gold-400 uppercase">{a.header.label[lang]}</span>
-            <h1 className="font-display text-5xl md:text-6xl font-bold mt-4 mb-6 max-w-3xl">{a.header.title[lang]}</h1>
-            <p className="text-white/60 max-w-2xl text-lg leading-relaxed text-justify">{a.header.desc[lang]}</p>
+            <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-start">
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-8 h-px bg-gold-400/60" />
+                  <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-400 uppercase">{a.header.label[lang]}</span>
+                </div>
+                <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1]">
+                  <span className="bg-gradient-to-r from-white via-white to-gold-300/80 bg-clip-text text-transparent">{a.header.title[lang]}</span>
+                </h1>
+                <div className="w-16 h-1 bg-gold-400 mt-8" />
+              </div>
+              <div className="md:pt-12">
+                <div className="relative p-6 md:p-8 bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 rounded-sm backdrop-blur-sm">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-gold-400/60 to-transparent" />
+                  <p className="text-white/65 text-base md:text-lg leading-relaxed text-justify-smart">{a.header.desc[lang]}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </ScrollReveal>
@@ -70,7 +92,7 @@ export function AboutContent() {
                     <div className="mt-4 flex-1 flex flex-col">
                       <div className="w-10 h-1 bg-navy-900 mb-4" />
                       <h3 className="font-display text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{lang === 'en' ? 'The Foundation' : 'መሠረቱ'}</h3>
-                      <p className="text-navy-700/70 text-base leading-relaxed text-justify flex-1">{a.executive.p1[lang]}</p>
+                      <p className="text-navy-700/70 text-base leading-relaxed  text-justify-smart flex-1">{a.executive.p1[lang]}</p>
                     </div>
                   </div>
                   <div className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 px-8 py-6 hover-lift group flex flex-col">
@@ -80,7 +102,7 @@ export function AboutContent() {
                     <div className="mt-4 flex-1 flex flex-col">
                       <div className="w-10 h-1 bg-navy-800 mb-4" />
                       <h3 className="font-display text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{lang === 'en' ? 'The Strategic Transition' : 'ስትራቴጂካዊ ሽግግሩ'}</h3>
-                      <p className="text-navy-700/70 text-base leading-relaxed text-justify flex-1">{a.executive.p2[lang]}</p>
+                      <p className="text-navy-700/70 text-base leading-relaxed  text-justify-smart flex-1">{a.executive.p2[lang]}</p>
                     </div>
                   </div>
                   <div className="relative bg-white border border-navy-100 border-t-4 border-t-forest-700 px-8 py-6 hover-lift group flex flex-col">
@@ -90,7 +112,7 @@ export function AboutContent() {
                     <div className="mt-4 flex-1 flex flex-col">
                       <div className="w-10 h-1 bg-navy-900 mb-4" />
                       <h3 className="font-display text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{lang === 'en' ? 'The Engineering Mindset' : 'የምህንድስና አስተሳሰብ'}</h3>
-                      <p className="text-navy-700/70 text-base leading-relaxed text-justify flex-1">{a.executive.p3[lang]}</p>
+                      <p className="text-navy-700/70 text-base leading-relaxed  text-justify-smart flex-1">{a.executive.p3[lang]}</p>
                     </div>
                   </div>
                 </div>
@@ -113,12 +135,12 @@ export function AboutContent() {
               <div className="bg-navy-900/60 border border-white/10 p-8">
                 <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-gold-400 uppercase">{a.visionMission.visionLabel[lang]}</span>
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-white mt-4 mb-4">{a.visionMission.visionTitle[lang]}</h2>
-                <p className="text-white/60 leading-relaxed text-justify">{a.visionMission.visionDesc[lang]}</p>
+                <p className="text-white/60 leading-relaxed text-justify-smart">{(apiData?.vision && apiData.vision[lang]) || a.visionMission.visionDesc[lang]}</p>
               </div>
               <div className="bg-gradient-to-br from-forest-600/20 to-navy-900/60 border border-forest-500/20 p-8">
                 <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-gold-400 uppercase">{a.visionMission.missionLabel[lang]}</span>
                 <h2 className="font-display text-xl md:text-2xl font-bold text-white mt-4 mb-4">{a.visionMission.missionTitle[lang]}</h2>
-                <p className="text-white/70 text-sm leading-relaxed mb-6">BYKM Trading PLC is committed to architecting the future of a Modern Ethiopia via four strategic imperatives:</p>
+                <p className="text-white/70 text-sm leading-relaxed mb-6">{(apiData?.mission && apiData.mission[lang]) || `${t.brand.name[lang]} is committed to architecting the future of a Modern Ethiopia via four strategic imperatives:`}</p>
                 <div className="grid grid-cols-2 gap-4">
                   {missionCards.map((card) => (
                     <div key={card.titleEn} className="relative bg-white/5 border border-white/10 p-5 hover:bg-white/10 hover:border-forest-500/30 transition-all group overflow-hidden">
@@ -127,9 +149,9 @@ export function AboutContent() {
                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-forest-600 to-forest-800 flex items-center justify-center mb-3 shadow-lg shadow-forest-700/20">
                           <span className="text-lg">{card.icon}</span>
                         </div>
-                        <h3 className="font-display font-bold text-white text-sm mb-1 group-hover:text-gold-400 transition-colors">{lang === 'en' ? card.titleEn : card.titleAm}</h3>
-                        <p className="text-white/60 text-sm leading-relaxed mb-2">{lang === 'en' ? card.descEn : card.descAm}</p>
-                        <p className="text-forest-400 text-xs font-mono font-bold tracking-wide">{lang === 'en' ? card.statEn : card.statAm}</p>
+                        <h3 className="font-display font-bold text-white text-sm mb-1 group-hover:text-gold-400 transition-colors">{tr({ en: card.titleEn, am: card.titleAm }, lang)}</h3>
+                        <p className="text-white/60 text-sm leading-relaxed mb-2">{tr({ en: card.descEn, am: card.descAm }, lang)}</p>
+                        <p className="text-forest-400 text-xs font-mono font-bold tracking-wide">{tr({ en: card.statEn, am: card.statAm }, lang)}</p>
                       </div>
                     </div>
                   ))}
@@ -163,8 +185,8 @@ export function AboutContent() {
                     </div>
                     <div className="mt-4 flex-1 flex flex-col">
                       <div className={`w-10 h-1 ${accentColor} mb-4`} />
-                      <h3 className="font-display text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{lang === 'en' ? item.titleEn : item.titleAm}</h3>
-                      <p className="text-navy-700/70 text-base leading-relaxed text-justify flex-1">{lang === 'en' ? item.descEn : item.descAm}</p>
+                      <h3 className="font-display text-xl font-bold text-navy-900 mb-3 group-hover:text-gold-600 transition-colors">{tr({ en: item.titleEn, am: item.titleAm }, lang)}</h3>
+                      <p className="text-navy-700/70 text-base leading-relaxed  text-justify-smart flex-1">{tr({ en: item.descEn, am: item.descAm }, lang)}</p>
                     </div>
                   </div>
                 );
@@ -194,7 +216,7 @@ export function AboutContent() {
                 </div>
               </div>
               <div>
-                <p className="text-white/85 text-base md:text-lg leading-relaxed text-justify">{lang === 'en' ? greenLegacyText.en : greenLegacyText.am}</p>
+                <p className="text-white/85 text-base md:text-lg leading-relaxed text-justify-smart">{tr(greenLegacyText, lang)}</p>
                     <div className="mt-4 flex items-center gap-2 text-forest-400 text-base font-mono tracking-wider uppercase">
                   <span className="w-6 h-px bg-forest-500" />
                   {lang === 'en' ? 'Green Legacy Partner' : 'አረንጓዴ አሻራ አጋር'}
@@ -220,7 +242,7 @@ export function AboutContent() {
               <h2 className="font-display text-4xl font-bold mt-3">{a.leadership.title[lang]}</h2>
             </div>
             <div className="max-w-3xl mx-auto">
-              <p className="text-white/70 text-lg leading-relaxed text-justify text-center">{lang === 'en' ? governanceDesc.en : governanceDesc.am}</p>
+              <p className="text-white/70 text-lg leading-relaxed text-center">{tr(governanceDesc, lang)}</p>
             </div>
           </div>
         </section>
@@ -229,9 +251,9 @@ export function AboutContent() {
       <ScrollReveal>
         <section className="bg-gradient-to-r from-forest-600 to-navy-700 text-white py-20">
           <div className="container-custom text-center">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">{a.cta.title[lang]}</h2>
-            <p className="text-white/70 mb-8 max-w-xl mx-auto">{a.cta.desc[lang]}</p>
-            <Link href="/contact" className="btn-primary"><span>{a.cta.cta[lang]}</span><ArrowRight size={16} /></Link>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">{a.ctaSection.title[lang]}</h2>
+            <p className="text-white/70 mb-8 max-w-xl mx-auto">{a.ctaSection.desc[lang]}</p>
+            <Link href="/contact" className="btn-primary"><span>{a.ctaSection.cta[lang]}</span><ArrowRight size={16} /></Link>
           </div>
         </section>
       </ScrollReveal>

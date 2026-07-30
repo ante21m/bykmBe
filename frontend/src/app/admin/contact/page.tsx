@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import {
-  Group, Title, Text, Badge, Table, Select, Loader, Center, Stack, Card, SimpleGrid, Pagination, TextInput,
+  Group, Title, Text, Badge, Table, Select, Loader, Center, Card, SimpleGrid, Pagination, TextInput,
 } from '@mantine/core';
 import { useGetContactSubmissionsQuery, useUpdateContactStatusMutation } from '@/lib/redux/api';
 

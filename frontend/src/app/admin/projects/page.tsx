@@ -125,11 +125,10 @@ export default function AdminProjectsPage() {
           onChange={(v) => { setPillarFilter(v); setPage(1); }}
           clearable
           data={[
-            { value: 'agro', label: 'Agro-Industrialization' },
-            { value: 'infrastructure', label: 'Infrastructure' },
-            { value: 'logistics', label: 'Global Trade & Logistics' },
-            { value: 'digital', label: 'Digital Economy' },
-            { value: 'hospitality', label: 'Hospitality & Retail' },
+            { value: 'infrastructure', label: 'Infrastructure & Real Estate Development' },
+            { value: 'logistics', label: 'Global Trade, Logistics & Transport' },
+            { value: 'hospitality', label: 'Hospitality, Retail & Consumer Ecosystems' },
+            { value: 'agro', label: 'Agro-Industrialization & Natural Resources' },
           ]}
           w={220}
         />

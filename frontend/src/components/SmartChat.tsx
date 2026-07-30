@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User, Languages } from 'lucide-react';
@@ -29,17 +29,17 @@ const i18n: Record<Lang, {
     thinking: 'Thinking...',
     quickTitle: 'Quick Questions',
     welcomeEn: "Welcome to BYKM Trading PLC! I'm your smart assistant. Ask me anything about our company, services, projects, or partnerships.",
-    welcomeAm: 'እንኳን ወደ ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር በደህና መጡ! እኔ የእርስዎ ብልህ ረዳት ነኝ።',
+    welcomeAm: 'እንኳን ወደ ቢዋይኬኤም ትሬዲንግ ኃ/የተ/የግ/ማ በደህና መጡ! እኔ የእርስዎ ብልህ ረዳት ነኝ።',
     errorMsg: "I apologize, but I'm having trouble connecting. Please try again or use our contact form for urgent inquiries.",
   },
   am: {
-    header: 'ቢኬኤም ብልህ ረዳት',
+    header: 'ቢዋይኬኤም ብልህ ረዳት',
     subtitle: 'በአይ የተጎላበተ · የኩባንያ እውቀት',
-    inputPlaceholder: 'ስለ ቢኬኤም ይጠይቁ...',
+    inputPlaceholder: 'ስለ ቢዋይኬኤም ይጠይቁ...',
     thinking: 'በማሰብ ላይ...',
     quickTitle: 'ፈጣን ጥያቄዎች',
     welcomeEn: "Welcome to BYKM Trading PLC! I'm your smart assistant. Ask me anything about our company, services, projects, or partnerships.",
-    welcomeAm: 'እንኳን ወደ ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር በደህና መጡ! እኔ የእርስዎ ብልህ ረዳት ነኝ።',
+    welcomeAm: 'እንኳን ወደ ቢዋይኬኤም ትሬዲንግ ኃ/የተ/የግ/ማ በደህና መጡ! እኔ የእርስዎ ብልህ ረዳት ነኝ።',
     errorMsg: 'ይቅርታ፣ ግን መገናኘት አልቻልኩም። እባክዎ እንደገና ይሞክሩ ወይም ለአስቸኳይ ጥያቄዎች የእውቂያ ቅጻችንን ይጠቀሙ።',
   },
 };

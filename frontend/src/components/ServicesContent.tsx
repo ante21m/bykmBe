@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, Leaf, Shield, Globe, Zap, TrendingUp } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Leaf, Shield, Globe, TrendingUp } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
+import { tr } from '@/lib/i18n/tr';
 
 const pillarIcons: Record<string, typeof Leaf> = {
-  agro: Leaf, infrastructure: Shield, logistics: Globe, digital: Zap, hospitality: TrendingUp,
+  agro: Leaf, infrastructure: Shield, logistics: Globe, hospitality: TrendingUp,
 };
 
 const pillarsData = [
@@ -19,7 +20,7 @@ const pillarsData = [
     intentEn: 'To provide the physical foundation for a modern smart-city economy through integrated engineering.',
     intentAm: 'በተቀናጀ ምህንድስና ለዘመናዊ ስማርት-ከተማ ኢኮኖሚ አካላዊ መሠረት ለማቅረብ።',
     services: [
-      { titleEn: 'Grade-4 General Contracting', titleAm: 'የደረጃ-4 አጠቃላይ ኮንትራክተር', descEn: 'Complex works in Building, Road, Water, and Electro-mechanical engineering (GC-4 certified).', descAm: 'በህንፃ፣ መንገድ፣ ውሃ እና ኤሌክትሮ-መካኒካል ምህንድስና ውስብስብ ስራዎች (GC-4 የተረጋገጠ)።', featuresEn: ['Building construction', 'Road & highway', 'Water infrastructure', 'Electro-mechanical'], featuresAm: ['የህንፃ ግንባታ', 'መንገድ እና ሀይዌይ', 'የውሃ መሠረተ ልማት', 'ኤሌክትሮ-መካኒካል'] },
+      { titleEn: 'General Contracting', titleAm: 'አጠቃላይ ኮንትራክተር', descEn: 'Complex works in Building, Road, Water, and Electro-mechanical engineering (GC-4 certified).', descAm: 'በህንፃ፣ መንገድ፣ ውሃ እና ኤሌክትሮ-መካኒካል ምህንድስና ውስብስብ ስራዎች (GC-4 የተረጋገጠ)።', featuresEn: ['Building construction', 'Road & highway', 'Water infrastructure', 'Electro-mechanical'], featuresAm: ['የህንፃ ግንባታ', 'መንገድ እና ሀይዌይ', 'የውሃ መሠረተ ልማት', 'ኤሌክትሮ-መካኒካል'] },
       { titleEn: 'Urban Redevelopment & Living Infrastructure', titleAm: 'የከተማ መልሶ ልማት እና የቀጥታ መሠረተ ልማት', descEn: 'Mega-Corridor projects blending heavy civil engineering with ecological restoration.', descAm: 'የሜጋ-ኮሪደር ፕሮጀክቶች ከባድ ሲቪል ምህንድስናን ከሥነ-ምህዳር መልሶ ማቋቋም ጋር የሚያዋህዱ።', featuresEn: ['Mega-corridor dev', 'Urban green lungs', 'Riverside stabilization', 'Sustainable drainage'], featuresAm: ['ሜጋ-ኮሪደር ልማት', 'የከተማ አረንጓዴ ሳንባዎች', 'የወንዝ ዳር ማረጋጋት', 'ዘላቂ የፍሳሽ ማስወገጃ'] },
       { titleEn: 'Real Estate & Technical Consultancy', titleAm: 'ሪል እስቴት እና ቴክኒክ አማካሪነት', descEn: 'Urban land acquisition and development plus engineering management consultancy.', descAm: 'የከተማ መሬት ግዥ እና ልማት እንዲሁም የምህንድስና አስተዳደር አማካሪነት።', featuresEn: ['Real estate dev', 'Commercial complexes', 'Engineering consultancy', 'Project management'], featuresAm: ['ሪል እስቴት ልማት', 'የንግድ ኮምፕሌክሶች', 'የምህንድስና አማካሪነት', 'የፕሮጀክት አስተዳደር'] },
     ],
@@ -52,20 +53,7 @@ const pillarsData = [
     ],
   },
   {
-    key: 'digital', number: 'IV',
-    titleEn: 'Digital Economy, Media & Technical Services',
-    titleAm: 'ዲጂታል ኢኮኖሚ፣ ሚዲያ እና ቴክኒክ አገልግሎቶች',
-    taglineEn: 'Industry 4.0 for Ethiopia',
-    taglineAm: 'ኢንዱስትሪ 4.0 ለኢትዮጵያ',
-    intentEn: 'To integrate technology into the industrial process, moving Ethiopia toward Industry 4.0.',
-    intentAm: 'በኢንዱስትሪ ሂደት ውስጥ ቴክኖሎጂን ለማዋሃድ፣ ኢትዮጵያን ወደ ኢንዱስትሪ 4.0 ለማሸጋገር።',
-    services: [
-      { titleEn: 'ICT & Telecommunications Infrastructure', titleAm: 'አይሲቲ እና ቴሌኮሙኒኬሽን መሠረተ ልማት', descEn: 'Network infrastructure, ICT system integration, and smart city connectivity solutions.', descAm: 'የአውታረ መረብ መሠረተ ልማት፣ የአይሲቲ ሥርዓት ውህደት እና የስማርት ከተማ ግንኙነት መፍትሄዎች።', featuresEn: ['Network infra', 'ICT integration', 'Telecom solutions', 'Smart cities'], featuresAm: ['የኔትወርክ መሠረተ ልማት', 'የአይሲቲ ውህደት', 'የቴሌኮም መፍትሄዎች', 'ስማርት ከተሞች'] },
-      { titleEn: 'Printing, Publishing & Knowledge Transfer', titleAm: 'ህትመት፣ ኅትመት ሥራ እና የእውቀት ሽግግር', descEn: 'Full-scale printing, specialized machinery import, and vocational ICT training for Ethiopia\'s workforce.', descAm: 'ሙሉ ልኬት ህትመት፣ ልዩ ማሽነሪዎች ማስመጣት እና ለኢትዮጵያ የሰው ኃይል የሙያ አይሲቲ ስልጠና።', featuresEn: ['Commercial printing', 'Machinery import', 'ICT training', 'Digital literacy'], featuresAm: ['የንግድ ህትመት', 'ማሽነሪ ማስመጣት', 'የአይሲቲ ስልጠና', 'ዲጂታል ማንበብና መጻፍ'] },
-    ],
-  },
-  {
-    key: 'hospitality', number: 'V',
+    key: 'hospitality', number: 'IV',
     titleEn: 'Hospitality, Retail & Consumer Ecosystems',
     titleAm: 'ሆስፒታሊቲ፣ ችርቻሮ እና የሸማች ሥነ-ምህዳር',
     taglineEn: 'Elevating Ethiopian Living',
@@ -112,19 +100,19 @@ export function ServicesContent() {
               <div className="container-custom">
                 <div className="grid lg:grid-cols-5 gap-10">
                   <div className="lg:col-span-2 lg:sticky lg:top-32 lg:self-start">
-                    <div className="w-14 h-14 flex items-center justify-center mb-4" style={{ backgroundColor: `${pillarIcons[pillar.key] === Leaf ? '#2e7d32' : pillar.key === 'infrastructure' ? '#1a237e' : pillar.key === 'logistics' ? '#3949ab' : pillar.key === 'digital' ? '#2e7d32' : '#c8a84b'}15` }}>
-                      <Icon size={24} style={{ color: pillarIcons[pillar.key] === Leaf ? '#2e7d32' : pillar.key === 'infrastructure' ? '#1a237e' : pillar.key === 'logistics' ? '#3949ab' : pillar.key === 'digital' ? '#2e7d32' : '#c8a84b' }} />
+                    <div className="w-14 h-14 flex items-center justify-center mb-4" style={{ backgroundColor: `${pillarIcons[pillar.key] === Leaf ? '#2e7d32' : pillar.key === 'infrastructure' ? '#1a237e' : pillar.key === 'logistics' ? '#3949ab' : '#c8a84b'}15` }}>
+                      <Icon size={24} style={{ color: pillarIcons[pillar.key] === Leaf ? '#2e7d32' : pillar.key === 'infrastructure' ? '#1a237e' : pillar.key === 'logistics' ? '#3949ab' : '#c8a84b' }} />
                     </div>
                     <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase">Pillar {pillar.number}</span>
-                    <h2 className="font-display text-3xl font-bold text-navy-900 mt-2 mb-3">{lang === 'en' ? pillar.titleEn : pillar.titleAm}</h2>
-                    <p className="text-base font-bold text-navy-700/60 mb-2 italic">{lang === 'en' ? pillar.taglineEn : pillar.taglineAm}</p>
-                    <p className="text-navy-700/60 text-base leading-relaxed">{lang === 'en' ? pillar.intentEn : pillar.intentAm}</p>
+                    <h2 className="font-display text-3xl font-bold text-navy-900 mt-2 mb-3">{tr({ en: pillar.titleEn, am: pillar.titleAm }, lang)}</h2>
+                    <p className="text-base font-bold text-navy-700/60 mb-2 italic">{tr({ en: pillar.taglineEn, am: pillar.taglineAm }, lang)}</p>
+                    <p className="text-navy-700/60 text-base leading-relaxed">{tr({ en: pillar.intentEn, am: pillar.intentAm }, lang)}</p>
                   </div>
                   <div className="lg:col-span-3 space-y-6">
                     {pillar.services.map((svc, sIdx) => (
                       <div key={sIdx} className="bg-white border border-navy-100 p-6 md:p-8 hover-lift">
-                        <h3 className="font-display text-xl font-bold text-navy-900 mb-3">{lang === 'en' ? svc.titleEn : svc.titleAm}</h3>
-                        <p className="text-navy-700/60 text-base leading-relaxed mb-4">{lang === 'en' ? svc.descEn : svc.descAm}</p>
+                        <h3 className="font-display text-xl font-bold text-navy-900 mb-3">{tr({ en: svc.titleEn, am: svc.titleAm }, lang)}</h3>
+                        <p className="text-navy-700/60 text-base leading-relaxed mb-4">{tr({ en: svc.descEn, am: svc.descAm }, lang)}</p>
                         <ul className="grid grid-cols-2 gap-3">
                           {(lang === 'en' ? svc.featuresEn : svc.featuresAm).map(f => (
                             <li key={f} className="flex items-center gap-2 text-sm font-medium text-navy-700/80">
@@ -153,9 +141,9 @@ export function ServicesContent() {
           <div className="geo-shape w-48 h-48 top-[-40px] right-[-20px] rotate-12 opacity-20" />
           <div className="geo-shape w-32 h-32 bottom-[-10px] left-1/4 rotate-45 opacity-10" />
           <div className="container-custom relative z-10 text-center">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">{s.cta.title[lang]}</h2>
-            <p className="text-white/60 max-w-xl mx-auto mb-8">{s.cta.desc[lang]}</p>
-            <Link href="/contact" className="btn-primary"><span>{s.cta.cta[lang]}</span><ArrowRight size={16} /></Link>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">{s.ctaSection.title[lang]}</h2>
+            <p className="text-white/60 max-w-xl mx-auto mb-8">{s.ctaSection.desc[lang]}</p>
+            <Link href="/contact" className="btn-primary"><span>{s.ctaSection.cta[lang]}</span><ArrowRight size={16} /></Link>
           </div>
         </section>
       </ScrollReveal>

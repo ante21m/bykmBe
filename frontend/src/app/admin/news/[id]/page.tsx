@@ -3,10 +3,12 @@
 import { useParams, useRouter } from 'next/navigation';
 import NewsForm from '@/components/admin/NewsForm';
 import { useGetNewsItemQuery, useUpdateNewsMutation } from '@/lib/redux/api';
+import { useToast } from '@/components/ui/Toaster';
 
 export default function EditNewsPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
+  const { addToast } = useToast();
   const { data: article, isLoading: loading } = useGetNewsItemQuery(id);
   const [updateNews, { isLoading: saving }] = useUpdateNewsMutation();
 
@@ -36,9 +38,16 @@ export default function EditNewsPage() {
   };
 
   const handleSave = async (data: any) => {
-    await updateNews({ id, data }).unwrap();
-    router.push('/admin/news');
+    try {
+      await updateNews({ id, data }).unwrap();
+      addToast({ type: 'success', title: 'Article updated', message: 'The news article has been updated successfully.' });
+      router.push('/admin/news');
+    } catch {
+      addToast({ type: 'error', title: 'Update failed', message: 'Could not update the article. Please try again.' });
+    }
   };
 
-  return <NewsForm initial={initial} onSave={handleSave} saving={saving} />;
+  return (
+<NewsForm initial={initial} onSave={handleSave} saving={saving} cancelPath="/admin/news" />
+  );
 }

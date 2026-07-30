@@ -11,6 +11,22 @@ import { useGetHomeSectionsQuery, useDeleteHomeSectionMutation } from '@/lib/red
 type SortField = 'sectionKey' | 'title' | 'active';
 type SortDir = 'asc' | 'desc';
 
+const SECTION_KEY_LABELS: Record<string, string> = {
+  heroSection: 'Hero Section',
+  hero: 'Hero Section',
+  heroStatistics: 'Hero Statistics',
+  heroStats: 'Hero Statistics',
+  mission: 'Mission',
+  pillars: 'Pillars',
+  flagshipProject: 'Flagship Project',
+  flagship: 'Flagship Project',
+  values: 'Values',
+  esg: 'ESG',
+  partners: 'Partners',
+  ctaSection: 'CTA Section',
+  cta: 'CTA Section',
+};
+
 export default function AdminHomePage() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [search, setSearch] = useState('');
@@ -46,7 +62,8 @@ export default function AdminHomePage() {
       const q = search.toLowerCase();
       items = items.filter(s =>
         s.title.toLowerCase().includes(q) ||
-        s.sectionKey.toLowerCase().includes(q)
+        s.sectionKey.toLowerCase().includes(q) ||
+        (SECTION_KEY_LABELS[s.sectionKey] || s.sectionKey).toLowerCase().includes(q)
       );
     }
     items.sort((a, b) => {
@@ -100,7 +117,7 @@ export default function AdminHomePage() {
           <Table.Thead>
             <Table.Tr>
               <Table.Th w={50}>#</Table.Th>
-              <Table.Th style={{ cursor: 'pointer' }} onClick={() => toggleSort('sectionKey')}>Key{sortIcon('sectionKey')}</Table.Th>
+              <Table.Th style={{ cursor: 'pointer' }} onClick={() => toggleSort('sectionKey')}>Section{sortIcon('sectionKey')}</Table.Th>
               <Table.Th style={{ cursor: 'pointer' }} onClick={() => toggleSort('title')}>Title (EN){sortIcon('title')}</Table.Th>
               <Table.Th style={{ cursor: 'pointer' }} onClick={() => toggleSort('active')}>Active{sortIcon('active')}</Table.Th>
               <Table.Th w={100}>Actions</Table.Th>
@@ -110,7 +127,7 @@ export default function AdminHomePage() {
             {filtered.map((s, i) => (
               <Table.Tr key={s.id}>
                 <Table.Td><Text size="sm" c="dimmed">{i + 1}</Text></Table.Td>
-                <Table.Td><Badge size="sm" variant="light">{s.sectionKey}</Badge></Table.Td>
+                <Table.Td><Badge size="sm" variant="light">{SECTION_KEY_LABELS[s.sectionKey] || s.sectionKey}</Badge></Table.Td>
                 <Table.Td><Text size="sm">{s.title}</Text></Table.Td>
                 <Table.Td><Badge size="sm" color={s.active ? 'green' : 'gray'}>{s.active ? 'Active' : 'Inactive'}</Badge></Table.Td>
                 <Table.Td>

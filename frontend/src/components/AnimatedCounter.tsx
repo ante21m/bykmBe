@@ -1,51 +1,52 @@
 'use client';
+import { useState, useEffect, useRef } from 'react';
 
-import { useRef, useEffect, useState } from 'react';
-
-interface AnimatedCounterProps {
-  value: number;
-  suffix?: string;
-  prefix?: string;
-  decimals?: number;
-  duration?: number;
-  className?: string;
+interface Props {
+  value: string;
+  unit: string;
 }
 
-export function AnimatedCounter({ value, suffix = '', prefix = '', decimals = 0, duration = 2000, className = '' }: AnimatedCounterProps) {
-  const [display, setDisplay] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
+export function AnimatedCounter({ value, unit }: Props) {
+  const raw = value;
+  const num = parseFloat(raw.replace(/[^0-9.]/g, ''));
+  const suffix = raw.replace(/[0-9.,]/g, '');
+  const isDecimal = raw.includes('.');
+  const decimalPart = isDecimal ? '.' + raw.split('.')[1] : '';
+
+  const [count, setCount] = useState(1);
+  const ref = useRef<HTMLDivElement>(null);
   const counted = useRef(false);
 
   useEffect(() => {
+    if (!ref.current) return;
     const el = ref.current;
-    if (!el || counted.current) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !counted.current) {
           counted.current = true;
-          const startTime = Date.now();
-          const animate = () => {
-            const elapsed = Date.now() - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setDisplay(Math.round(value * eased * Math.pow(10, decimals)) / Math.pow(10, decimals));
-            if (progress < 1) requestAnimationFrame(animate);
-          };
-          requestAnimationFrame(animate);
-          observer.unobserve(el);
+          const range = num - 1;
+          const stepTime = Math.max(2000 / range, 16);
+          let current = 1;
+          const timer = setInterval(() => {
+            current += 1;
+            if (current >= num) {
+              setCount(num);
+              clearInterval(timer);
+            } else {
+              setCount(current);
+            }
+          }, stepTime);
         }
       },
-      { threshold: 0.3 },
+      { threshold: 0.3 }
     );
-
     observer.observe(el);
     return () => observer.disconnect();
-  }, [value, duration, decimals]);
+  }, [num]);
 
   return (
-    <span ref={ref} className={className}>
-      {prefix}{display.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}{suffix}
-    </span>
+    <div ref={ref} className="font-display text-5xl md:text-6xl font-bold text-gold-400 mb-2">
+      {count}{decimalPart}<small className="text-2xl text-gold-400/70 ml-1">{suffix}{unit}</small>
+    </div>
   );
 }

@@ -1,4 +1,6 @@
-const BASE_URL = 'https://bykmgroup.com';
+import { SITE_URL, SOCIAL_LINKS, CONTACT_INFO } from '@/lib/siteConfig';
+
+const BASE_URL = SITE_URL;
 
 const org = {
   '@type': 'Organization',
@@ -7,7 +9,7 @@ const org = {
   url: BASE_URL,
   logo: `${BASE_URL}/images/logo-bykm.jpg`,
   description:
-    'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation driving industrial sovereignty through five integrated strategic pillars: Infrastructure, Agro-Industrialization, Global Trade, Digital Economy, and Hospitality.',
+    'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation driving industrial sovereignty through four integrated strategic pillars: Infrastructure & Real Estate Development, Global Trade, Logistics & Transport, Hospitality, Retail & Consumer Ecosystems, and Agro-Industrialization & Natural Resources.',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Yeka Sub-City, Woreda 08',
@@ -19,20 +21,20 @@ const org = {
       '@type': 'ContactPoint',
       telephone: '+251-XXX-XXXXXXX',
       contactType: 'customer service',
-      email: 'bykmgroup@gmail.com',
+      email: CONTACT_INFO.email,
       availableLanguage: ['English', 'Amharic'],
     },
     {
       '@type': 'ContactPoint',
       telephone: '+251-XXX-XXXXXXX',
       contactType: 'sales',
-      email: 'bykmgroup@gmail.com',
+      email: CONTACT_INFO.email,
     },
   ],
   sameAs: [
-    'https://linkedin.com/company/bykm-trading',
-    'https://facebook.com/bykmtrading',
-    'https://twitter.com/bykmtrading',
+    SOCIAL_LINKS.linkedin,
+    SOCIAL_LINKS.facebook,
+    SOCIAL_LINKS.twitter,
   ],
   foundingDate: '2000',
   numberOfEmployees: { '@type': 'QuantitativeValue', minValue: 50, maxValue: 200 },
@@ -64,7 +66,7 @@ const webPage = {
   name: 'BYKM Trading PLC — Architecting Ethiopia\'s Integrated Future',
   isPartOf: { '@id': `${BASE_URL}/#website` },
   about: { '@id': `${BASE_URL}/#organization` },
-  description: 'Ethiopian multi-sectoral corporation — Infrastructure, Agro-Industry, Global Trade, Digital Economy & Hospitality.',
+  description: 'Ethiopian multi-sectoral corporation — Infrastructure & Real Estate, Global Trade & Logistics, Hospitality & Retail, Agro-Industrialization & Natural Resources.',
 };
 
 const breadcrumb = {
@@ -87,7 +89,7 @@ const localBusiness = {
   image: `${BASE_URL}/images/logo-banner.png`,
   url: BASE_URL,
   telephone: '+251-XXX-XXXXXXX',
-  email: 'bykmgroup@gmail.com',
+  email: CONTACT_INFO.email,
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Yeka Sub-City, Woreda 08',
@@ -110,7 +112,7 @@ const faq = {
       name: 'What is BYKM Trading PLC?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'BYKM Trading PLC is a multi-sectoral Ethiopian corporation engaged in infrastructure development, agro-industrialization, global trade, digital economy, and hospitality services.',
+        text: 'BYKM Trading PLC is a multi-sectoral Ethiopian corporation engaged in infrastructure & real estate development, global trade & logistics, hospitality & retail, and agro-industrialization & natural resources.',
       },
     },
     {
@@ -118,7 +120,7 @@ const faq = {
       name: 'What services does BYKM Trading PLC offer?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'BYKM offers Grade-4 general contracting, import/export logistics, coffee value chain management, ICT infrastructure, telecommunications, hospitality, and real estate development.',
+        text: 'BYKM offers general contracting, import/export logistics, coffee value chain management, ICT infrastructure, telecommunications, hospitality, and real estate development.',
       },
     },
     {
@@ -134,7 +136,7 @@ const faq = {
       name: 'Is BYKM Trading PLC a licensed general contractor in Ethiopia?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, BYKM Trading PLC holds a Grade-4 General Contracting (GC-4) license for building, road, water, and electro-mechanical engineering in Ethiopia.',
+        text: 'Yes, BYKM Trading PLC holds a General Contracting (GC-4) license for building, road, water, and electro-mechanical engineering in Ethiopia.',
       },
     },
   ],

@@ -2,7 +2,7 @@
 
 import {
   Group, Title, Text, Paper, SimpleGrid, Grid, Table, Badge,
-  Loader, Center, Stack,
+  Loader, Center,
 } from '@mantine/core';
 import { useGetProjectsQuery, useGetServicesQuery, useGetAboutSectionsQuery, useGetNewsQuery, useGetContactSubmissionsQuery, useGetContactStatsQuery } from '@/lib/redux/api';
 import {
@@ -10,14 +10,6 @@ import {
 } from 'recharts';
 
 const COLORS = ['#228be6', '#40c057', '#fab005', '#fa5252', '#7950f2', '#fd7e14', '#12b886'];
-
-const PILLAR_COLORS: Record<string, string> = {
-  agro: '#40c057',
-  infrastructure: '#228be6',
-  logistics: '#fab005',
-  digital: '#7950f2',
-  hospitality: '#fd7e14',
-};
 
 export default function AdminDashboardPage() {
   const { data: projects, isLoading: loadP } = useGetProjectsQuery();

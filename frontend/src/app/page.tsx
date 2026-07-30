@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { HomeContent } from '@/components/HomeContent';
+import { api, type HomeSection } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'BYKM Trading PLC — Architecting Ethiopia\'s Integrated Future',
@@ -11,8 +12,12 @@ export const metadata: Metadata = {
     images: ['/images/logo-bykm.jpg'],
   },
 };
-// This is the main page of the BYKM Trading PLC website, showcasing our commitment to building a connected and prosperous Ethiopia through our diverse range of services and solutions.
 
-export default function HomePage() {
-  return <HomeContent />;
+export default async function HomePage() {
+  let sections: HomeSection[] = [];
+  try {
+    sections = await api.getHomeSections();
+  } catch {
+  }
+  return <HomeContent sections={sections} />;
 }

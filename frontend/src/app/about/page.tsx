@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { AboutContent } from '@/components/AboutContent';
+import { api, type AboutSection } from '@/lib/api';
 
 const TITLE = 'About — BYKM Trading PLC';
 const DESC = 'The story of BYKM Trading PLC — from Besufekad BC to Ethiopia\'s premier multi-sectoral industrial corporation.';
@@ -21,6 +22,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
-  return <AboutContent />;
+export default async function AboutPage() {
+  let sections: AboutSection[] = [];
+  try {
+    sections = await api.getAboutSections();
+  } catch {
+  }
+  return <AboutContent sections={sections} />;
 }

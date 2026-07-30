@@ -34,6 +34,7 @@ interface MissionItem {
 interface PillarMeta {
   tagline: BilingualField;
   exploreLabel: BilingualField;
+  imageUrl?: string;
 }
 
 interface KpiItem {
@@ -42,7 +43,7 @@ interface KpiItem {
 }
 
 export interface HomeApiData {
-  hero: {
+  heroSection: {
     edition: BilingualField;
     motto: BilingualField;
     line1: BilingualField;
@@ -51,16 +52,17 @@ export interface HomeApiData {
     desc: BilingualField;
     discoverBtn: BilingualField;
     viewProjectsBtn: BilingualField;
+    bgImage?: string;
   };
-  heroStats: StatItem[];
-  mission: { label: BilingualField; title: BilingualField; items: MissionItem[] };
+  heroStatistics: StatItem[];
+  mission: { label: BilingualField; title: BilingualField; desc: BilingualField; items: MissionItem[] };
   pillars: { label: BilingualField; title: BilingualField; desc: BilingualField; explore: BilingualField };
   pillarsData: PillarMeta[];
-  flagship: { label: BilingualField; title: BilingualField; desc: BilingualField; viewAll: BilingualField; kpis: KpiItem[]; client: BilingualField; clientSub: BilingualField };
+  flagshipProject: { label: BilingualField; title: BilingualField; desc: BilingualField; viewAll: BilingualField; kpis: KpiItem[]; client: BilingualField; clientSub: BilingualField; stats?: StatItem[] };
   values: { label: BilingualField; title: BilingualField };
   esg: { label: BilingualField; title: BilingualField; desc: BilingualField; cta: BilingualField };
   partners: { label: BilingualField; title: BilingualField };
-  cta: { label: BilingualField; title: BilingualField; desc: BilingualField; partnershipBtn: BilingualField; inquiryBtn: BilingualField };
+  ctaSection: { label: BilingualField; title: BilingualField; desc: BilingualField; partnershipBtn: BilingualField; inquiryBtn: BilingualField };
 }
 
 function bf(en: string, am: string): BilingualField {
@@ -76,15 +78,15 @@ function flatToBf(flatEn: Record<string, string> | undefined, flatAm: Record<str
 
 export function transformHomeSections(sections: RawHomeSection[]): HomeApiData | null {
   const get = (key: string) => sections.find(s => s.sectionKey === key);
-  const hero = get('hero');
-  const heroStats = get('heroStats');
+  const hero = get('heroSection');
+  const heroStats = get('heroStatistics');
   const mission = get('mission');
   const pillars = get('pillars');
-  const flagship = get('flagship');
+  const flagship = get('flagshipProject');
   const valSec = get('values');
   const esg = get('esg');
   const partners = get('partners');
-  const cta = get('cta');
+  const cta = get('ctaSection');
 
   if (!hero) return null;
 
@@ -117,6 +119,7 @@ export function transformHomeSections(sections: RawHomeSection[]): HomeApiData |
   const pillarsMeta: PillarMeta[] = pillDataEn.map((p: any, i: number) => ({
     tagline: bf(p.tagline || '', pillDataAm[i]?.tagline || p.tagline || ''),
     exploreLabel: bf(p.exploreLabel || '', pillDataAm[i]?.exploreLabel || p.exploreLabel || ''),
+    imageUrl: p.imageUrl || pillDataAm[i]?.imageUrl || '',
   }));
 
   const flagEn = parseJson<Record<string, any>>(flagship?.content, {});
@@ -127,6 +130,13 @@ export function transformHomeSections(sections: RawHomeSection[]): HomeApiData |
     val: k.value || '',
     label: bf(k.label || '', flagKpisAm[i]?.label || k.label || ''),
   }));
+  const flagStatsEn: any[] = flagEn?.stats || [];
+  const flagStatsAm: any[] = flagAm?.stats || [];
+  const flagStats: StatItem[] = flagStatsEn.map((s: any, i: number) => ({
+    value: s.value || '',
+    unit: bf(s.unit || '', flagStatsAm[i]?.unit || s.unit || ''),
+    label: bf(s.label || '', flagStatsAm[i]?.label || s.label || ''),
+  }));
 
   const esgEn = parseJson<Record<string, string>>(esg?.content, {});
   const esgAm = parseJson<Record<string, string>>(esg?.contentAm, {});
@@ -135,23 +145,25 @@ export function transformHomeSections(sections: RawHomeSection[]): HomeApiData |
   const ctaAm = parseJson<Record<string, string>>(cta?.contentAm, {});
 
   return {
-    hero: {
-      edition: flatToBf(heroEn, heroAm, 'edition', 'Edition 1.0', 'እትም 1.0'),
-      motto: flatToBf(heroEn, heroAm, 'motto', 'Architecting Ethiopian Integrated Future!', 'የኢትዮጵያን የተቀናጀ የወደፊት እድገት በመቅረጽ!'),
-      line1: flatToBf(heroEn, heroAm, 'line1', 'Building', 'እየገነባን'),
-      line2: flatToBf(heroEn, heroAm, 'line2', 'Tomorrow', 'ነገን'),
+    heroSection: {
+      edition: flatToBf(heroEn, heroAm, 'edition', '', ''),
+      motto: flatToBf(heroEn, heroAm, 'motto', 'Architecting Ethiopian Integrated Future!', 'የኢትዮጵያን የተቀናጀ የወደፊት እድገት በማነድፍ ላይ!'),
+      line1: flatToBf(heroEn, heroAm, 'line1', 'The Blueprint for', 'ብሉፕሪንቱ'),
+      line2: flatToBf(heroEn, heroAm, 'line2', '', ''),
       typeWords: bf(
-        heroEn?.typeWords || 'Future',
-        heroAm?.typeWords || 'የወደፊት',
+        heroEn?.typeWords || '',
+        heroAm?.typeWords || '',
       ),
-      desc: flatToBf(heroEn, heroAm, 'desc'),
+      desc: flatToBf(heroEn, heroAm, 'desc', 'Architecting Ethiopia\'s integrated future through four strategic pillars of industrial excellence, environmental stewardship, and economic resilience.', 'የኢትዮጵያን የተቀናጀ የወደፊት እድገት በማነድፍ በአራት ስትራቴጂካዊ ምሰሶዎች፡ የኢንዱስትሪ የላቀነት፣ የአካባቢ ጥበቃ እና ኢኮኖሚያዊ መቋቋም።'),
       discoverBtn: flatToBf(heroEn, heroAm, 'discoverBtn', 'Discover More', 'ተጨማሪ ይወቁ'),
       viewProjectsBtn: flatToBf(heroEn, heroAm, 'viewProjectsBtn', 'View Projects', 'ፕሮጀክቶችን ይመልከቱ'),
+      bgImage: heroEn?.bgImage || undefined,
     },
-    heroStats: stats,
+    heroStatistics: stats,
     mission: {
       label: bf(missEn?.label || 'Our Mission', missAm?.label || 'ተልዕኳችን'),
       title: bf(missEn?.title || '', missAm?.title || ''),
+      desc: bf(missEn?.desc || '', missAm?.desc || ''),
       items: missionItems,
     },
     pillars: {
@@ -161,7 +173,7 @@ export function transformHomeSections(sections: RawHomeSection[]): HomeApiData |
       explore: bf(pillEn?.explore || 'Explore', pillAm?.explore || 'ያስሱ'),
     },
     pillarsData: pillarsMeta,
-    flagship: {
+    flagshipProject: {
       label: bf(flagEn?.label || 'Flagship Project', flagAm?.label || 'ዋና ፕሮጀክት'),
       title: bf(flagEn?.title || '', flagAm?.title || ''),
       desc: bf(flagEn?.desc || '', flagAm?.desc || ''),
@@ -169,6 +181,7 @@ export function transformHomeSections(sections: RawHomeSection[]): HomeApiData |
       kpis,
       client: bf(flagEn?.client || '', flagAm?.client || ''),
       clientSub: bf(flagEn?.clientSub || '', flagAm?.clientSub || ''),
+      stats: flagStats.length > 0 ? flagStats : undefined,
     },
     values: {
       label: bf(valSec?.title || 'Our Core Values', valSec?.titleAm || 'ዋና እሴቶቻችን'),
@@ -187,7 +200,7 @@ export function transformHomeSections(sections: RawHomeSection[]): HomeApiData |
       label: bf(parseJson<Record<string, string>>(partners?.content, {})?.label || 'Partners', parseJson<Record<string, string>>(partners?.contentAm, {})?.label || 'አጋሮች'),
       title: bf(parseJson<Record<string, string>>(partners?.content, {})?.title || 'Trusted Partners', parseJson<Record<string, string>>(partners?.contentAm, {})?.title || 'የታመኑ አጋሮች'),
     },
-    cta: {
+    ctaSection: {
       label: bf(ctaEn?.label || '', ctaAm?.label || ''),
       title: bf(ctaEn?.title || 'Partner With Us', ctaAm?.title || 'ከእኛ ጋር አጋር ይሁኑ'),
       desc: bf(ctaEn?.desc || '', ctaAm?.desc || ''),

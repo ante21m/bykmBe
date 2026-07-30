@@ -13,5 +13,5 @@ export default function NewHomePage() {
     router.push('/admin/home');
   };
 
-  return <HomeSectionForm onSave={handleSave} saving={isLoading} />;
+  return <HomeSectionForm onSave={handleSave} saving={isLoading} cancelPath="/admin/home" />;
 }

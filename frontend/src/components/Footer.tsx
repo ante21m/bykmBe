@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import { MapPin, Phone, Mail, Globe, Linkedin } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
+import { SOCIAL_LINKS, CONTACT_INFO } from '@/lib/siteConfig';
 import DOMPurify from 'isomorphic-dompurify';
 
 export function Footer() {
   const { lang, translations: t } = useTranslation();
   const f = t.footer;
-
   return (
     <footer className="bg-[#080616] text-white">
       <div className="bg-gradient-to-r from-navy-800 via-navy-700 to-forest-600 py-12">
@@ -25,36 +25,35 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-6">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/logo-bykm.jpg" alt="BYKM" className="h-14 md:h-20 w-auto object-contain" />
+                <img src="/images/logo-bykm.jpg" alt={t.brand.short[lang]} className="h-14 md:h-20 w-auto object-contain" />
                 <div>
-                <div className="font-display font-bold text-lg leading-none">BYKM</div>
-                <div className="text-gold-400 text-xs sm:text-sm font-mono tracking-[0.2em] uppercase">Trading PLC</div>
+                <div className="font-display font-bold text-lg leading-none">{t.brand.short[lang]}</div>
+                <div className="text-gold-400 text-xs sm:text-sm font-mono tracking-[0.2em] uppercase">{t.brand.suffix[lang]}</div>
               </div>
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-6">{f.brandDesc[lang]}</p>
             <div className="flex gap-3 flex-wrap">
-              <a href="https://www.bykmgroup.com" target="_blank" rel="noopener noreferrer"
+              <a href={SOCIAL_LINKS.website} target="_blank" rel="noopener noreferrer"
                 className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="Website">
                 <Globe size={15} />
               </a>
-              <a href="https://linkedin.com/company/bykm-trading-plc" target="_blank" rel="noopener noreferrer"
+              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer"
                 className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="LinkedIn">
                 <Linkedin size={15} />
               </a>
-              <a href="https://facebook.com/bykmgroup" target="_blank" rel="noopener noreferrer"
+              <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer"
                 className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="Facebook">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
               </a>
-              <a href="https://twitter.com/bykmgroup" target="_blank" rel="noopener noreferrer"
+              <a href={SOCIAL_LINKS.twitter} target="_blank" rel="noopener noreferrer"
                 className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="Twitter / X">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               </a>
-              <a href="https://instagram.com/bykmgroup" target="_blank" rel="noopener noreferrer"
+              <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer"
                 className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="Instagram">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
               </a>
-              <a href="https://youtube.com/@bykmgroup" target="_blank" rel="noopener noreferrer"
+              <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer"
                 className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="YouTube">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               </a>
@@ -64,7 +63,7 @@ export function Footer() {
           <div>
 <h3 className="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase text-gold-400 mb-5">{f.pillarsTitle[lang]}</h3>
           <ul className="space-y-3">
-            {['agro', 'infra', 'logistics', 'digital', 'hospitality'].map((key) => (
+            {['infra', 'logistics', 'hospitality', 'agro'].map((key) => (
               <li key={key}>
                 <Link href={`/services?pillar=${key}`}
                   className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 group">
@@ -119,17 +118,15 @@ export function Footer() {
                 <MapPin size={15} className="text-gold-400 mt-0.5 shrink-0" />
                 <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(f.address[lang]) }} />
               </li>
-              <li className="flex items-center gap-3 text-sm">
-                <Phone size={15} className="text-gold-400 shrink-0" />
-                <a href="tel:+251911343290" className="text-white/60 hover:text-white transition-colors">+251 911 34 32 90</a>
-              </li>
-              <li className="flex items-center gap-3 text-sm">
-                <Phone size={15} className="text-gold-400 shrink-0" />
-                <a href="tel:+251912764343" className="text-white/60 hover:text-white transition-colors">+251 912 76 43 43</a>
-              </li>
+              {CONTACT_INFO.phones.map((phone) => (
+                <li key={phone.number} className="flex items-center gap-3 text-sm">
+                  <Phone size={15} className="text-gold-400 shrink-0" />
+                  <a href={`tel:${phone.number.replace(/\s/g, '')}`} className="text-white/60 hover:text-white transition-colors">{phone.number}</a>
+                </li>
+              ))}
               <li className="flex items-center gap-3 text-sm">
                 <Mail size={15} className="text-gold-400 shrink-0" />
-                <a href="mailto:bykmgroup@gmail.com" className="text-white/60 hover:text-white transition-colors">bykmgroup@gmail.com</a>
+                <a href={`mailto:${CONTACT_INFO.email}`} className="text-white/60 hover:text-white transition-colors">{CONTACT_INFO.email}</a>
               </li>
             </ul>
           </div>

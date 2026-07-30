@@ -48,7 +48,7 @@ export default function TermsPage() {
           <h2 className="text-xl font-bold text-navy-900 mt-8 mb-3">Contact</h2>
           <p>
             For questions about these Terms of Service, please contact us at{' '}
-            <a href="mailto:info@bykmgroup.com" className="text-forest-600 underline">info@bykmgroup.com</a>.
+            <a href="mailto:beleteslesh@bykmgroup.com" className="text-forest-600 underline">beleteslesh@bykmgroup.com</a>.
           </p>
         </div>
       </div>

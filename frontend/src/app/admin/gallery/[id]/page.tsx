@@ -34,5 +34,5 @@ export default function EditGalleryPage() {
     router.push('/admin/gallery');
   };
 
-  return <GalleryForm initial={initial} onSave={handleSave} saving={saving} />;
+  return <GalleryForm initial={initial} onSave={handleSave} saving={saving} cancelPath="/admin/gallery" />;
 }

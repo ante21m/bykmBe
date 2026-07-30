@@ -19,5 +19,5 @@ export default function EditHomePage() {
     router.push('/admin/home');
   };
 
-  return <HomeSectionForm initial={section} onSave={handleSave} saving={saving} />;
+  return <HomeSectionForm initial={section} onSave={handleSave} saving={saving} cancelPath="/admin/home" />;
 }

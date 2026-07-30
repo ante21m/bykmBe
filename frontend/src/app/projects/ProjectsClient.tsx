@@ -9,11 +9,10 @@ import { useGetProjectsQuery } from '@/lib/redux/api';
 import type { ProjectData } from '@/lib/redux/api';
 
 const pillarLabelMap: Record<string, { en: string; am: string }> = {
-  agro: { en: 'Agro-Industrialization', am: 'አግሮ-ኢንዱስትሪላይዜሽን' },
-  infrastructure: { en: 'Infrastructure', am: 'መሠረተ ልማት' },
-  logistics: { en: 'Global Trade & Logistics', am: 'ዓለም አቀፍ ንግድ እና ሎጂስቲክስ' },
-  digital: { en: 'Digital Economy', am: 'ዲጂታል ኢኮኖሚ' },
-  hospitality: { en: 'Hospitality & Retail', am: 'ሆስፒታሊቲ እና ችርቻሮ' },
+  infrastructure: { en: 'Infrastructure & Real Estate Development', am: 'መሠረተ ልማት እና ሪል እስቴት ልማት' },
+  logistics: { en: 'Global Trade, Logistics & Transport', am: 'ዓለም አቀፍ ንግድ፣ ሎጂስቲክስ እና ትራንስፖርት' },
+  hospitality: { en: 'Hospitality, Retail & Consumer Ecosystems', am: 'ሆስፒታሊቲ፣ ችርቻሮ እና የሸማች ሥነ-ምህዳር' },
+  agro: { en: 'Agro-Industrialization & Natural Resources', am: 'አግሮ-ኢንዱስትሪላይዜሽን እና የተፈጥሮ ሀብቶች' },
 };
 
 const headerStats = [
@@ -342,9 +341,9 @@ export function ProjectsClient() {
           <div className="geo-shape w-48 h-48 top-[-40px] right-[-20px] rotate-12 opacity-20" />
           <div className="geo-shape w-32 h-32 bottom-[-10px] left-1/4 rotate-45 opacity-10" />
           <div className="container-custom relative z-10 text-center">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">{p.cta.title[lang]}</h2>
-            <p className="text-white/60 max-w-xl mx-auto mb-8">{p.cta.desc[lang]}</p>
-            <Link href="/contact" className="btn-primary"><span>{p.cta.cta[lang]}</span><ArrowRight size={16} /></Link>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">{p.ctaSection.title[lang]}</h2>
+            <p className="text-white/60 max-w-xl mx-auto mb-8">{p.ctaSection.desc[lang]}</p>
+            <Link href="/contact" className="btn-primary"><span>{p.ctaSection.cta[lang]}</span><ArrowRight size={16} /></Link>
           </div>
         </section>
       </ScrollReveal>

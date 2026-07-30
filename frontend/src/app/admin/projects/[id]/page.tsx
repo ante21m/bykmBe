@@ -19,7 +19,8 @@ export default function EditProjectPage() {
     return <div className="px-6 py-10 text-red-400 text-sm">Project not found</div>;
   }
 
-  const initial: ProjectFormData = {
+  const initial: ProjectFormData & { id?: string } = {
+    id: project.id,
     title: project.title,
     titleAm: project.titleAm,
     description: project.description,
@@ -49,5 +50,7 @@ export default function EditProjectPage() {
     router.push('/admin/projects');
   };
 
-  return <ProjectForm initial={initial} onSave={handleSave} saving={saving} />;
+  return (
+<ProjectForm initial={initial} onSave={handleSave} saving={saving} cancelPath="/admin/projects" />
+  );
 }

@@ -19,5 +19,7 @@ export default function EditServicePage() {
     router.push('/admin/services');
   };
 
-  return <ServiceForm initial={service} onSave={handleSave} saving={saving} />;
+  return (
+<ServiceForm initial={service} onSave={handleSave} saving={saving} cancelPath="/admin/services" />
+  );
 }

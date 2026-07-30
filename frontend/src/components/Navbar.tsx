@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import { Drawer } from '@mantine/core';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { SearchDialog } from './SearchDialog';
@@ -13,6 +14,7 @@ const navLinks = [
   { href: '/about', key: 'about' },
   { href: '/services', key: 'services' },
   { href: '/projects', key: 'projects' },
+  { href: '/team', key: 'team' },
   { href: '/news', key: 'news' },
   { href: '/gallery', key: 'gallery' },
   { href: '/contact', key: 'contact' },
@@ -31,8 +33,6 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const isHero = pathname === '/';
-
   return (
     <>
       <header
@@ -42,12 +42,11 @@ export function Navbar() {
           <div className="flex items-center justify-between h-20">
             <Link href="/" className="flex items-center gap-3 group">
               <div className="relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/logo-bykm.jpg" alt="BYKM" className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain" />
+                <img src="/images/logo-bykm.jpg" alt={t.brand.short[lang]} className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain" />
               </div>
               <div>
-                <div className="text-white font-display font-bold text-lg leading-none">BYKM</div>
-                <div className="text-gold-400 text-xs sm:text-sm font-mono tracking-[0.2em] uppercase leading-tight">Trading PLC</div>
+                <div className="text-white font-display font-bold text-lg leading-none">{t.brand.short[lang]}</div>
+                <div className="text-gold-400 text-xs sm:text-sm font-mono tracking-[0.2em] uppercase leading-tight">{t.brand.suffix[lang]}</div>
               </div>
             </Link>
 
@@ -76,15 +75,12 @@ export function Navbar() {
                 </svg>
               </button>
               <LanguageSwitcher />
-              <Link href="/contact" className="hidden md:flex btn-primary text-[10px] py-1 px-2.5">
-                <span>{t.nav.partnerCta[lang]}</span>
-              </Link>
               <button
                 className="md:hidden text-white p-2"
-                onClick={() => setMenuOpen(!menuOpen)}
-                aria-label="Toggle menu"
+                onClick={() => setMenuOpen(true)}
+                aria-label="Open menu"
               >
-                {menuOpen ? <X size={22} /> : <Menu size={22} />}
+                <Menu size={22} />
               </button>
             </div>
           </div>
@@ -93,28 +89,57 @@ export function Navbar() {
 
       <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      <div
-        className={`fixed inset-0 z-[60] bg-[#080616] transition-all duration-400 ${
-          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+      <Drawer
+        opened={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        position="right"
+        size="75%"
+        padding={0}
+        withCloseButton={false}
+        styles={{
+          root: { zIndex: 60 },
+          overlay: { background: 'rgba(8,6,22,0.85)', backdropFilter: 'blur(4px)' },
+          body: { height: '100%' },
+        }}
       >
-        <div className="flex flex-col items-center justify-center h-full gap-8 pt-20">
-          {navLinks.map((link, i) => (
-            <Link
-              key={link.href}
-              href={link.href}
+        <div className="flex flex-col h-full bg-[#0c1445]">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+            <span className="text-white font-display font-bold text-lg">Menu</span>
+            <button
               onClick={() => setMenuOpen(false)}
-              className="text-white font-display text-3xl hover:text-gold-400 transition-colors"
-              style={{ transitionDelay: `${i * 50}ms` }}
+              className="text-white/60 hover:text-white p-1.5 transition-colors"
+              aria-label="Close menu"
             >
-              {t.nav[link.key as keyof typeof t.nav][lang]}
+              <X size={22} />
+            </button>
+          </div>
+          <div className="flex-1 flex flex-col gap-1 px-4 py-6 overflow-y-auto">
+            {navLinks.map((link, i) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className={`flex items-center px-4 py-3.5 rounded-lg text-base font-medium transition-colors ${
+                  pathname === link.href
+                    ? 'text-gold-400 bg-white/5'
+                    : 'text-white/80 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                {t.nav[link.key as keyof typeof t.nav][lang]}
+              </Link>
+            ))}
+          </div>
+          <div className="px-6 pb-8 pt-4 border-t border-white/10">
+            <Link
+              href="/contact"
+              onClick={() => setMenuOpen(false)}
+              className="btn-primary w-full text-center"
+            >
+              <span>Contact Us</span>
             </Link>
-          ))}
-          <Link href="/contact" onClick={() => setMenuOpen(false)} className="btn-primary mt-4">
-            <span>{t.nav.partnerCta[lang]}</span>
-          </Link>
+          </div>
         </div>
-      </div>
+      </Drawer>
     </>
   );
 }

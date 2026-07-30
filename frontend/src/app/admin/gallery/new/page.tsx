@@ -1,17 +1,17 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import GalleryForm from '@/components/admin/GalleryForm';
 import { useCreateGalleryMutation } from '@/lib/redux/api';
+import GalleryForm from '@/components/admin/GalleryForm';
 
 export default function NewGalleryPage() {
   const router = useRouter();
-  const [createGallery, { isLoading }] = useCreateGalleryMutation();
+  const [create, { isLoading }] = useCreateGalleryMutation();
 
   const handleSave = async (data: any) => {
-    await createGallery(data).unwrap();
+    await create(data).unwrap();
     router.push('/admin/gallery');
   };
 
-  return <GalleryForm onSave={handleSave} saving={isLoading} />;
+  return <GalleryForm onSave={handleSave} saving={isLoading} cancelPath="/admin/gallery" />;
 }

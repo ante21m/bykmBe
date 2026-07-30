@@ -14,5 +14,7 @@ export default function NewProjectPage() {
     router.push('/admin/projects');
   };
 
-  return <ProjectForm onSave={handleSave} saving={isLoading} />;
+  return (
+<ProjectForm onSave={handleSave} saving={isLoading} cancelPath="/admin/projects" />
+  );
 }
