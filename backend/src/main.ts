@@ -12,6 +12,10 @@ async function bootstrap() {
 
   const frontendUrl = process.env.FRONTEND_URL;
   const origins: string[] = [];
+  const corsOrigins = process.env.CORS_ORIGINS;
+  if (corsOrigins) {
+    origins.push(...corsOrigins.split(',').map((o) => o.trim()).filter(Boolean));
+  }
   if (frontendUrl) origins.push(frontendUrl);
   if (process.env.NODE_ENV !== 'production') {
     origins.push('http://localhost:3000');
@@ -19,7 +23,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: origins.length > 0 ? origins : '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   });
