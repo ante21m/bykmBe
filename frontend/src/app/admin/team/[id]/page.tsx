@@ -1,6 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { Text } from '@mantine/core';
 import TeamForm from '@/components/admin/TeamForm';
 import { useGetTeamMemberQuery, useUpdateTeamMemberMutation } from '@/lib/redux/api';
 
@@ -9,6 +11,7 @@ export default function EditTeamMemberPage() {
   const router = useRouter();
   const { data: member, isLoading: loading } = useGetTeamMemberQuery(id);
   const [updateMember, { isLoading: saving }] = useUpdateTeamMemberMutation();
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   if (loading) {
     return <div className="px-6 py-10 text-white/40 text-sm">Loading...</div>;
@@ -38,9 +41,22 @@ export default function EditTeamMemberPage() {
   };
 
   const handleSave = async (data: any) => {
-    await updateMember({ id, data }).unwrap();
-    router.push('/admin/team');
+    setSaveError(null);
+    try {
+      await updateMember({ id, data }).unwrap();
+      router.push('/admin/team');
+    } catch (err: any) {
+      const msg = err?.data?.message ?? err?.error ?? 'Failed to update member';
+      setSaveError(Array.isArray(msg) ? msg.join(', ') : String(msg));
+    }
   };
 
-  return <TeamForm initial={initial} onSave={handleSave} saving={saving} cancelPath="/admin/team" />;
+  return (
+    <>
+      {saveError && (
+        <Text c="red" size="sm" mb="md">{saveError}</Text>
+      )}
+      <TeamForm initial={initial} onSave={handleSave} saving={saving} cancelPath="/admin/team" />
+    </>
+  );
 }

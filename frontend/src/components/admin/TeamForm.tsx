@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import {
-  TextInput, Textarea, Button, Group, Stack, Switch, Select, NumberInput, Divider, ActionIcon, Tooltip, FileInput,
+  TextInput, Textarea, Button, Group, Stack, Switch, Select, NumberInput, Divider, ActionIcon, Tooltip, FileInput, Text,
 } from '@mantine/core';
 import Link from 'next/link';
 import { Upload, Trash2 } from 'lucide-react';
@@ -34,17 +34,25 @@ export default function TeamForm({ initial, onSave, saving, cancelPath }: { init
     ...initial,
   });
   const [uploadFile] = useUploadFileMutation();
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   const set = (key: keyof FormData, value: any) => setForm((prev) => ({ ...prev, [key]: value }));
 
   const handleImageUpload = async (file: File | null) => {
     if (!file) return;
+    setUploadError(null);
     try {
       const formData = new FormData();
       formData.append('file', file);
       const result = await uploadFile(formData).unwrap();
       set('imageUrl', result.url);
-    } catch { }
+    } catch (err: any) {
+      setUploadError(
+        err?.status === 401
+          ? 'Session expired. Please sign out and log in again, then retry the upload.'
+          : `Upload failed${err?.status ? ` (${err.status})` : ''}. Please try again.`,
+      );
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -127,6 +135,7 @@ export default function TeamForm({ initial, onSave, saving, cancelPath }: { init
           <FileInput label="Image" accept="image/*" onChange={handleImageUpload} clearable leftSection={<Upload size={16} />} />
           {form.imageUrl && <TextInput label="Image URL" value={form.imageUrl} onChange={(e) => set('imageUrl', e.currentTarget.value)} />}
         </Group>
+        {uploadError && <Text c="red" size="xs">{uploadError}</Text>}
 
         <Group gap="md" align="flex-start" grow>
           <Select label="Category" data={['founder', 'leadership']} value={form.category || 'leadership'} onChange={(v) => set('category', v || 'leadership')} />

@@ -16,11 +16,28 @@ function LeadershipGrid({ leaders, lang }: { leaders: TeamMemberData[]; lang: st
       {leaders.map((leader) => (
         <div key={leader.id} className="bg-white border border-navy-100 overflow-hidden group hover:shadow-lg hover:border-gold-200 transition-all duration-300">
           <div className="aspect-[4/3] bg-gradient-to-br from-navy-50 to-navy-100 relative overflow-hidden">
-            <img
-              src={leader.imageUrl || '/images/placeholder.jpg'}
-              alt={lang === 'en' ? leader.nameEn : leader.nameAm}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
+            {leader.imageUrl ? (
+              <img
+                src={leader.imageUrl}
+                alt={lang === 'en' ? leader.nameEn : leader.nameAm}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            ) : (
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <div className="w-20 h-20 rounded-full bg-navy-900 flex items-center justify-center">
+                  <span className="text-gold-400 font-display text-2xl font-bold">
+                    {((lang === 'en' ? leader.nameEn : leader.nameAm) || '?')
+                      .split(/\s+/)
+                      .filter(Boolean)
+                      .slice(0, 2)
+                      .map((w) => w[0])
+                      .join('')
+                      .toUpperCase()}
+                  </span>
+                </div>
+                <span className="mt-4 font-mono text-xs tracking-[0.3em] uppercase text-navy-400">BYKM</span>
+              </div>
+            )}
           </div>
           <div className="p-5">
             <h3 className="font-display text-base font-bold text-navy-900">{lang === 'en' ? leader.nameEn : leader.nameAm}</h3>
@@ -115,7 +132,7 @@ export default function TeamPage() {
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div className="relative">
                 <div className="aspect-[4/5] bg-gradient-to-br from-navy-900 to-navy-700 overflow-hidden">
-                  <img src="/images/owner.jpg" alt="Besufekad Molla Wube" className="w-full h-full object-cover" />
+                  <img src={founder?.imageUrl || '/images/owner.jpg'} alt="Besufekad Molla Wube" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gold-400/10 rounded-full blur-2xl" />
               </div>

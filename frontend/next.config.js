@@ -50,7 +50,7 @@ const nextConfig = {
     return [
       {
         source: '/uploads/:path*',
-        destination: `${apiBase}/uploads/:path*`,
+        destination: `${apiBase}/api/uploads/:path*`,
       },
     ];
   },
