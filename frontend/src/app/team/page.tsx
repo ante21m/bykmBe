@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown, Building2 } from 'lucide-react';
+import { ChevronDown, Building2, X } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
 import { useGetActiveTeamMembersQuery } from '@/lib/redux/api';
 import type { TeamMemberData } from '@/lib/redux/api';
 
-function LeadershipGrid({ leaders, lang }: { leaders: TeamMemberData[]; lang: string }) {
+function LeadershipGrid({ leaders, lang, onImageClick }: { leaders: TeamMemberData[]; lang: string; onImageClick: (src: string, alt: string) => void }) {
   const { translations: tm } = useTranslation();
   const tlm = tm.team.leadership;
   return (
@@ -17,11 +17,16 @@ function LeadershipGrid({ leaders, lang }: { leaders: TeamMemberData[]; lang: st
         <div key={leader.id} className="bg-white border border-navy-100 overflow-hidden group hover:shadow-lg hover:border-gold-200 transition-all duration-300">
           <div className="aspect-[4/3] bg-gradient-to-br from-navy-50 to-navy-100 relative overflow-hidden">
             {leader.imageUrl ? (
-              <img
-                src={leader.imageUrl}
-                alt={lang === 'en' ? leader.nameEn : leader.nameAm}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+              <button
+                onClick={() => onImageClick(leader.imageUrl ?? '', lang === 'en' ? leader.nameEn : (leader.nameAm ?? leader.nameEn))}
+                className="w-full h-full cursor-zoom-in"
+              >
+                <img
+                  src={leader.imageUrl}
+                  alt={lang === 'en' ? leader.nameEn : leader.nameAm}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </button>
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <div className="w-20 h-20 rounded-full bg-navy-900 flex items-center justify-center">
@@ -35,7 +40,7 @@ function LeadershipGrid({ leaders, lang }: { leaders: TeamMemberData[]; lang: st
                       .toUpperCase()}
                   </span>
                 </div>
-                <span className="mt-4 font-mono text-xs tracking-[0.3em] uppercase text-navy-400">BYKM</span>
+                <span className="mt-4 font-mono text-xs tracking-[0.3em] uppercase text-navy-400">{tm.brand.short[lang as 'en' | 'am']}</span>
               </div>
             )}
           </div>
@@ -55,6 +60,7 @@ export default function TeamPage() {
   const tm = t.team;
   const { data: allMembers = [], isLoading } = useGetActiveTeamMembersQuery();
   const [expandedPillar, setExpandedPillar] = useState<string | null>(null);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   const founder = allMembers.find((m) => m.category === 'founder');
   const leaders = allMembers.filter((m) => m.category === 'leadership');
@@ -131,7 +137,7 @@ export default function TeamPage() {
           <div className="container-custom">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div className="relative">
-                <div className="aspect-[4/5] bg-gradient-to-br from-navy-900 to-navy-700 overflow-hidden">
+                <div className="aspect-[4/5] bg-gradient-to-br from-navy-900 to-navy-700 overflow-hidden cursor-zoom-in" onClick={() => setLightbox({ src: founder?.imageUrl || '/images/owner.jpg', alt: 'Besufekad Molla Wube' })}>
                   <img src={founder?.imageUrl || '/images/owner.jpg'} alt="Besufekad Molla Wube" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gold-400/10 rounded-full blur-2xl" />
@@ -156,7 +162,7 @@ export default function TeamPage() {
               <div className="w-12 h-1 bg-gold-400 mx-auto mt-4" />
             </div>
 
-            <LeadershipGrid leaders={leaders} lang={lang} />
+            <LeadershipGrid leaders={leaders} lang={lang} onImageClick={(src, alt) => setLightbox({ src, alt })} />
           </div>
         </section>
       </ScrollReveal>
@@ -210,6 +216,26 @@ export default function TeamPage() {
           </div>
         </section>
       </ScrollReveal>
+
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fadeIn"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            onClick={() => setLightbox(null)}
+            className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+          >
+            <X size={20} />
+          </button>
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            className="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl animate-scaleIn"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </>
   );
 }

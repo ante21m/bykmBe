@@ -1,149 +1,142 @@
-'use client';
+﻿'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { MapPin, Phone, Mail, Globe, Linkedin } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowUp } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
 import { SOCIAL_LINKS, CONTACT_INFO } from '@/lib/siteConfig';
-import DOMPurify from 'isomorphic-dompurify';
+
+const socialIcons = [
+  { href: SOCIAL_LINKS.linkedin, label: 'LinkedIn', path: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z' },
+  { href: SOCIAL_LINKS.facebook, label: 'Facebook', path: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z' },
+  { href: SOCIAL_LINKS.instagram, label: 'Instagram', path: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z' },
+  { href: SOCIAL_LINKS.twitter, label: 'X', path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' },
+  { href: SOCIAL_LINKS.youtube, label: 'YouTube', path: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z' },
+];
 
 export function Footer() {
   const { lang, translations: t } = useTranslation();
   const f = t.footer;
-  return (
-    <footer className="bg-[#080616] text-white">
-      <div className="bg-gradient-to-r from-navy-800 via-navy-700 to-forest-600 py-12">
-        <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h2 className="font-display text-2xl md:text-3xl font-bold">{f.ctaTitle[lang]}</h2>
-            <p className="text-white/70 mt-2 text-sm">{f.ctaSub[lang]}</p>
-          </div>
-          <Link href="/contact" className="btn-primary whitespace-nowrap"><span>{f.engageCta[lang]}</span></Link>
-        </div>
-      </div>
+  const [showTop, setShowTop] = useState(false);
 
-      <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          <div className="lg:col-span-1">
-              <div className="flex items-center gap-3 mb-6">
-                <img src="/images/logo-bykm.jpg" alt={t.brand.short[lang]} className="h-14 md:h-20 w-auto object-contain" />
-                <div>
-                <div className="font-display font-bold text-lg leading-none">{t.brand.short[lang]}</div>
-                <div className="text-gold-400 text-xs sm:text-sm font-mono tracking-[0.2em] uppercase">{t.brand.suffix[lang]}</div>
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 600);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <>
+      <footer className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1240] via-[#080f2e] to-[#050820]" />
+        <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(rgba(200,168,75,1) 1px, transparent 1px), linear-gradient(90deg, rgba(200,168,75,1) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+
+        <div className="relative z-10">
+          <div className="container-custom pt-20 pb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+
+              <div>
+                <div className="flex items-center gap-3 mb-8">
+                  <img src="/images/logo-bykm.jpg" alt={t.brand.short[lang]} className="h-14 w-auto object-contain" />
+                  <div>
+                    <div className="font-display font-bold text-lg leading-none text-white">{t.brand.short[lang]}</div>
+                    <div className="text-gold-400 text-[9px] font-mono tracking-[0.35em] uppercase mt-1.5">{t.brand.suffix[lang]}</div>
+                  </div>
+                </div>
+
+                <h3 className="font-mono text-[10px] tracking-[0.4em] uppercase text-gold-400 mb-5">{lang === 'en' ? 'Company' : 'ኩባንያ'}</h3>
+                <ul className="space-y-3">
+                  {[
+                    { href: '/about', label: lang === 'en' ? 'Who We Are' : 'እኛ ማን ነን' },
+                    { href: '/team', label: lang === 'en' ? 'Founder' : 'መሥራች' },
+                    { href: '/careers', label: lang === 'en' ? 'Careers' : 'ሙያዎች' },
+                  ].map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="group inline-flex items-center gap-2 text-white/70 hover:text-white text-sm transition-colors duration-300">
+                        <span className="w-0 group-hover:w-3 h-px bg-gold-400 transition-all duration-300" />
+                        <span>{link.label}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-mono text-[10px] tracking-[0.4em] uppercase text-gold-400 mb-5">{lang === 'en' ? 'Quick Links' : 'ፈጣን አገናኞች'}</h3>
+                <ul className="space-y-3">
+                  {[
+                    { href: '/services', label: lang === 'en' ? 'Services' : 'አገልግሎቶች' },
+                    { href: '/projects', label: f.quickLinksLabels.projects[lang] },
+                    { href: '/news', label: lang === 'en' ? 'News' : 'ዜና' },
+                    { href: '/contact', label: lang === 'en' ? 'Contact Us' : 'ያግኙን' },
+                  ].map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="group inline-flex items-center gap-2 text-white/70 hover:text-white text-sm transition-colors duration-300">
+                        <span className="w-0 group-hover:w-3 h-px bg-gold-400 transition-all duration-300" />
+                        <span>{link.label}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-mono text-[10px] tracking-[0.4em] uppercase text-gold-400 mb-5">{lang === 'en' ? 'Connect' : 'ግንኙነት'}</h3>
+                <div className="flex gap-3 mb-6">
+                  {socialIcons.map((s) => (
+                    <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-gold-400 hover:border-gold-400/40 hover:bg-gold-400/5 hover:scale-110 transition-all duration-300" aria-label={s.label}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d={s.path}/></svg>
+                    </a>
+                  ))}
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3 text-sm text-white/70">
+                    <MapPin size={14} className="text-gold-400 mt-0.5 shrink-0" />
+                    <span dangerouslySetInnerHTML={{ __html: f.address[lang] }} />
+                  </div>
+                  {CONTACT_INFO.phones.map((phone) => (
+                    <div key={phone.number} className="flex items-center gap-3 text-sm">
+                      <Phone size={14} className="text-gold-400 shrink-0" />
+                      <a href={`tel:${phone.number.replace(/\s/g, '')}`} className="text-white/70 hover:text-white transition-colors duration-300">{phone.number}</a>
+                    </div>
+                  ))}
+                  <div className="flex items-center gap-3 text-sm">
+                    <Mail size={14} className="text-gold-400 shrink-0" />
+                    <a href={`mailto:${CONTACT_INFO.email}`} className="text-white/70 hover:text-white transition-colors duration-300">{CONTACT_INFO.email}</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="border-t border-white/10">
+            <div className="container-custom py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+              <p className="text-white/70 text-sm">{f.copyright[lang]}</p>
+              <div className="flex items-center gap-8">
+                {[
+                  { href: '/privacy', label: 'Privacy Policy' },
+                  { href: '/terms', label: 'Terms of Service' },
+                ].map((link) => (
+                  <Link key={link.href} href={link.href} className="group relative text-white/60 hover:text-white text-sm transition-colors duration-300">
+                    {link.label}
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-400 group-hover:w-full transition-all duration-300" />
+                  </Link>
+                ))}
               </div>
             </div>
-            <p className="text-white/60 text-sm leading-relaxed mb-6">{f.brandDesc[lang]}</p>
-            <div className="flex gap-3 flex-wrap">
-              <a href={SOCIAL_LINKS.website} target="_blank" rel="noopener noreferrer"
-                className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="Website">
-                <Globe size={15} />
-              </a>
-              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer"
-                className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="LinkedIn">
-                <Linkedin size={15} />
-              </a>
-              <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer"
-                className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="Facebook">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              </a>
-              <a href={SOCIAL_LINKS.twitter} target="_blank" rel="noopener noreferrer"
-                className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="Twitter / X">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              </a>
-              <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer"
-                className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="Instagram">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-              </a>
-              <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer"
-                className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-gold-400 hover:text-gold-400 transition-colors" aria-label="YouTube">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              </a>
-            </div>
-          </div>
-
-          <div>
-<h3 className="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase text-gold-400 mb-5">{f.pillarsTitle[lang]}</h3>
-          <ul className="space-y-3">
-            {['infra', 'logistics', 'hospitality', 'agro'].map((key) => (
-              <li key={key}>
-                <Link href={`/services?pillar=${key}`}
-                  className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 group">
-                  <span className="w-1 h-1 bg-gold-500 rounded-full group-hover:scale-150 transition-transform" />
-                  {f.pillars[key as keyof typeof f.pillars][lang]}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase text-gold-400 mb-5">{f.quickLinksTitle[lang]}</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="/about" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 group">
-                  <span className="w-1 h-1 bg-gold-500 rounded-full group-hover:scale-150 transition-transform" />
-                  {f.quickLinksLabels.about[lang]}
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 group">
-                  <span className="w-1 h-1 bg-gold-500 rounded-full group-hover:scale-150 transition-transform" />
-                  {f.quickLinksLabels.projects[lang]}
-                </Link>
-              </li>
-              <li>
-                <Link href="/about#esg" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 group">
-                  <span className="w-1 h-1 bg-gold-500 rounded-full group-hover:scale-150 transition-transform" />
-                  {f.quickLinksLabels.esg[lang]}
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact?inquiry=careers" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 group">
-                  <span className="w-1 h-1 bg-gold-500 rounded-full group-hover:scale-150 transition-transform" />
-                  {f.quickLinksLabels.careers[lang]}
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact?inquiry=partnership" className="text-sm text-white/60 hover:text-white transition-colors flex items-center gap-2 group">
-                  <span className="w-1 h-1 bg-gold-500 rounded-full group-hover:scale-150 transition-transform" />
-                  {f.quickLinksLabels.investors[lang]}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase text-gold-400 mb-5">{f.contactTitle[lang]}</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-sm text-white/60">
-                <MapPin size={15} className="text-gold-400 mt-0.5 shrink-0" />
-                <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(f.address[lang]) }} />
-              </li>
-              {CONTACT_INFO.phones.map((phone) => (
-                <li key={phone.number} className="flex items-center gap-3 text-sm">
-                  <Phone size={15} className="text-gold-400 shrink-0" />
-                  <a href={`tel:${phone.number.replace(/\s/g, '')}`} className="text-white/60 hover:text-white transition-colors">{phone.number}</a>
-                </li>
-              ))}
-              <li className="flex items-center gap-3 text-sm">
-                <Mail size={15} className="text-gold-400 shrink-0" />
-                <a href={`mailto:${CONTACT_INFO.email}`} className="text-white/60 hover:text-white transition-colors">{CONTACT_INFO.email}</a>
-              </li>
-            </ul>
           </div>
         </div>
-      </div>
+      </footer>
 
-      <div className="border-t border-white/10">
-        <div className="container-custom py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <Link href="/privacy" className="text-white/40 hover:text-white/70 text-xs transition-colors">Privacy Policy</Link>
-            <span className="text-white/20">|</span>
-            <Link href="/terms" className="text-white/40 hover:text-white/70 text-xs transition-colors">Terms of Service</Link>
-          </div>
-          <p className="text-white/40 text-xs sm:text-sm">{f.copyright[lang]}</p>
-          <p className="text-white/30 text-xs sm:text-sm font-mono">{f.statutory[lang]}</p>
-        </div>
-      </div>
-    </footer>
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className={`fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-gold-400 text-[#080f2e] shadow-xl flex items-center justify-center hover:bg-white transition-all duration-300 ${showTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}
+        aria-label="Back to top"
+      >
+        <ArrowUp size={18} strokeWidth={2.5} />
+      </button>
+    </>
   );
 }

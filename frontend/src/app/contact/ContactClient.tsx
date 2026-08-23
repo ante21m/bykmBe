@@ -95,19 +95,20 @@ export function ContactClient() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#080616] text-white">
+      <section className="relative overflow-hidden bg-[#080616] text-white pt-32 pb-20 md:pb-28">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_40%,rgba(30,50,150,0.5)_0%,rgba(8,6,22,0.2)_40%,transparent_70%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_70%,rgba(40,70,180,0.3)_0%,transparent_50%)]" />
-          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(200,168,75,1) 1px, transparent 1px), linear-gradient(90deg, rgba(200,168,75,1) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_30%,rgba(30,50,150,0.6)_0%,rgba(8,6,22,0.2)_50%,transparent_80%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_70%,rgba(200,168,75,0.08)_0%,transparent_50%)]" />
+          <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'linear-gradient(rgba(200,168,75,1) 1px, transparent 1px), linear-gradient(90deg, rgba(200,168,75,1) 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
         </div>
-        <div className="geo-shape w-72 h-72 top-10 right-[-60px] rotate-12 opacity-30" />
-        <div className="geo-shape w-40 h-40 bottom-16 right-32 rotate-6 opacity-15" />
-        <div className="h-28" />
-        <div className="container-custom relative z-10 pb-20">
-          <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-400 uppercase">{c.header.label[lang]}</span>
-          <h1 className="font-display text-5xl md:text-6xl font-bold mt-4 mb-6 max-w-3xl">{c.header.title[lang]}</h1>
-          <p className="text-white/90 max-w-2xl text-lg leading-relaxed">{c.header.desc[lang]}</p>
+        <div className="geo-shape w-96 h-96 top-[-80px] right-[-80px] rotate-12 opacity-10" />
+        <div className="geo-shape w-56 h-56 bottom-10 right-1/3 rotate-45 opacity-[0.06]" />
+        <div className="container-custom relative z-10">
+          <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-gold-400 uppercase">{c.header.label[lang]}</span>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mt-4 mb-6 max-w-4xl">
+            <span className="bg-gradient-to-r from-white via-white to-gold-300/80 bg-clip-text text-transparent">{c.header.title[lang]}</span>
+          </h1>
+          <p className="text-white/60 max-w-3xl text-lg leading-relaxed">{c.header.desc[lang]}</p>
         </div>
       </section>
 
@@ -147,7 +148,7 @@ export function ContactClient() {
       </section>
 
       {/* Form + Sidebar */}
-      <section id="form-section" className="section-padding bg-[#f5f4ef]">
+      <section id="form-section" className="py-16 md:py-24 bg-[#f5f4ef]">
         <div className="container-custom">
           <div className="grid lg:grid-cols-3 gap-10">
 
@@ -310,7 +311,7 @@ export function ContactClient() {
       </section>
 
       {/* Map */}
-      <section className="relative overflow-hidden bg-navy-900 py-16">
+      <section className="relative overflow-hidden bg-navy-900 py-16 md:py-24">
         <div className="geo-shape w-64 h-64 -top-20 right-[-30px] rotate-12 opacity-20" />
         <div className="geo-shape w-36 h-36 bottom-1/4 left-[-20px] rotate-45 opacity-10" />
         <div className="container-custom relative z-10">

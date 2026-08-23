@@ -73,6 +73,7 @@ export default function HomeSectionForm({ initial, onSave, saving, cancelPath }:
 
   const isJsonSection = JSON_SECTIONS.includes(form.sectionKey);
   const [uploadFile, { isLoading: uploading }] = useUploadFileMutation();
+  const [uploadError, setUploadError] = useState<string | null>(null);
 
   const handleBgUpload = async (file: File | null) => {
     if (!file) return;
@@ -85,8 +86,53 @@ export default function HomeSectionForm({ initial, onSave, saving, cancelPath }:
       try { obj = JSON.parse(raw); } catch { obj = {}; }
       obj.bgImage = res.url;
       set('content', JSON.stringify(obj, null, 2));
-    } catch { /* upload failed */ }
+      setUploadError(null);
+    } catch {
+      setUploadError('Background image upload failed. If your session expired, sign out and log in again.');
+    }
   };
+
+  const handleHeroImagesUpload = async (files: File[] | null) => {
+    if (!files || files.length === 0) return;
+    setUploadError(null);
+    const raw = form.content || '{}';
+    let obj: Record<string, any> = {};
+    try { obj = JSON.parse(raw); } catch { obj = {}; }
+    const existing: string[] = Array.isArray(obj.heroImages) ? obj.heroImages : [];
+    const urls: string[] = [];
+    for (const file of files) {
+      try {
+        const fd = new FormData();
+        fd.append('file', file);
+        const res = await uploadFile(fd).unwrap();
+        urls.push(res.url);
+      } catch {
+        setUploadError('Some images failed to upload. If your session expired, sign out and log in again.');
+      }
+    }
+    if (urls.length > 0) {
+      obj.heroImages = [...existing, ...urls];
+      set('content', JSON.stringify(obj, null, 2));
+    }
+  };
+
+  const handleHeroImageRemove = (index: number) => {
+    const raw = form.content || '{}';
+    let obj: Record<string, any> = {};
+    try { obj = JSON.parse(raw); } catch { obj = {}; }
+    const list: string[] = Array.isArray(obj.heroImages) ? obj.heroImages : [];
+    obj.heroImages = list.filter((_, i) => i !== index);
+    if (obj.heroImages.length === 0) delete obj.heroImages;
+    set('content', JSON.stringify(obj, null, 2));
+  };
+
+  let heroImagesList: string[] = [];
+  if (form.sectionKey === 'heroSection' || form.sectionKey === 'hero') {
+    try {
+      const parsed = JSON.parse(form.content || '{}');
+      if (Array.isArray(parsed.heroImages)) heroImagesList = parsed.heroImages;
+    } catch { /* ignore */ }
+  }
 
   let parsedJson: Record<string, any> = {};
   let parseError = '';
@@ -192,13 +238,46 @@ export default function HomeSectionForm({ initial, onSave, saving, cancelPath }:
                   )
                 ))}
                 {(form.sectionKey === 'heroSection' || form.sectionKey === 'hero') && (
-                  <FileInput
-                    label="Background Image"
-                    accept="image/*"
-                    onChange={handleBgUpload}
-                    clearable
-                    leftSection={<Upload size={16} />}
-                  />
+                  <>
+                    <FileInput
+                      label="Background Image"
+                      accept="image/*"
+                      onChange={handleBgUpload}
+                      clearable
+                      leftSection={<Upload size={16} />}
+                    />
+                    <FileInput
+                      label="Hero Carousel Images (multi-select — order = slide order)"
+                      accept="image/*"
+                      multiple
+                      onChange={handleHeroImagesUpload}
+                      leftSection={<Upload size={16} />}
+                      disabled={uploading}
+                    />
+                    {heroImagesList.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {heroImagesList.map((url, i) => (
+                          <div key={url + i} className="relative group">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={url} alt={`Hero slide ${i + 1}`} className="w-24 h-16 object-cover rounded border border-slate-200" />
+                            <button
+                              type="button"
+                              aria-label={`Remove slide ${i + 1}`}
+                              onClick={() => handleHeroImageRemove(i)}
+                              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-xs leading-none flex items-center justify-center hover:bg-red-600 shadow"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+                {uploadError && (
+                  <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
+                    {uploadError}
+                  </div>
                 )}
               </div>
             ) : (

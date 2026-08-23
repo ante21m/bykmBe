@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { NewsContent } from '@/components/NewsContent';
 
 const TITLE = 'News — BYKM Trading PLC';
@@ -22,5 +23,9 @@ export const metadata: Metadata = {
 };
 
 export default function NewsPage() {
-  return <NewsContent />;
+  return (
+    <Suspense>
+      <NewsContent />
+    </Suspense>
+  );
 }

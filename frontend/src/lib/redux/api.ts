@@ -327,9 +327,12 @@ export const api = createApi({
     }),
 
     // News
-    getNews: builder.query<NewsData[], { active?: boolean } | void>({
+    getNews: builder.query<NewsData[], { active?: boolean; tag?: string } | void>({
       query: (params) => {
-        const qs = params?.active !== undefined ? `?active=${params.active}` : '';
+        const parts: string[] = [];
+        if (params?.active !== undefined) parts.push(`active=${params.active}`);
+        if (params?.tag) parts.push(`tag=${encodeURIComponent(params.tag)}`);
+        const qs = parts.length ? `?${parts.join('&')}` : '';
         return `/news${qs}`;
       },
       providesTags: ['News'],

@@ -53,6 +53,7 @@ export interface HomeApiData {
     discoverBtn: BilingualField;
     viewProjectsBtn: BilingualField;
     bgImage?: string;
+    heroImages?: string[];
   };
   heroStatistics: StatItem[];
   mission: { label: BilingualField; title: BilingualField; desc: BilingualField; items: MissionItem[] };
@@ -78,15 +79,15 @@ function flatToBf(flatEn: Record<string, string> | undefined, flatAm: Record<str
 
 export function transformHomeSections(sections: RawHomeSection[]): HomeApiData | null {
   const get = (key: string) => sections.find(s => s.sectionKey === key);
-  const hero = get('heroSection');
-  const heroStats = get('heroStatistics');
+  const hero = get('heroSection') || get('hero');
+  const heroStats = get('heroStatistics') || get('heroStats');
   const mission = get('mission');
   const pillars = get('pillars');
-  const flagship = get('flagshipProject');
+  const flagship = get('flagshipProject') || get('flagship');
   const valSec = get('values');
   const esg = get('esg');
   const partners = get('partners');
-  const cta = get('ctaSection');
+  const cta = get('ctaSection') || get('cta');
 
   if (!hero) return null;
 
@@ -147,7 +148,7 @@ export function transformHomeSections(sections: RawHomeSection[]): HomeApiData |
   return {
     heroSection: {
       edition: flatToBf(heroEn, heroAm, 'edition', '', ''),
-      motto: flatToBf(heroEn, heroAm, 'motto', 'Architecting Ethiopian Integrated Future!', 'የኢትዮጵያን የተቀናጀ የወደፊት እድገት በማነድፍ ላይ!'),
+      motto: flatToBf(heroEn, heroAm, 'motto', 'The Blueprint for Sustainable Industrial Growth', 'ለዘላቂ የኢንዱስትሪ እድገት የሚሆን ስትራቴጂካዊ ዕቅድ'),
       line1: flatToBf(heroEn, heroAm, 'line1', 'The Blueprint for', 'ብሉፕሪንቱ'),
       line2: flatToBf(heroEn, heroAm, 'line2', '', ''),
       typeWords: bf(
@@ -158,6 +159,7 @@ export function transformHomeSections(sections: RawHomeSection[]): HomeApiData |
       discoverBtn: flatToBf(heroEn, heroAm, 'discoverBtn', 'Discover More', 'ተጨማሪ ይወቁ'),
       viewProjectsBtn: flatToBf(heroEn, heroAm, 'viewProjectsBtn', 'View Projects', 'ፕሮጀክቶችን ይመልከቱ'),
       bgImage: heroEn?.bgImage || undefined,
+      heroImages: Array.isArray(heroEn?.heroImages) ? heroEn.heroImages.filter(Boolean) : undefined,
     },
     heroStatistics: stats,
     mission: {
