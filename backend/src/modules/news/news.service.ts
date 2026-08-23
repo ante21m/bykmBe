@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { LessThan, MoreThanOrEqual, Repository } from 'typeorm';
+import { ILike, LessThan, MoreThanOrEqual, Repository } from 'typeorm';
 import { News } from '../../entities/news.entity';
 
 @Injectable()
@@ -128,9 +128,10 @@ export class NewsService implements OnModuleInit {
     );
   }
 
-  async findAll(active?: boolean): Promise<News[]> {
+  async findAll(active?: boolean, tag?: string): Promise<News[]> {
     const where: any = {};
     if (active !== undefined) where.active = active;
+    if (tag) where.tags = ILike(`%${tag}%`);
     return this.newsRepository.find({
       where,
       order: { sortOrder: 'ASC', publishedAt: 'DESC' },
@@ -145,12 +146,12 @@ export class NewsService implements OnModuleInit {
   }
 
   async findRecent(limit = 3): Promise<News[]> {
-    const fourteenDaysAgo = new Date();
-    fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
+    const twentyDaysAgo = new Date();
+    twentyDaysAgo.setDate(twentyDaysAgo.getDate() - 20);
     return this.newsRepository.find({
       where: {
         active: true,
-        publishedAt: MoreThanOrEqual(fourteenDaysAgo.toISOString().split('T')[0]),
+        publishedAt: MoreThanOrEqual(twentyDaysAgo.toISOString().split('T')[0]),
       },
       order: { publishedAt: 'DESC' },
       take: limit,

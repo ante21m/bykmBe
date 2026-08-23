@@ -26,7 +26,7 @@ export class HomeService implements OnModuleInit {
         titleAm: 'የመግቢያ ክፍል',
         content: JSON.stringify({
           edition: '',
-          motto: 'Architecting Ethiopian Integrated Future!',
+          motto: 'The Blueprint for Sustainable Industrial Growth',
           line1: 'The Blueprint for',
           line2: '',
           typeWords: '',
@@ -37,7 +37,7 @@ export class HomeService implements OnModuleInit {
         }),
         contentAm: JSON.stringify({
           edition: '',
-          motto: 'የኢትዮጵያን የተቀናጀ የወደፊት እድገት በማነድፍ ላይ!',
+          motto: 'ለዘላቂ የኢንዱስትሪ እድገት የሚሆን ስትራቴጂካዊ ዕቅድ',
           line1: 'ብሉፕሪንቱ',
           line2: '',
           typeWords: '',

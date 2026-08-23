@@ -17,9 +17,10 @@ export class NewsController {
   @Get()
   @ApiOperation({ summary: 'Get all news' })
   @ApiQuery({ name: 'active', required: false })
-  findAll(@Query('active') active?: string) {
+  @ApiQuery({ name: 'tag', required: false })
+  findAll(@Query('active') active?: string, @Query('tag') tag?: string) {
     const activeBool = active === 'true' ? true : active === 'false' ? false : undefined;
-    return this.newsService.findAll(activeBool);
+    return this.newsService.findAll(activeBool, tag);
   }
 
   @Get('featured')

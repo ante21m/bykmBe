@@ -18,7 +18,7 @@ async function bootstrap() {
   }
   if (frontendUrl) origins.push(frontendUrl);
   if (process.env.NODE_ENV !== 'production') {
-    origins.push('http://localhost:3000');
+    origins.push('http://localhost:3000', 'http://localhost:3002');
   }
 
   app.enableCors({
