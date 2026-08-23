@@ -23,7 +23,7 @@ const milestones = [
     title: { en: 'Mega-Corridor Project', am: 'ሜጋ-ኮሪደር ፕሮጀክት' },
     desc: {
       en: 'Delivered 20.5km of integrated urban corridors for Addis Ababa\'s CBD — 15 days ahead of schedule — establishing BYKM\'s reputation for excellence.',
-      am: 'ለአዲስ አበባ CBD 20.5 ኪሎ ሜትር የተቀናጀ የከተማ ኮሪደሮችን አድርሷል — ከቀጠሮው 15 ቀናት ቀደም ብሎ — የBYKMን የላቀነት ስም አስመሥርቷል።',
+      am: 'ለአዲስ አበባ CBD 20.5 ኪሎ ሜትር የተቀናጀ የከተማ ኮሪደሮችን አድርሷል — ከቀጠሮው 15 ቀናት ቀደም ብሎ — የቢዋይኬኤምን የላቀነት ስም አስመሥርቷል።',
     },
     ribbonBg: 'bg-[#146B1F]',
     ribbonText: 'text-white',
@@ -44,7 +44,7 @@ const milestones = [
   {
     number: '04',
     year: '2018 GC',
-    title: { en: 'Strategic Transition to BYKM Trading PLC', am: 'ወደ BYKM ትሬዲንግ ፒኤልሲ ስትራቴጂካዊ ሽግግር' },
+    title: { en: 'Strategic Transition to BYKM Trading PLC', am: 'ወደ ቢዋይኬኤም ትሬዲንግ ፒኤልሲ ስትራቴጂካዊ ሽግግር' },
     desc: {
       en: 'Evolved from specialized contractor to diversified multi-sectoral powerhouse, spanning five integrated business pillars for a Modern Ethiopia.',
       am: 'ከልዩ ኮንትራክተርነት ወደ ተለያዩ ዘርፎች የተስፋፋ ኃያል ኃይል ተለወጠ፣ ለዘመናዊቷ ኢትዮጵያ አምስት የተቀናጁ የንግድ ምሰሶዎችን ያካተተ።',
@@ -77,7 +77,7 @@ const evolutionCards = [
         'As a General Contractor, we proved our operational velocity and technical precision through landmark projects, most notably the Addis Ababa Mega-Corridor Project, delivering critical urban infrastructure ahead of national deadlines.',
       ],
       am: [
-        'የBYKM መሠረት በቴክኒክ የላቀነት ውርስ ላይ የተገነባ ነው።',
+        'የቢዋይኬኤም መሠረት በቴክኒክ የላቀነት ውርስ ላይ የተገነባ ነው።',
         'እንደ አጠቃላይ ኮንትራክተር፣ የአዲስ አበባ ሜጋ-ኮሪደር ፕሮጀክትን ጨምሮ በታዋቂ ፕሮጀክቶች አማካኝነት የአሰራር ፍጥነታችንን እና የቴክኒክ ትክክለኛነታችንን አሳይተናል።',
       ],
     },
@@ -112,7 +112,7 @@ const evolutionCards = [
       ],
       am: [
         'የኮርፖሬት ማንነታችን ዋና አካል የምህንድስና አስተሳሰብ ነው። የመዋቅራዊ ምህንድስና ትክክለኛነት፣ የአደጋ ቅነሳ እና የመጠን አቅም ተግሣጽ በሁሉም የንግድ ዘርፎች ላይ መተግበር እንዳለበት እናምናለን።',
-        'ይህ ፍልስፍና BYKM ወደ ገበያ ብቻ የሚገባ ሳይሆን ገበያዎችን የሚያረጋጋ እና የማይታጠፍ ጥራት የሚያሳድግ መሆኑን ያረጋግጣል።',
+        'ይህ ፍልስፍና ቢዋይኬኤም ወደ ገበያ ብቻ የሚገባ ሳይሆን ገበያዎችን የሚያረጋጋ እና የማይታጠፍ ጥራት የሚያሳድግ መሆኑን ያረጋግጣል።',
       ],
     },
     ribbonBg: 'bg-[#0B0F5A]',

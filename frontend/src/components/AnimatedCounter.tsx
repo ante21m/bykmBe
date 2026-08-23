@@ -13,7 +13,7 @@ export function AnimatedCounter({ value, unit }: Props) {
   const isDecimal = raw.includes('.');
   const decimalPart = isDecimal ? '.' + raw.split('.')[1] : '';
 
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const counted = useRef(false);
 
@@ -24,18 +24,20 @@ export function AnimatedCounter({ value, unit }: Props) {
       ([entry]) => {
         if (entry.isIntersecting && !counted.current) {
           counted.current = true;
-          const range = num - 1;
-          const stepTime = Math.max(2000 / range, 16);
-          let current = 1;
-          const timer = setInterval(() => {
-            current += 1;
-            if (current >= num) {
-              setCount(num);
-              clearInterval(timer);
-            } else {
-              setCount(current);
+          const duration = 1500;
+          const startTime = performance.now();
+
+          function tick(now: number) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(eased * num);
+            setCount(current);
+            if (progress < 1) {
+              requestAnimationFrame(tick);
             }
-          }, stepTime);
+          }
+          requestAnimationFrame(tick);
         }
       },
       { threshold: 0.3 }

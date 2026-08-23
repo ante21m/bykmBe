@@ -32,7 +32,7 @@ const pillarsData = [
     taglineEn: 'Ethiopia\'s Gateway to the World',
     taglineAm: 'የኢትዮጵያ ወደ ዓለም መግቢያ በር',
     intentEn: 'To position BYKM as the primary link between Ethiopian producers and international markets.',
-    intentAm: 'BYKM ን በኢትዮጵያ አምራቾች እና ዓለም አቀፍ ገበያዎች መካከል ዋና አገናኝ ለማድረግ።',
+    intentAm: 'ቢዋይኬኤምን በኢትዮጵያ አምራቾች እና ዓለም አቀፍ ገበያዎች መካከል ዋና አገናኝ ለማድረግ።',
     services: [
       { titleEn: 'Strategic Import/Export & Trade Agency', titleAm: 'ስትራቴጂካዊ ማስመጣት/መላክ እና የንግድ ወኪልነት', descEn: 'Facilitating industrial machinery, stationery, and general commodities flow with commission agent services.', descAm: 'የኢንዱስትሪ ማሽነሪዎችን፣ የቢሮ እቃዎች እና አጠቃላይ ምርቶችን ፍሰት ከኮሚሽን ወኪል አገልግሎቶች ጋር ማመቻቸት።', featuresEn: ['Industrial import', 'Agricultural export', 'Trade agency', 'Commission services'], featuresAm: ['የኢንዱስትሪ ማስመጣት', 'የግብርና ምርት መላክ', 'የንግድ ወኪልነት', 'የኮሚሽን አገልግሎቶች'] },
       { titleEn: 'Logistics, Warehousing & Fleet Management', titleAm: 'ሎጂስቲክስ፣ መጋዘን እና የመርከብ አስተዳደር', descEn: 'Transit services, freight forwarding, high-capacity warehousing, and heavy machinery rental.', descAm: 'የመጓጓዣ አገልግሎቶች፣ የጭነት ዝውውር፣ ከፍተኛ አቅም ያለው መጋዘን እና የከባድ ማሽነሪ ኪራይ።', featuresEn: ['Freight forwarding', 'High-capacity warehousing', 'Vehicle rental', 'Fleet management'], featuresAm: ['የጭነት ዝውውር', 'ከፍተኛ አቅም ያለው መጋዘን', 'የተሽከርካሪ ኪራይ', 'የመርከብ አስተዳደር'] },

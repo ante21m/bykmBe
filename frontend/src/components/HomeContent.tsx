@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Shield, Leaf, Zap, Globe, TrendingUp, Users } from 'lucide-react';
+import { ArrowRight, Shield, Leaf, Zap, Globe, TrendingUp, Users, Calendar, CalendarDays, Clock, Tag } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 import { AnimatedCounter } from './AnimatedCounter';
 import { HeroSection } from './HeroSection';
@@ -9,6 +9,7 @@ import { NumberedCard } from './NumberedCard';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
 import { tr } from '@/lib/i18n/tr';
 import { transformHomeSections, type RawHomeSection } from '@/lib/home-data';
+import { useGetRecentNewsQuery, useGetHomeSectionsQuery } from '@/lib/redux/api';
 
 const pillars = [
   { key: 'infra', icon: Shield, titleEn: 'Infrastructure & Real Estate Development', titleAm: 'መሠረተ ልማት እና ሪል እስቴት ልማት', descEn: 'We build Ethiopia\'s future with General Contracting — roads, buildings, water systems, and smart city solutions that improve everyday life.', descAm: 'የኢትዮጵያን የወደፊት እጣ ፈንታ በአጠቃላይ ኮንትራክተርነት እንገነባለን — መንገዶች፣ ህንፃዎች፣ የውሃ ሥርዓቶች እና የዕለት ተዕለት ኑሮን የሚያሻሽሉ ስማርት ከተማ መፍትሄዎች።', accent: '#1a237e', href: '/services?pillar=infrastructure' },
@@ -25,6 +26,147 @@ const values = [
   { icon: Users, titleEn: 'Ethical Legacy', titleAm: 'ሥነ ምግባራዊ ውርስ', descEn: 'Building with integrity, operating with transparency, and honoring our commitments.', descAm: 'በታማኝነት መገንባት፣ በግልጽነት መስራት እና ቃል ኪዳናችንን ማክበር።' },
 ];
 
+export function RecentNewsSection() {
+  const { lang, translations: t } = useTranslation();
+  const { data: newsItems, isLoading } = useGetRecentNewsQuery({ limit: 4 });
+
+  if (isLoading || !newsItems || newsItems.length === 0) return null;
+
+  const featured = newsItems[0];
+  const remaining = newsItems.slice(1);
+
+  const formatDate = (d: string) =>
+    new Date(d).toLocaleDateString(lang === 'am' ? 'am-ET' : 'en-US', {
+      year: 'numeric', month: 'long', day: 'numeric',
+    });
+
+  const readingTime = (text?: string) => {
+    if (!text) return '1 min';
+    const words = text.split(/\s+/).length;
+    const min = Math.max(1, Math.ceil(words / 200));
+    return `${min} min`;
+  };
+
+  return (
+    <ScrollReveal>
+      <section className="bg-[#f5f4ef]">
+        <div className="container-custom py-24">
+          <div className="flex items-end justify-between mb-14">
+            <div>
+              <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase">{lang === 'en' ? 'Latest News' : 'የቅርብ ጊዜ ዜና'}</span>
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-navy-900 mt-3 leading-tight">{lang === 'en' ? 'Stay Updated' : 'ዝመናዎችን ይከታተሉ'}</h2>
+              <p className="text-slate-500 text-base mt-3 max-w-xl">{lang === 'en' ? ('Corporate announcements, project milestones, and strategic updates from ' + t.brand.name.en + '.') : (t.brand.name.am + ' የኮርፖሬት ማስታወቂያዎች፣ የፕሮጀክት ምዕራፎች እና ስትራቴጂካዊ ዝማኔዎች።')}</p>
+            </div>
+            <Link href="/news" className="group hidden md:inline-flex items-center gap-2 bg-[#183587] text-white px-6 py-3 text-sm font-medium hover:bg-[#1a237e] transition-all duration-300">
+              <span>{lang === 'en' ? 'View All News' : 'ሁሉንም ዜና ይመልከቱ'}</span>
+              <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
+          </div>
+
+          {/* Featured Article - same as /news page */}
+          {featured && (
+            <Link href={`/news/${featured.id}`} className="group block relative overflow-hidden rounded-sm bg-white shadow-sm hover:shadow-xl transition-all duration-500 mb-8">
+              <div className="grid md:grid-cols-2 gap-0 min-h-[420px]">
+                {featured.imageUrl && (
+                  <div className="relative overflow-hidden h-64 md:h-auto">
+                    <img src={featured.imageUrl} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
+                    <div className="absolute top-5 left-5 bg-[#183587] text-white text-[10px] font-mono tracking-[0.2em] uppercase px-4 py-2">
+                      {lang === 'en' ? 'Featured' : 'ዋና ዜና'}
+                    </div>
+                  </div>
+                )}
+                <div className="flex flex-col justify-center p-8 md:p-10 lg:p-12">
+                  <div className="flex flex-wrap items-center gap-3 text-slate-400 text-xs font-mono mb-5">
+                    {featured.publishedAt && (
+                      <span className="flex items-center gap-1.5">
+                        <CalendarDays size={12} />
+                        {formatDate(featured.publishedAt)}
+                      </span>
+                    )}
+                    <span className="flex items-center gap-1.5">
+                      <Clock size={12} />
+                      {readingTime(featured.content)}
+                    </span>
+                  </div>
+                  <h2 className="font-display text-2xl md:text-3xl font-bold text-navy-900 mb-4 group-hover:text-[#183587] transition-colors duration-300">
+                    {lang === 'am' && featured.titleAm ? featured.titleAm : featured.title}
+                  </h2>
+                  <p className="text-slate-500 text-base leading-relaxed line-clamp-3 mb-6">
+                    {lang === 'am' && featured.excerptAm ? featured.excerptAm : featured.excerpt}
+                  </p>
+                  <div className="inline-flex items-center gap-2 text-[#183587] font-medium text-sm group-hover:gap-3 transition-all duration-300">
+                    {lang === 'en' ? 'Read More' : 'ተጨማሪ ያንብቡ'}
+                    <ArrowRight size={15} />
+                  </div>
+                </div>
+              </div>
+            </Link>
+          )}
+
+          {/* Remaining Articles - same as /news page grid */}
+          {remaining.length > 0 && (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {remaining.map((article) => (
+                <Link href={`/news/${article.id}`} key={article.id} className="group block bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col">
+                  {article.imageUrl && (
+                    <div className="relative overflow-hidden h-52 shrink-0">
+                      <img src={article.imageUrl} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      {article.tags && (
+                        <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                          {article.tags.split(',').slice(0, 2).map((tag) => (
+                            <span key={tag} onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.location.href = `/news?tag=${encodeURIComponent(tag.trim())}`; }} className="inline-flex items-center gap-1 text-white bg-black/40 backdrop-blur-sm text-[10px] font-mono tracking-wider uppercase px-2.5 py-1 hover:bg-[#183587] transition-colors duration-300 cursor-pointer">
+                              <Tag size={9} />
+                              {tag.trim()}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  <div className="flex flex-col flex-1 p-6">
+                    <div className="flex items-center gap-3 text-slate-400 text-xs font-mono mb-3">
+                      {article.publishedAt && (
+                        <span className="flex items-center gap-1.5">
+                          <CalendarDays size={11} />
+                          {formatDate(article.publishedAt)}
+                        </span>
+                      )}
+                      <span className="flex items-center gap-1.5">
+                        <Clock size={11} />
+                        {readingTime(article.content)}
+                      </span>
+                    </div>
+                    <h2 className="font-display text-lg font-bold text-navy-900 mb-2 group-hover:text-[#183587] transition-colors duration-300 line-clamp-2">
+                      {lang === 'am' && article.titleAm ? article.titleAm : article.title}
+                    </h2>
+                    <p className="text-slate-500 text-sm leading-relaxed line-clamp-2 mb-4 flex-1">
+                      {lang === 'am' && article.excerptAm ? article.excerptAm : article.excerpt}
+                    </p>
+                    <div className="flex items-center gap-2 text-[#183587] font-medium text-xs group-hover:gap-3 transition-all duration-300 mt-auto pt-4 border-t border-slate-100">
+                      {lang === 'en' ? 'Read More' : 'ተጨማሪ ያንብቡ'}
+                      <ArrowRight size={12} />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Mobile View All */}
+          <div className="mt-10 md:hidden">
+            <Link href="/news" className="group flex items-center justify-center gap-2 bg-[#183587] text-white px-6 py-3.5 text-sm font-medium hover:bg-[#1a237e] transition-all duration-300 w-full">
+              <span>{lang === 'en' ? 'View All News' : 'ሁሉንም ዜና ይመልከቱ'}</span>
+              <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </ScrollReveal>
+  );
+}
+
 const partnerNames = [
   { en: 'Addis Ababa City Administration', am: 'የአዲስ አበባ ከተማ አስተዳደር' },
   { en: 'Federal Ministry of Urban Development', am: 'የፌደራል ከተማ ልማት ሚኒስቴር' },
@@ -37,8 +179,10 @@ interface Props {
   sections?: RawHomeSection[];
 }
 
-export function HomeContent({ sections }: Props) {
+export function HomeContent({ sections: serverSections }: Props) {
   const { lang, translations: t } = useTranslation();
+  const { data: clientSections } = useGetHomeSectionsQuery();
+  const sections = clientSections ?? serverSections;
   const api = sections ? transformHomeSections(sections) : null;
 
   const h = api ? {
@@ -51,6 +195,8 @@ export function HomeContent({ sections }: Props) {
       desc: { en: api.heroSection.desc.en, am: api.heroSection.desc.am },
       discoverBtn: { en: api.heroSection.discoverBtn.en, am: api.heroSection.discoverBtn.am },
       viewProjectsBtn: { en: api.heroSection.viewProjectsBtn.en, am: api.heroSection.viewProjectsBtn.am },
+      bgImage: api.heroSection.bgImage,
+      heroImages: api.heroSection.heroImages,
     },
     mission: {
       label: { en: api.mission.label.en, am: api.mission.label.am },
@@ -118,27 +264,12 @@ export function HomeContent({ sections }: Props) {
       <HeroSection heroSection={h.heroSection} lang={lang} />
 
       <ScrollReveal>
-        <section className="bg-navy-900 py-10 border-t border-navy-700">
-          <div className="container-custom">
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/about" className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/80 text-white font-bold uppercase tracking-wider rounded-sm hover:bg-white hover:text-navy-900 transition-all duration-300 transform hover:scale-105 text-sm">
-                <span>{h.heroSection.discoverBtn[lang]}</span>
-              </Link>
-              <Link href="/projects" className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/80 text-white font-bold uppercase tracking-wider rounded-sm hover:bg-white hover:text-navy-900 transition-all duration-300 transform hover:scale-105 text-sm">
-                <span>{h.heroSection.viewProjectsBtn[lang]}</span>
-              </Link>
-            </div>
-          </div>
-        </section>
-      </ScrollReveal>
-
-      <ScrollReveal>
-        <section className="bg-white pt-8 md:pt-12 pb-20 md:pb-28 relative overflow-hidden">
+        <section className="bg-white pt-8 md:pt-12 pb-16 md:pb-24 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-1/3 h-full bg-[#f8f7f4] hidden lg:block"></div>
           <div className="container-custom relative">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               <div className="lg:sticky lg:top-28">
-                <span className="font-mono text-sm sm:text-base tracking-[0.3em] text-gold-600 uppercase block mb-4">{h.mission.label[lang]}</span>
+                <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase block mb-4">{h.mission.label[lang]}</span>
                 <h2 className="font-display text-2xl md:text-4xl font-bold text-navy-900 leading-tight">{h.mission.title[lang]}</h2>
                 <div className="w-16 h-1 bg-gold-400 mt-6"></div>
               </div>
@@ -151,7 +282,7 @@ export function HomeContent({ sections }: Props) {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="bg-[#f5f4ef] py-20 md:py-28">
+        <section className="bg-[#f5f4ef] py-16 md:py-24">
           <div className="container-custom">
             <div className="text-center mb-12">
               <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase">{h.pillars.label[lang]}</span>
@@ -181,7 +312,7 @@ export function HomeContent({ sections }: Props) {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="bg-[#081144] text-white py-20">
+        <section className="bg-[#081144] text-white py-16 md:py-24">
           <div className="container-custom text-center">
             <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-400 uppercase">{h.flagshipProject.label[lang]}</span>
             <h2 className="font-display text-3xl md:text-4xl font-bold mt-3 mb-12">{h.flagshipProject.title[lang]}</h2>
@@ -198,13 +329,13 @@ export function HomeContent({ sections }: Props) {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="py-16 md:py-20 bg-white">
+        <section className="py-16 md:py-24 bg-white">
           <div className="container-custom">
             <div className="text-center mb-12">
               <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase">{h.values.label[lang]}</span>
               <h2 className="font-display text-4xl md:text-5xl font-bold text-navy-900 mt-3">{h.values.title[lang]}</h2>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
               {values.map((val, i) => {
                 const Icon = val.icon;
                 return (
@@ -226,13 +357,13 @@ export function HomeContent({ sections }: Props) {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="bg-gradient-to-r from-forest-600 to-navy-700 text-white py-16">
+        <section className="bg-gradient-to-r from-forest-600 to-navy-700 text-white py-16 md:py-20">
           <div className="container-custom">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="max-w-2xl">
                 <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-white/60 uppercase">{lang === 'en' ? 'ESG & Sustainability' : 'ኢኤስጂ እና ዘላቂነት'}</span>
                 <h2 className="font-display text-3xl md:text-4xl font-bold mt-3 mb-4">{lang === 'en' ? 'Committed to a Sustainable Future' : 'ለዘላቂ የወደፊት እጣ ፈንታ የተወሰነ'}</h2>
-                <p className="text-white/70">{lang === 'en' ? 'BYKM is committed to sustainable development through responsible engineering, environmental stewardship, and efficient resource management. We build today with a focus on protecting tomorrow.' : 'ቢዋይኬኤም በኃላፊነት በተሞላ ምህንድስና፣ በአካባቢ ጥበቃ እና ቀልጣፋ የሀብት አያያዝ ዘላቂ ልማት ለማምጣት ቁርጠኛ ነው። የነገን ለመጠበቅ በማሰብ ዛሬ እንገነባለን።'}</p>
+                <p className="text-white/70">{lang === 'en' ? (t.brand.short.en + ' is committed to sustainable development through responsible engineering, environmental stewardship, and efficient resource management. We build today with a focus on protecting tomorrow.') : (t.brand.short.am + ' በኃላፊነት በተሞላ ምህንድስና፣ በአካባቢ ጥበቃ እና ቀልጣፋ የሀብት አያያዝ ዘላቂ ልማት ለማምጣት ቁርጠኛ ነው። የነገን ለመጠበቅ በማሰብ ዛሬ እንገነባለን።')}</p>
               </div>
               <Link href="/about#esg" className="btn-outline border-white text-white hover:bg-white hover:text-forest-600 whitespace-nowrap shrink-0">
                 <span>{h.esg.cta[lang]}</span><ArrowRight size={16} />
@@ -243,7 +374,7 @@ export function HomeContent({ sections }: Props) {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="section-padding bg-[#f5f4ef]">
+        <section className="py-16 md:py-24 bg-[#f5f4ef]">
           <div className="container-custom text-center">
             <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-600 uppercase">{h.partners.label[lang]}</span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-navy-900 mt-3 mb-12">{h.partners.title[lang]}</h2>
@@ -259,11 +390,11 @@ export function HomeContent({ sections }: Props) {
       </ScrollReveal>
 
       <ScrollReveal>
-        <section className="bg-[#0a1a6b] text-white py-24">
+        <section className="bg-[#0a1a6b] text-white py-16 md:py-24">
           <div className="container-custom text-center">
-            <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-400 uppercase">{lang === 'en' ? 'Work With BYKM' : 'ከቢዋይኬኤም ጋር ይስሩ'}</span>
-            <h2 className="font-display text-4xl md:text-6xl font-bold mt-4 mb-6 max-w-3xl mx-auto">{lang === 'en' ? 'Building Strong Partnerships' : 'ጠንካራ አጋርነቶችን መገንባት'}</h2>
-            <p className="text-white/60 max-w-2xl mx-auto mb-10 text-lg">{lang === 'en' ? 'Whether you are a government organization, private investor, development partner, or financial institution, BYKM delivers reliable expertise, local knowledge, and trusted project execution to help turn ambitious ideas into lasting results.' : 'የመንግስት ድርጅት፣ የግል ባለሀብት፣ የልማት አጋር፣ ወይም የፋይናንስ ተቋም ብትሆኑ፣ ቢዋይኬኤም ምኞት ያላቸውን ሃሳቦች ወደ ዘላቂ ውጤቶች ለመቀየር አስተማማኝ እውቀት፣ የአካባቢ እውቀት እና የታመነ የፕሮጀክት አፈጻጸም ያቀርባል።'}</p>
+            <span className="font-mono text-xs sm:text-sm tracking-[0.3em] text-gold-400 uppercase">{lang === 'en' ? ('Work With ' + t.brand.short.en) : ('ከ' + t.brand.short.am + ' ጋር ይስሩ')}</span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6 max-w-3xl mx-auto">{lang === 'en' ? 'Building Strong Partnerships' : 'ጠንካራ አጋርነቶችን መገንባት'}</h2>
+            <p className="text-white/60 max-w-2xl mx-auto mb-10 text-lg">{lang === 'en' ? ('Whether you are a government organization, private investor, development partner, or financial institution, ' + t.brand.short.en + ' delivers reliable expertise, local knowledge, and trusted project execution to help turn ambitious ideas into lasting results.') : ('የመንግስት ድርጅት፣ የግል ባለሀብት፣ የልማት አጋር፣ ወይም የፋይናንስ ተቋም ብትሆኑ፣ ' + t.brand.short.am + ' ምኞት ያላቸውን ሃሳቦች ወደ ዘላቂ ውጤቶች ለመቀየር አስተማማኝ እውቀት፣ የአካባቢ እውቀት እና የታመነ የፕሮጀክት አፈጻጸም ያቀርባል።')}</p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/contact?inquiry=partnership" className="btn-primary text-sm"><span>{h.ctaSection.partnershipBtn[lang]}</span><ArrowRight size={16} /></Link>
               <Link href="/contact" className="btn-primary text-sm"><span>{h.ctaSection.inquiryBtn[lang]}</span></Link>
@@ -271,6 +402,8 @@ export function HomeContent({ sections }: Props) {
           </div>
         </section>
       </ScrollReveal>
+
+      <RecentNewsSection />
     </>
   );
 }

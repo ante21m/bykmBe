@@ -38,13 +38,13 @@
       investors: { en: 'Investors', am: 'ባለሀብቶች' },
     },
     address: { en: 'Yeka Sub-City, Woreda 08<br/>House No. 4-04<br/>Addis Ababa, Ethiopia', am: 'የካ ክፍለ ከተማ፣ ወረዳ 08<br/>ቤት ቁጥር 4-04<br/>አዲስ አበባ፣ ኢትዮጵያ' },
-    copyright: { en: '© 2018–2026 BYKM Trading PLC. All Rights Reserved.', am: '© 2018–2026 ቢዋይኬኤም ትሬዲንግ ኃ/የተ/የግ/ማ። ሁሉም መብቶች የተጠበቁ ናቸው።' },
+    copyright: { en: '© 2026 BYKM Trading PLC. All Rights Reserved.', am: '© 2026 ቢዋይኬኤም ትሬዲንግ ኃ/የተ/የግ/ማ። ሁሉም መብቶች የተጠበቁ ናቸው።' },
     statutory: { en: 'TIN: 0103921383 · VAT: 35205580010 · Reg: AACATB/2/0257491/2018', am: 'ቲን፡ 0103921383 · ቫት፡ 35205580010 · ምዝገባ፡ AACATB/2/0257491/2018' },
   },
   home: {
     heroSection: {
       edition: { en: '', am: '' },
-      motto: { en: 'Architecting Ethiopian Integrated Future!', am: 'የኢትዮጵያን የተቀናጀ የወደፊት እድገት በማነድፍ ላይ!' },
+      motto: { en: 'The Blueprint for Sustainable Industrial Growth', am: 'ለዘላቂ የኢንዱስትሪ እድገት የሚሆን ስትራቴጂካዊ ዕቅድ' },
       line1: { en: 'The Blueprint for', am: 'ብሉፕሪንቱ' },
       line2: { en: '', am: '' },
       typeWords: { en: [], am: [] },
