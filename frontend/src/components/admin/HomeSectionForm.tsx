@@ -3,9 +3,9 @@
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 import {
-  TextInput, Textarea, NumberInput, Switch, Button, Group, Title, Tabs, Select, FileInput,
+  TextInput, Textarea, NumberInput, Switch, Button, Group, Title, Tabs, Select, FileInput, Modal, Loader,
 } from '@mantine/core';
-import { Upload } from 'lucide-react';
+import { Upload, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useUploadFileMutation } from '@/lib/redux/api';
 import { CollapsibleSection } from './FormControls';
 
@@ -62,6 +62,7 @@ export default function HomeSectionForm({ initial, onSave, saving, cancelPath }:
     active: initial?.active ?? true,
   });
   const [lang, setLang] = useState<'en' | 'am'>('en');
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     identification: true,
     title: true,
@@ -74,23 +75,6 @@ export default function HomeSectionForm({ initial, onSave, saving, cancelPath }:
   const isJsonSection = JSON_SECTIONS.includes(form.sectionKey);
   const [uploadFile, { isLoading: uploading }] = useUploadFileMutation();
   const [uploadError, setUploadError] = useState<string | null>(null);
-
-  const handleBgUpload = async (file: File | null) => {
-    if (!file) return;
-    try {
-      const fd = new FormData();
-      fd.append('file', file);
-      const res = await uploadFile(fd).unwrap();
-      const raw = form.content || '{}';
-      let obj: Record<string, any> = {};
-      try { obj = JSON.parse(raw); } catch { obj = {}; }
-      obj.bgImage = res.url;
-      set('content', JSON.stringify(obj, null, 2));
-      setUploadError(null);
-    } catch {
-      setUploadError('Background image upload failed. If your session expired, sign out and log in again.');
-    }
-  };
 
   const handleHeroImagesUpload = async (files: File[] | null) => {
     if (!files || files.length === 0) return;
@@ -114,6 +98,39 @@ export default function HomeSectionForm({ initial, onSave, saving, cancelPath }:
       obj.heroImages = [...existing, ...urls];
       set('content', JSON.stringify(obj, null, 2));
     }
+  };
+
+  const handleHeroImageReplace = async (index: number, file: File | null) => {
+    if (!file) return;
+    setUploadError(null);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await uploadFile(fd).unwrap();
+      const raw = form.content || '{}';
+      let obj: Record<string, any> = {};
+      try { obj = JSON.parse(raw); } catch { obj = {}; }
+      const list: string[] = Array.isArray(obj.heroImages) ? obj.heroImages : [];
+      if (index >= 0 && index < list.length) {
+        list[index] = res.url;
+        obj.heroImages = list;
+        set('content', JSON.stringify(obj, null, 2));
+      }
+    } catch {
+      setUploadError('Image replace failed. If your session expired, sign out and log in again.');
+    }
+  };
+
+  const handleHeroImageMove = (index: number, direction: -1 | 1) => {
+    const raw = form.content || '{}';
+    let obj: Record<string, any> = {};
+    try { obj = JSON.parse(raw); } catch { obj = {}; }
+    const list: string[] = Array.isArray(obj.heroImages) ? obj.heroImages : [];
+    const target = index + direction;
+    if (index < 0 || target < 0 || target >= list.length) return;
+    [list[index], list[target]] = [list[target], list[index]];
+    obj.heroImages = list;
+    set('content', JSON.stringify(obj, null, 2));
   };
 
   const handleHeroImageRemove = (index: number) => {
@@ -142,9 +159,6 @@ export default function HomeSectionForm({ initial, onSave, saving, cancelPath }:
       const parsed = JSON.parse(raw || '{}');
       if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
         parsedJson = parsed;
-        if ((form.sectionKey === 'heroSection' || form.sectionKey === 'hero') && !('bgImage' in parsedJson)) {
-          parsedJson.bgImage = '';
-        }
       }
     } catch { parseError = 'Invalid JSON — check your content'; }
   }
@@ -200,7 +214,9 @@ export default function HomeSectionForm({ initial, onSave, saving, cancelPath }:
           <CollapsibleSection label="Content" open={openSections.content} onToggle={() => toggle('content')}>
             {isJsonSection && !parseError ? (
               <div className="space-y-3">
-                {Object.entries(parsedJson).map(([fieldKey, fieldVal]) => (
+                {Object.entries(parsedJson)
+                  .filter(([fieldKey]) => !(form.sectionKey === 'heroSection' || form.sectionKey === 'hero') || !['bgImage', 'heroImages'].includes(fieldKey))
+                  .map(([fieldKey, fieldVal]) => (
                   Array.isArray(fieldVal) ? (
                     <Textarea
                       key={fieldKey}
@@ -240,13 +256,6 @@ export default function HomeSectionForm({ initial, onSave, saving, cancelPath }:
                 {(form.sectionKey === 'heroSection' || form.sectionKey === 'hero') && (
                   <>
                     <FileInput
-                      label="Background Image"
-                      accept="image/*"
-                      onChange={handleBgUpload}
-                      clearable
-                      leftSection={<Upload size={16} />}
-                    />
-                    <FileInput
                       label="Hero Carousel Images (multi-select — order = slide order)"
                       accept="image/*"
                       multiple
@@ -255,19 +264,66 @@ export default function HomeSectionForm({ initial, onSave, saving, cancelPath }:
                       disabled={uploading}
                     />
                     {heroImagesList.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                         {heroImagesList.map((url, i) => (
-                          <div key={url + i} className="relative group">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={url} alt={`Hero slide ${i + 1}`} className="w-24 h-16 object-cover rounded border border-slate-200" />
-                            <button
-                              type="button"
-                              aria-label={`Remove slide ${i + 1}`}
-                              onClick={() => handleHeroImageRemove(i)}
-                              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-xs leading-none flex items-center justify-center hover:bg-red-600 shadow"
-                            >
-                              ×
-                            </button>
+                          <div key={url + i} className="relative rounded-lg border border-slate-200 bg-slate-50 p-2">
+                            <div className="relative group">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src={url}
+                                alt={`Hero slide ${i + 1}`}
+                                onClick={() => setPreviewUrl(url)}
+                                className="w-full h-28 object-cover rounded border border-slate-200 cursor-zoom-in"
+                              />
+                              <div className="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-black/60 text-white text-[10px] font-semibold">
+                                {i + 1}
+                              </div>
+                              <button
+                                type="button"
+                                aria-label={`Remove slide ${i + 1}`}
+                                onClick={() => handleHeroImageRemove(i)}
+                                className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-xs leading-none flex items-center justify-center hover:bg-red-600 shadow"
+                              >
+                                ×
+                              </button>
+                            </div>
+
+                            <div className="flex items-center justify-between gap-1 mt-2">
+                              <div className="flex gap-1">
+                                <button
+                                  type="button"
+                                  aria-label={`Move slide ${i + 1} left`}
+                                  onClick={() => handleHeroImageMove(i, -1)}
+                                  disabled={i === 0}
+                                  className="w-6 h-6 rounded border border-slate-200 bg-white text-slate-500 flex items-center justify-center hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed"
+                                >
+                                  <ChevronLeft size={14} />
+                                </button>
+                                <button
+                                  type="button"
+                                  aria-label={`Move slide ${i + 1} right`}
+                                  onClick={() => handleHeroImageMove(i, 1)}
+                                  disabled={i === heroImagesList.length - 1}
+                                  className="w-6 h-6 rounded border border-slate-200 bg-white text-slate-500 flex items-center justify-center hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed"
+                                >
+                                  <ChevronRight size={14} />
+                                </button>
+                              </div>
+                              <label className="inline-flex items-center gap-1 px-2 py-1 rounded border border-blue-200 bg-blue-50 text-blue-600 text-xs font-medium hover:bg-blue-100 cursor-pointer">
+                                {uploading ? <Loader size={12} /> : <Upload size={12} />}
+                                Replace
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                  onChange={(e) => {
+                                    const file = e.target.files?.[0] || null;
+                                    handleHeroImageReplace(i, file);
+                                    e.target.value = '';
+                                  }}
+                                />
+                              </label>
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -323,6 +379,20 @@ export default function HomeSectionForm({ initial, onSave, saving, cancelPath }:
           </div>
         </div>
       </div>
+
+      <Modal
+        opened={!!previewUrl}
+        onClose={() => setPreviewUrl(null)}
+        title="Image Preview"
+        centered
+        size="xl"
+        padding="md"
+      >
+        <div className="flex justify-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {previewUrl && <img src={previewUrl} alt="Preview" className="max-h-[70vh] w-auto rounded object-contain" />}
+        </div>
+      </Modal>
     </form>
   );
 }

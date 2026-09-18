@@ -78,8 +78,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         }}
       >
         <AppShell.Navbar p="md" style={{ borderRight: '1px solid var(--mantine-color-gray-2)' }}>
-          <Stack justify="space-between" h="100%">
-            <div>
+          <Stack justify="space-between" h="100%" style={{ gap: 0 }}>
+            <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', overflowX: 'hidden' }}>
               <Group gap={10} mb="xl" px={8}>
                 <img src="/images/logo-bykm.jpg" alt="BYKM" style={{ height: 56, width: 'auto', objectFit: 'contain' }} />
                 <div>
@@ -101,7 +101,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               </Stack>
             </div>
 
-            <div>
+            <div style={{ flexShrink: 0, paddingTop: 12 }}>
               <Divider mb="sm" />
 
               <UnstyledButton
