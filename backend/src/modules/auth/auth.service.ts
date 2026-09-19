@@ -21,20 +21,32 @@ export class AuthService implements OnModuleInit {
   }
 
   private async seedAdmin() {
-    const count = await this.userRepository.count();
-    if (count > 0) return;
+    await this.upsertUser(
+      this.configService.get<string>('ADMIN_USERNAME', 'admin'),
+      this.configService.get<string>('ADMIN_PASSWORD', 'admin123'),
+      'admin',
+    );
+    await this.upsertUser(
+      this.configService.get<string>('SUPER_ADMIN_USERNAME', 'superadmin'),
+      this.configService.get<string>('SUPER_ADMIN_PASSWORD', 'superadmin123'),
+      'super_admin',
+    );
+  }
 
-    const username = this.configService.get<string>('ADMIN_USERNAME', 'admin');
-    const password = this.configService.get<string>('ADMIN_PASSWORD', 'admin123');
-    const hashed = await bcrypt.hash(password, 10);
-
-    const user = new User();
+  private async upsertUser(username: string, password: string, role: string) {
+    let user = await this.userRepository.findOne({ where: { username } });
+    if (user) {
+      user.password = await bcrypt.hash(password, 10);
+      user.role = role;
+      await this.userRepository.save(user);
+      return;
+    }
+    user = new User();
     user.id = uuidv4();
     user.username = username;
-    user.password = hashed;
-    user.role = 'admin';
+    user.password = await bcrypt.hash(password, 10);
+    user.role = role;
     await this.userRepository.save(user);
-    console.log(`✅ Default admin user seeded (username: ${username})`);
   }
 
   async login(username: string, password: string) {
