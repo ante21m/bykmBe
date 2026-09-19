@@ -397,7 +397,6 @@ export function HomeContent({ sections: serverSections }: Props) {
             <p className="text-white/60 max-w-2xl mx-auto mb-10 text-lg">{lang === 'en' ? ('Whether you are a government organization, private investor, development partner, or financial institution, ' + t.brand.short.en + ' delivers reliable expertise, local knowledge, and trusted project execution to help turn ambitious ideas into lasting results.') : ('የመንግስት ድርጅት፣ የግል ባለሀብት፣ የልማት አጋር፣ ወይም የፋይናንስ ተቋም ብትሆኑ፣ ' + t.brand.short.am + ' ምኞት ያላቸውን ሃሳቦች ወደ ዘላቂ ውጤቶች ለመቀየር አስተማማኝ እውቀት፣ የአካባቢ እውቀት እና የታመነ የፕሮጀክት አፈጻጸም ያቀርባል።')}</p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/contact?inquiry=partnership" className="btn-primary text-sm"><span>{h.ctaSection.partnershipBtn[lang]}</span><ArrowRight size={16} /></Link>
-              <Link href="/contact" className="btn-primary text-sm"><span>{h.ctaSection.inquiryBtn[lang]}</span></Link>
             </div>
           </div>
         </section>

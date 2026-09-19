@@ -40,13 +40,17 @@ export function Navbar() {
       >
         <div className="container-custom" style={{ paddingLeft: '0.25rem' }}>
           <div className="flex items-center justify-between h-20">
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link href="/" className="flex items-center gap-3 group" aria-label="Go to home">
               <div className="relative">
-                <img src="/images/logo-bykm.jpg" alt={t.brand.short[lang]} className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain" />
+                <img
+                  src="/images/logo-bykm.jpg"
+                  alt={t.brand.short[lang]}
+                  className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-20 lg:w-20 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
               </div>
               <div>
-                <div className="text-white font-display font-bold text-lg leading-none">{t.brand.short[lang]}</div>
-                <div className="text-gold-400 text-xs sm:text-sm font-mono tracking-[0.2em] uppercase leading-tight">{t.brand.suffix[lang]}</div>
+                <div className="text-white group-hover:text-gold-400 transition-colors duration-300 font-display font-bold text-lg leading-none">{t.brand.short[lang]}</div>
+                <div className="text-gold-400 group-hover:text-white transition-colors duration-300 text-xs sm:text-sm font-mono tracking-[0.2em] uppercase leading-tight">{t.brand.suffix[lang]}</div>
               </div>
             </Link>
 
@@ -98,11 +102,12 @@ export function Navbar() {
         withCloseButton={false}
         styles={{
           root: { zIndex: 60 },
-          overlay: { background: 'rgba(8,6,22,0.85)', backdropFilter: 'blur(4px)' },
+          overlay: { background: 'rgba(8,6,22,0.2)', backdropFilter: 'none' },
+          content: { background: 'transparent', boxShadow: 'none' },
           body: { height: '100%' },
         }}
       >
-        <div className="flex flex-col h-full bg-[#0c1445]">
+        <div className="flex flex-col h-full bg-[#0c1445]/85 backdrop-blur-md border-l border-white/10">
           <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
             <span className="text-white font-display font-bold text-lg">Menu</span>
             <button
@@ -114,15 +119,15 @@ export function Navbar() {
             </button>
           </div>
           <div className="flex-1 flex flex-col gap-1 px-4 py-6 overflow-y-auto">
-            {navLinks.map((link, i) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className={`flex items-center px-4 py-3.5 rounded-lg text-base font-medium transition-colors ${
+                className={`flex items-center px-4 py-3.5 rounded-r-lg border-l-2 text-base transition-colors ${
                   pathname === link.href
-                    ? 'text-gold-400 bg-white/5'
-                    : 'text-white/80 hover:text-white hover:bg-white/5'
+                    ? 'border-gold-400 bg-gradient-to-r from-gold-400/15 to-transparent text-gold-400 font-semibold'
+                    : 'border-transparent text-white/90 font-medium hover:text-white'
                 }`}
               >
                 {t.nav[link.key as keyof typeof t.nav][lang]}

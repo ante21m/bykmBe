@@ -77,24 +77,6 @@ export function RouteMap({ lang }: { lang?: 'en' | 'am' }) {
         {geoError && (
           <p className="text-red-400 text-xs mt-2 text-center">{geoError}</p>
         )}
-        <p className="text-white/30 text-xs sm:text-sm text-center mt-3">
-          <MapPin size={12} className="inline mr-1" />
-          {lang === 'am' ? 'የአካባቢ ፈቃድ ሲሰጡ አሁን ያሉበት ቦታ እንደ መነሻ ይጠቀማል' : 'Opens Google Maps with your current location as origin'}
-        </p>
-      </div>
-
-      <div className="text-center mt-4">
-        <button
-          onClick={() => openDirections()}
-          disabled={loadingGeo}
-          className="inline-block bg-transparent border-0 text-gold-400 text-xs font-bold uppercase tracking-wider hover:text-gold-300 transition-colors cursor-pointer disabled:opacity-50"
-        >
-          {loadingGeo ? (
-            <span className="inline-flex items-center gap-1"><Loader2 size={12} className="animate-spin" /> {lang === 'am' ? 'በመከፈት ላይ...' : 'Opening...'}</span>
-          ) : (
-            lang === 'am' ? 'በጎግል ካርታ ይክፈቱ →' : 'Open in Google Maps →'
-          )}
-        </button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2, Clock, Zap, Search, Filter, type LucideIcon } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
@@ -21,6 +21,40 @@ const headerStats = [
   { val: '2', labelEn: 'Pipeline Projects', labelAm: 'በሂደት ላይ ፕሮጀክቶች' },
   { val: '2024–2030', labelEn: 'Strategic Window', labelAm: 'ስትራቴጂካዊ መስኮት' },
 ];
+
+function CountUp({ value, duration = 1200 }: { value: number; duration?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [display, setDisplay] = useState(0);
+  const started = useRef(false);
+  const rafId = useRef<number>(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) { setDisplay(value); return; }
+
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !started.current) {
+        started.current = true;
+        const from = performance.now();
+        const tick = (now: number) => {
+          const progress = Math.min((now - from) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          setDisplay(Math.round(eased * value));
+          if (progress < 1) rafId.current = requestAnimationFrame(tick);
+        };
+        rafId.current = requestAnimationFrame(tick);
+        io.disconnect();
+      }
+    }, { threshold: 0.4 });
+    io.observe(el);
+    return () => { io.disconnect(); cancelAnimationFrame(rafId.current); };
+  }, [value, duration]);
+
+  return <div ref={ref}>{display}</div>;
+}
+
 
 const statusConfig: Record<string, { labelEn: string; labelAm: string; Icon: LucideIcon; color: string; bg: string; border: string }> = {
   completed: { labelEn: 'Completed', labelAm: 'ተጠናቋል', Icon: CheckCircle2, color: 'text-forest-500', bg: 'bg-green-50', border: 'border-green-200' },
@@ -160,7 +194,9 @@ export function ProjectsClient() {
             <div className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-white/10">
               {headerStats.map(s => (
                 <div key={s.labelEn}>
-                  <div className="font-display text-3xl font-bold text-gold-400">{s.val}</div>
+                  <div className="font-display text-3xl font-bold text-gold-400">
+                    {Number.isFinite(Number(s.val)) ? <CountUp value={Number(s.val)} /> : s.val}
+                  </div>
                   <p className="text-white/40 text-sm font-mono tracking-wide mt-1">{lang === 'en' ? s.labelEn : s.labelAm}</p>
                 </div>
               ))}

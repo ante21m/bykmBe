@@ -27,8 +27,12 @@ interface HeroSectionProps {
 interface TText {
   [key: string]: string;
 }
+
 const t: Record<string, TText> = {
-  bgAlt: { en: 'BYKM Group — Ethiopian Integrated Future', am: 'ቢዋይኬኤም ግሩፕ — የኢትዮጵያ የተቀናጀ የወደፊት' },
+  bgAlt: {
+    en: 'BYKM Group Ã¢â‚¬â€ Ethiopian Integrated Future',
+    am: 'Ã¡â€°Â¢Ã¡â€¹â€¹Ã¡â€¹Â­Ã¡Å Â¬Ã¡Å Â¤Ã¡Ë†Â Ã¡Å’ÂÃ¡Ë†Â©Ã¡Ââ€¢ Ã¢â‚¬â€ Ã¡â€¹Â¨Ã¡Å Â¢Ã¡â€°ÂµÃ¡â€¹Â®Ã¡Å’ÂµÃ¡â€¹Â« Ã¡â€¹Â¨Ã¡â€°Â°Ã¡â€°â‚¬Ã¡Å â€œÃ¡Å’â‚¬ Ã¡â€¹Â¨Ã¡â€¹Ë†Ã¡â€¹Â°Ã¡ÂÅ Ã¡â€°Âµ',
+  },
 };
 
 const HERO_IMAGES = [
@@ -39,7 +43,7 @@ const HERO_IMAGES = [
   '/images/hero/hero-5.jpg',
 ];
 
-const SLIDE_INTERVAL = 7000;
+const SLIDE_INTERVAL = 10000;
 
 export function HeroSection({ heroSection, lang }: HeroSectionProps) {
   const [active, setActive] = useState(0);
@@ -92,7 +96,6 @@ export function HeroSection({ heroSection, lang }: HeroSectionProps) {
         ))}
         <div className="absolute inset-0 bg-gradient-to-r from-[#080616]/40 via-[#080616]/10 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#080616]/30 via-transparent to-transparent" />
-
       </div>
 
       <div className="container-custom relative z-10 h-full flex flex-col">
@@ -113,8 +116,6 @@ export function HeroSection({ heroSection, lang }: HeroSectionProps) {
               {heroSection.motto[lang]}
             </h1>
           </ScrollReveal>
-
-
 
           <ScrollReveal delay={350}>
             <div className="flex flex-col sm:flex-row items-start gap-5">
@@ -138,12 +139,19 @@ export function HeroSection({ heroSection, lang }: HeroSectionProps) {
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <div className="h-px bg-white/10 w-full">
-          <div
-            className="h-full bg-gold-400 transition-all duration-100 ease-linear"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
+          <div className="flex items-center gap-1.5">
+            {images.map((_, i) => (
+              <span
+                key={i}
+                className={`relative block h-1 w-6 sm:w-9 overflow-hidden transition-colors duration-500 bg-white/10 ${i < active ? "bg-gold-400" : ""}`}
+              >
+                <span
+                  className={`absolute inset-y-0 left-0 bg-gold-400 transition-all duration-100 ease-linear ${i < active ? "w-full" : "w-0"}`}
+                  style={i === active ? { width: `${progress}%` } : undefined}
+                />
+              </span>
+            ))}
+          </div>
         <div className="container-custom flex items-center justify-end py-6">
           <span className="font-mono text-[10px] tracking-widest text-white/20 uppercase">
             {String(active + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}

@@ -26,31 +26,31 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const inquiryOptions = [
-  { value: 'partnership', labelEn: 'Partnerships & JV', labelAm: 'አጋርነት እና ጁንቲየር ቬንቸር', icon: Building2, deptEn: 'Office of the General Manager', deptAm: 'የአጠቃላይ ሥራ አስኪያጅ ቢሮ', descEn: 'Strategic alliances, joint ventures, and investment collaboration.', descAm: 'ስትራቴጂካዊ ትብብር፣ ጁንቲየር ቬንቸር እና የኢንቨስትመንት ትብብር።' },
-  { value: 'construction', labelEn: 'Construction', labelAm: 'ኮንስትራክሽን', icon: Shield, deptEn: 'Engineering & Infrastructure Division', deptAm: 'የምህንድስና እና መሠረተ ልማት ክፍል', descEn: 'Mega-corridors, general contracting, and urban development.', descAm: 'ሜጋ-ኮሪደሮች፣ አጠቃላይ ኮንትራት እና የከተማ ልማት።' },
-  { value: 'trade', labelEn: 'Import/Export', labelAm: 'ማስመጣት/መላክ', icon: Globe, deptEn: 'Global Trade & Logistics Hub', deptAm: 'የአለም ንግድ እና ሎጂስቲክስ ማዕከል', descEn: 'Supply chain, logistics, and international trade services.', descAm: 'አቅርቦት ሰንሰለት፣ ሎጂስቲክስ እና አለም አቀፍ የንግድ አገልግሎቶች።' },
-  { value: 'careers', labelEn: 'Careers', labelAm: 'ሙያ', icon: Gavel, deptEn: 'Human Capital & Social Services', deptAm: 'የሰው ካፒታል እና ማህበራዊ አገልግሎቶች', descEn: 'Job opportunities, capacity building, and HR partnerships.', descAm: 'የስራ እድሎች፣ የአቅም ግንባታ እና የሰው ሃይል አጋርነት።' },
-  { value: 'general', labelEn: 'General Inquiry', labelAm: 'አጠቃላይ ጥያቄ', icon: Send, deptEn: 'Corporate Communications', deptAm: 'የኮርፖሬት ኮሙኒኬሽን', descEn: 'General questions, media, feedback, or other inquiries.', descAm: 'አጠቃላይ ጥያቄዎች፣ ሚዲያ፣ አስተያየት ወይም ሌሎች ጥያቄዎች።' },
+  { value: 'partnership', labelEn: 'Partnerships & JV', labelAm: 'áŠ áŒ‹áˆ­áŠá‰µ áŠ¥áŠ“ áŒáŠ•á‰²á‹¨áˆ­ á‰¬áŠ•á‰¸áˆ­', icon: Building2, deptEn: 'Office of the General Manager', deptAm: 'á‹¨áŠ áŒ á‰ƒáˆ‹á‹­ áˆ¥áˆ« áŠ áˆµáŠªá‹«áŒ… á‰¢áˆ®', descEn: 'Strategic alliances, joint ventures, and investment collaboration.', descAm: 'áˆµá‰µáˆ«á‰´áŒ‚áŠ«á‹Š á‰µá‰¥á‰¥áˆ­á£ áŒáŠ•á‰²á‹¨áˆ­ á‰¬áŠ•á‰¸áˆ­ áŠ¥áŠ“ á‹¨áŠ¢áŠ•á‰¨áˆµá‰µáˆ˜áŠ•á‰µ á‰µá‰¥á‰¥áˆ­á¢' },
+  { value: 'construction', labelEn: 'Construction', labelAm: 'áŠ®áŠ•áˆµá‰µáˆ«áŠ­áˆ½áŠ•', icon: Shield, deptEn: 'Engineering & Infrastructure Division', deptAm: 'á‹¨áˆáˆ…áŠ•á‹µáˆµáŠ“ áŠ¥áŠ“ áˆ˜áˆ áˆ¨á‰° áˆáˆ›á‰µ áŠ­ááˆ', descEn: 'Mega-corridors, general contracting, and urban development.', descAm: 'áˆœáŒ‹-áŠ®áˆªá‹°áˆ®á‰½á£ áŠ áŒ á‰ƒáˆ‹á‹­ áŠ®áŠ•á‰µáˆ«á‰µ áŠ¥áŠ“ á‹¨áŠ¨á‰°áˆ› áˆáˆ›á‰µá¢' },
+  { value: 'trade', labelEn: 'Import/Export', labelAm: 'áˆ›áˆµáˆ˜áŒ£á‰µ/áˆ˜áˆ‹áŠ­', icon: Globe, deptEn: 'Global Trade & Logistics Hub', deptAm: 'á‹¨áŠ áˆˆáˆ áŠ•áŒá‹µ áŠ¥áŠ“ áˆŽáŒ‚áˆµá‰²áŠ­áˆµ áˆ›á‹•áŠ¨áˆ', descEn: 'Supply chain, logistics, and international trade services.', descAm: 'áŠ á‰…áˆ­á‰¦á‰µ áˆ°áŠ•áˆ°áˆˆá‰µá£ áˆŽáŒ‚áˆµá‰²áŠ­áˆµ áŠ¥áŠ“ áŠ áˆˆáˆ áŠ á‰€á á‹¨áŠ•áŒá‹µ áŠ áŒˆáˆáŒáˆŽá‰¶á‰½á¢' },
+  { value: 'careers', labelEn: 'Careers', labelAm: 'áˆ™á‹«', icon: Gavel, deptEn: 'Human Capital & Social Services', deptAm: 'á‹¨áˆ°á‹ áŠ«á’á‰³áˆ áŠ¥áŠ“ áˆ›áˆ…á‰ áˆ«á‹Š áŠ áŒˆáˆáŒáˆŽá‰¶á‰½', descEn: 'Job opportunities, capacity building, and HR partnerships.', descAm: 'á‹¨áˆµáˆ« áŠ¥á‹µáˆŽá‰½á£ á‹¨áŠ á‰…áˆ áŒáŠ•á‰£á‰³ áŠ¥áŠ“ á‹¨áˆ°á‹ áˆƒá‹­áˆ áŠ áŒ‹áˆ­áŠá‰µá¢' },
+  { value: 'general', labelEn: 'General Inquiry', labelAm: 'áŠ áŒ á‰ƒáˆ‹á‹­ áŒ¥á‹«á‰„', icon: Send, deptEn: 'Corporate Communications', deptAm: 'á‹¨áŠ®áˆ­á–áˆ¬á‰µ áŠ®áˆ™áŠ’áŠ¬áˆ½áŠ•', descEn: 'General questions, media, feedback, or other inquiries.', descAm: 'áŠ áŒ á‰ƒáˆ‹á‹­ áŒ¥á‹«á‰„á‹Žá‰½á£ áˆšá‹²á‹«á£ áŠ áˆµá‰°á‹«á‹¨á‰µ á‹ˆá‹­áˆ áˆŒáˆŽá‰½ áŒ¥á‹«á‰„á‹Žá‰½á¢' },
 ];
 
 const contactInfo = [
   {
-    icon: MapPin, titleEn: 'Headquarters', titleAm: 'ዋና መሥሪያ ቤት',
+    icon: MapPin, titleEn: 'Headquarters', titleAm: 'á‹‹áŠ“ áˆ˜áˆ¥áˆªá‹« á‰¤á‰µ',
     linesEn: ['Yeka Sub-City, Woreda 08', 'House No. 4-04 (New 4-04)', 'Addis Ababa, Ethiopia'],
-    linesAm: ['የካ ንዑስ ከተማ፣ ወረዳ 08', 'ቤት ቁጥር 4-04 (አዲስ 4-04)', 'አዲስ አበባ፣ ኢትዮጵያ'],
+    linesAm: ['á‹¨áŠ« áŠ•á‹‘áˆµ áŠ¨á‰°áˆ›á£ á‹ˆáˆ¨á‹³ 08', 'á‰¤á‰µ á‰áŒ¥áˆ­ 4-04 (áŠ á‹²áˆµ 4-04)', 'áŠ á‹²áˆµ áŠ á‰ á‰£á£ áŠ¢á‰µá‹®áŒµá‹«'],
   },
   {
-    icon: Phone, titleEn: 'Phone', titleAm: 'ስልክ',
+    icon: Phone, titleEn: 'Phone', titleAm: 'áˆµáˆáŠ­',
     linesEn: CONTACT_INFO.phones.map(p => `${p.number} (${p.label})`),
-    linesAm: CONTACT_INFO.phones.map(p => `${p.number} (${p.label === 'Primary' ? 'ዋና' : 'ኦፕሬሽን'})`),
+    linesAm: CONTACT_INFO.phones.map(p => `${p.number} (${p.label === 'Primary' ? 'á‹‹áŠ“' : 'áŠ¦á•áˆ¬áˆ½áŠ•'})`),
   },
   {
-    icon: Mail, titleEn: 'Email', titleAm: 'ኢሜይል',
+    icon: Mail, titleEn: 'Email', titleAm: 'áŠ¢áˆœá‹­áˆ',
     linesEn: [CONTACT_INFO.email],
     linesAm: [CONTACT_INFO.email],
   },
   {
-    icon: Globe, titleEn: 'Digital', titleAm: 'ዲጂታል',
+    icon: Globe, titleEn: 'Digital', titleAm: 'á‹²áŒ‚á‰³áˆ',
     linesEn: ['www.bykmgroup.com', 'LinkedIn: /company/bykm-trading-plc'],
     linesAm: ['www.bykmgroup.com', 'LinkedIn: /company/bykm-trading-plc'],
   },
@@ -112,41 +112,6 @@ export function ContactClient() {
         </div>
       </section>
 
-      {/* Inquiry Type Cards */}
-      <section className="bg-white border-b border-navy-100">
-        <div className="container-custom -mt-10 relative z-20">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {inquiryOptions.map(opt => {
-              const Icon = opt.icon;
-              const isActive = selectedType === opt.value;
-              return (
-                <button
-                  key={opt.value}
-                  type="button"
-                  onClick={() => {
-                    const form = document.querySelector('form');
-                    const select = form?.querySelector('select[name="inquiryType"]') as HTMLSelectElement;
-                    if (select) { select.value = opt.value; select.dispatchEvent(new Event('change', { bubbles: true })); }
-                    document.getElementById('form-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }}
-                  className={`group text-left bg-white border p-5 hover:shadow-lg transition-all duration-300 ${
-                    isActive ? 'border-gold-400 shadow-md ring-1 ring-gold-400/20' : 'border-navy-100 hover:border-navy-200'
-                  }`}
-                >
-                  <div className={`w-10 h-10 flex items-center justify-center mb-3 transition-colors ${
-                    isActive ? 'bg-gold-400 text-navy-900' : 'bg-navy-900 text-gold-400 group-hover:bg-navy-800'
-                  }`}>
-                    <Icon size={16} />
-                  </div>
-                  <p className="font-bold text-navy-900 text-sm mb-1">{lang === 'en' ? opt.labelEn : opt.labelAm}</p>
-                  <p className="text-navy-500/60 text-xs leading-relaxed">{lang === 'en' ? opt.descEn : opt.descAm}</p>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Form + Sidebar */}
       <section id="form-section" className="py-16 md:py-24 bg-[#f5f4ef]">
         <div className="container-custom">
@@ -166,12 +131,43 @@ export function ContactClient() {
                     <div className="w-10 h-10 bg-navy-900 flex items-center justify-center shrink-0">
                       <Icon size={16} className="text-gold-400" />
                     </div>
-                    <div>
-                      <p className="font-bold text-navy-900 text-sm mb-1">{lang === 'en' ? item.titleEn : item.titleAm}</p>
-                      {(lang === 'en' ? item.linesEn : item.linesAm).map(line => (
+<div>
+                    <p className="font-bold text-navy-900 text-sm mb-1">{lang === 'en' ? item.titleEn : item.titleAm}</p>
+                    {(lang === 'en' ? item.linesEn : item.linesAm).map(line => (
+                      item.titleEn === 'Headquarters' ? (
+                        <a
+                          key={line}
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(line.endsWith('Ethiopia') ? line : line + ', Addis Ababa, Ethiopia')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block text-navy-600/60 text-sm leading-relaxed hover:text-gold-600 hover:underline transition-colors"
+                        >
+                          {line}
+                        </a>
+                      ) : item.titleEn === 'Email' ? (
+                        <a
+                          key={line}
+                          href={`mailto:${line}`}
+                          className="block text-navy-600/60 text-sm leading-relaxed hover:text-gold-600 hover:underline transition-colors"
+                        >
+                          {line}
+                        </a>
+                      ) : (
                         <p key={line} className="text-navy-600/60 text-sm leading-relaxed">{line}</p>
-                      ))}
-                    </div>
+                      )
+                    ))}
+                    {item.titleEn === 'Headquarters' && (
+                      <a
+                        href={`https://www.google.com/maps/dir/?api=1&origin=my_location&destination=${encodeURIComponent('Yeka Sub-City, Woreda 08, House No. 4-04, Addis Ababa, Ethiopia')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-flex items-center gap-2 bg-navy-900 text-white text-xs font-mono tracking-[0.25em] uppercase px-4 py-2.5 hover:bg-navy-800 hover:gap-3 transition-all"
+                      >
+                        <MapPin size={14} className="text-gold-400" />
+                        <span>{lang === 'en' ? 'Connect' : 'áŒáŠ•áŠ™áŠá‰µ'}</span>
+                      </a>
+                    )}
+                  </div>
                   </div>
                 );
               })}

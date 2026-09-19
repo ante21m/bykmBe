@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import Link from 'next/link';
 import { MapPin, Phone, Mail, ArrowUp } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
@@ -36,13 +36,13 @@ export function Footer() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
 
               <div>
-                <div className="flex items-center gap-3 mb-8">
+<Link href="/" className="flex items-center gap-3 mb-8 group">
                   <img src="/images/logo-bykm.jpg" alt={t.brand.short[lang]} className="h-14 w-auto object-contain" />
                   <div>
-                    <div className="font-display font-bold text-lg leading-none text-white">{t.brand.short[lang]}</div>
+                    <div className="font-display font-bold text-lg leading-none text-white group-hover:text-gold-400 transition-colors duration-300">{t.brand.short[lang]}</div>
                     <div className="text-gold-400 text-[9px] font-mono tracking-[0.35em] uppercase mt-1.5">{t.brand.suffix[lang]}</div>
                   </div>
-                </div>
+                </Link>
 
                 <h3 className="font-mono text-[10px] tracking-[0.4em] uppercase text-gold-400 mb-5">{lang === 'en' ? 'Company' : 'ኩባንያ'}</h3>
                 <ul className="space-y-3">
@@ -81,7 +81,11 @@ export function Footer() {
               </div>
 
               <div>
-                <h3 className="font-mono text-[10px] tracking-[0.4em] uppercase text-gold-400 mb-5">{lang === 'en' ? 'Connect' : 'ግንኙነት'}</h3>
+                <h3>
+                  <Link href="/contact" className="font-mono text-[10px] tracking-[0.4em] uppercase text-gold-400 mb-5 inline-block hover:text-white transition-colors duration-300">
+                    {lang === 'en' ? 'Contact Us' : 'ግንኙነት'}
+                  </Link>
+                </h3>
                 <div className="flex gap-3 mb-6">
                   {socialIcons.map((s) => (
                     <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
@@ -91,10 +95,26 @@ export function Footer() {
                   ))}
                 </div>
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3 text-sm text-white/70">
+<div className="flex items-start gap-3 text-sm text-white/70">
                     <MapPin size={14} className="text-gold-400 mt-0.5 shrink-0" />
-                    <span dangerouslySetInnerHTML={{ __html: f.address[lang] }} />
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Yeka Sub-City, Woreda 08, House No. 4-04, Addis Ababa, Ethiopia')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-gold-400 transition-colors duration-300"
+                    >
+                      <span dangerouslySetInnerHTML={{ __html: f.address[lang] }} />
+                    </a>
                   </div>
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&origin=my_location&destination=${encodeURIComponent('Yeka Sub-City, Woreda 08, House No. 4-04, Addis Ababa, Ethiopia')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-xs font-mono tracking-[0.25em] uppercase text-gold-400 border border-gold-400/40 px-3 py-2 hover:bg-gold-400/10 hover:border-gold-400 transition-colors duration-300"
+                  >
+                    <MapPin size={14} />
+                    <span>{lang === 'en' ? 'Map' : 'ካርታ'}</span>
+                  </a>
                   {CONTACT_INFO.phones.map((phone) => (
                     <div key={phone.number} className="flex items-center gap-3 text-sm">
                       <Phone size={14} className="text-gold-400 shrink-0" />
@@ -112,21 +132,43 @@ export function Footer() {
           </div>
 
           <div className="border-t border-white/10">
-            <div className="container-custom py-10 flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-white/70 text-sm">{f.copyright[lang]}</p>
-              <div className="flex items-center gap-8">
-                {[
-                  { href: '/privacy', label: 'Privacy Policy' },
-                  { href: '/terms', label: 'Terms of Service' },
-                ].map((link) => (
-                  <Link key={link.href} href={link.href} className="group relative text-white/60 hover:text-white text-sm transition-colors duration-300">
-                    {link.label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-400 group-hover:w-full transition-all duration-300" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
+  <div className="container-custom py-7 sm:py-8">
+    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+
+      <p className="text-center md:text-left text-xs sm:text-sm text-white/50 leading-relaxed">
+        {f.copyright[lang]}
+      </p>
+
+      <nav
+        aria-label="Legal"
+        className="flex items-center justify-center gap-3 sm:gap-4"
+      >
+        {[
+          { href: '/privacy', label: 'Privacy Policy' },
+          { href: '/terms', label: 'Terms of Service' },
+        ].map((link, i) => (
+          <Fragment key={link.href}>
+            {i > 0 && (
+              <span className="text-white/20 text-xs" aria-hidden="true">
+                •
+              </span>
+            )}
+
+            <Link
+              href={link.href}
+              className="group relative text-xs sm:text-sm text-white/50 hover:text-white transition-colors duration-300"
+            >
+              {link.label}
+
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold-400 group-hover:w-full transition-all duration-300" />
+            </Link>
+          </Fragment>
+        ))}
+      </nav>
+    </div>
+
+     </div>
+</div>
         </div>
       </footer>
 
