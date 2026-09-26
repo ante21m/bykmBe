@@ -17,8 +17,8 @@ function isAmharic(text: string): boolean {
 const companyData: BilingualQAPair[] = [
   {
     keywords: ['what is bykm', 'who is bykm', 'tell me about bykm', 'about bykm', 'what does bykm do', 'company', 'overview'],
-    en: 'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation established in 2018. We operate through five integrated strategic pillars: Agro-Industrialization & Natural Resources, Infrastructure & Engineering, Global Trade & Logistics, Digital Economy & Media, and Hospitality & Retail. With a paid-up capital of more than 10,000,000 ETB and a General Contractor (GC-4) certification, we are committed to architecting Ethiopia\'s integrated future.',
-    am: 'ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር በ2018 ዓ.ም. የተመሰረተ ሁለገብ ዘርፍ የኢትዮጵያ ኮርፖሬሽን ነው። በአምስት የተቀናጁ ስትራቴጂካዊ ምሰሶዎች ይሰራል፦ አግሮ-ኢንዱስትሪላይዜሽን እና የተፈጥሮ ሀብት፣ መሠረተ ልማት እና ምህንድስና፣ ዓለም አቀፍ ንግድ እና ሎጂስቲክስ፣ ዲጂታል ኢኮኖሚ እና ሚዲያ፣ እንዲሁም ሆስፒታሊቲ እና ችርቻሮ። በmore than 10,000,000 ብር የተከፈለ ካፒታል እና በአጠቃላይ ኮንትራክተር (ጂሲ-4) የምስክር ወረቀት የተመሰከረለት ሲሆን፣ የኢትዮጵያን የተቀናጀ የወደፊት እድገት ለመቅረጽ ቆርጦ ይሰራል።',
+    en: 'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation established in 2018. We operate through four integrated strategic pillars: Agro-Industrialization & Natural Resources, Infrastructure & Engineering, Global Trade & Logistics, and Hospitality & Retail. With a paid-up capital of more than 10,000,000 ETB and a General Contractor (GC-4) certification, we are committed to architecting Ethiopia\'s integrated future.',
+    am: 'ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር በ2018 ዓ.ም. የተመሰረተ ሁለገብ ዘርፍ የኢትዮጵያ ኮርፖሬሽን ነው። በአራት የተቀናጁ ስትራቴጂካዊ ምሰሶዎች ይሰራል፦ አግሮ-ኢንዱስትሪላይዜሽን እና የተፈጥሮ ሀብት፣ መሠረተ ልማት እና ምህንድስና፣ ዓለም አቀፍ ንግድ እና ሎጂስቲክስ፣ እንዲሁም ሆስፒታሊቲ እና ችርቻሮ። በmore than 10,000,000 ብር የተከፈለ ካፒታል እና በአጠቃላይ ኮንትራክተር (ጂሲ-4) የምስክር ወረቀት የተመሰከረለት ሲሆን፣ የኢትዮጵያን የተቀናጀ የወደፊት እድገት ለመቅረጽ ቆርጦ ይሰራል።',
     suggestions: ['vision mission', 'business pillars', 'services offered'],
   },
   {
@@ -29,9 +29,9 @@ const companyData: BilingualQAPair[] = [
   },
   {
     keywords: ['service', 'what do you offer', 'business pillar', 'pillar', 'cluster'],
-    en: 'BYKM operates through five strategic business pillars: (1) Agro-Industrialization & Natural Resources — coffee value chain, high-value agriculture, mineral extraction; (2) Infrastructure, Engineering & Urban Development — contracting, mega-corridors, real estate; (3) Global Trade, Logistics & Transport — import/export, freight forwarding, warehousing; (4) Digital Economy, Media & Technical Services — ICT infrastructure, printing, digital training; (5) Hospitality, Retail & Consumer Ecosystems — hotels, eco-resorts, retail networks.',
-    am: 'ቢኬኤም በአምስት ስትራቴጂካዊ የንግድ ምሰሶዎች ይሰራል፦ (1) አግሮ-ኢንዱስትሪላይዜሽን እና የተፈጥሮ ሀብት — የቡና ሰንሰለት፣ ከፍተኛ ዋጋ ያለው እርሻ፣ የማዕድን ቁፋሮ፤ (2) መሠረተ ልማት፣ ምህንድስና እና የከተማ ልማት — ኮንትራክተር፣ ሜጋ ኮሪደሮች፣ ሪል እስቴት፤ (3) ዓለም አቀፍ ንግድ፣ ሎጂስቲክስ እና ትራንስፖርት — ማስመጣት/መላክ፣ የጭነት ዝውውር፣ መጋዘን፤ (4) ዲጂታል ኢኮኖሚ፣ ሚዲያ እና ቴክኒክ አገልግሎቶች — አይሲቲ መሠረተ ልማት፣ ህትመት፣ ዲጂቫል ስልጠና፤ (5) ሆስፒታሊቲ፣ ችርቻሮ እና የሸማቾች ስነ-ምህዳር — ሆቴሎች፣ ኢኮ-ሪዞርቶች፣ የችርቻሮ አውታሮች።',
-    suggestions: ['agro-industrialization', 'infrastructure', 'digital economy'],
+    en: 'BYKM operates through four strategic business pillars: (1) Agro-Industrialization & Natural Resources — coffee value chain, high-value agriculture, mineral extraction; (2) Infrastructure, Engineering & Urban Development — contracting, mega-corridors, real estate; (3) Global Trade, Logistics & Transport — import/export, freight forwarding, warehousing; (4) Hospitality, Retail & Consumer Ecosystems — hotels, eco-resorts, retail networks.',
+    am: 'ቢኬኤም በአራት ስትራቴጂካዊ የንግድ ምሰሶዎች ይሰራል፦ (1) አግሮ-ኢንዱስትሪላይዜሽን እና የተፈጥሮ ሀብት — የቡና ሰንሰለት፣ ከፍተኛ ዋጋ ያለው እርሻ፣ የማዕድን ቁፋሮ፤ (2) መሠረተ ልማት፣ ምህንድስና እና የከተማ ልማት — ኮንትራክተር፣ ሜጋ ኮሪደሮች፣ ሪል እስቴት፤ (3) ዓለም አቀፍ ንግድ፣ ሎጂስቲክስ እና ትራንስፖርት — ማስመጣት/መላክ፣ የጭነት ዝውውር፣ መጋዘን፤ (4) ሆስፒታሊቲ፣ ችርቻሮ እና የሸማቾች ስነ-ምህዳር — ሆቴሎች፣ ኢኮ-ሪዞርቶች፣ የችርቻሮ አውታሮች።',
+    suggestions: ['agro-industrialization', 'infrastructure', 'logistics'],
   },
   {
     keywords: ['agro', 'agriculture', 'coffee', 'natural resource', 'mineral'],

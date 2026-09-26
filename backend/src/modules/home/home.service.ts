@@ -1,11 +1,39 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
+import { Injectable, NotFoundException, OnModuleInit, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HomeSection } from '../../entities/home-content.entity';
 
+/**
+ * Keys retired from the hero payload. The UI no longer renders them, so any
+ * value left behind in the database is dead weight that can silently reappear
+ * if the markup is ever restored. Stripped on boot so deploys self-heal.
+ */
+const RETIRED_HERO_KEYS = ['edition'] as const;
+
+/** BYKM operates across four strategic pillars; Digital is not one of them. */
+const RETIRED_PILLAR_KEYS: readonly string[] = ['digital'];
+
+type Lang = 'en' | 'am';
+
+/**
+ * The pillar-count wording has to agree with the number of cards actually
+ * rendered, so the "five" phrasing is normalised to "four" alongside the
+ * removal of the Digital entry. Case is preserved so a sentence-initial
+ * "Five" does not become "four".
+ */
+const PILLAR_COUNT_COPY: Record<Lang, (input: string) => string> = {
+  en: (value) =>
+    value.replace(/\bfive\b/gi, (match) => (match[0] === 'F' ? 'Four' : 'four')),
+  am: (value) => value.replace(/አምስት/g, 'አራት'),
+};
+
+type SectionPatch = (obj: Record<string, unknown>, lang: Lang) => boolean;
+
 @Injectable()
 export class HomeService implements OnModuleInit {
+  private readonly logger = new Logger(HomeService.name);
+
   constructor(
     @InjectRepository(HomeSection)
     private readonly homeRepository: Repository<HomeSection>,
@@ -16,6 +44,92 @@ export class HomeService implements OnModuleInit {
     if (count === 0) {
       await this.seed();
     }
+    await this.patchSections(['heroSection', 'hero'], 'retired hero key', (obj) => {
+      let changed = false;
+      for (const key of RETIRED_HERO_KEYS) {
+        if (key in obj) {
+          delete obj[key];
+          changed = true;
+        }
+      }
+      return changed;
+    });
+    await this.patchSections(['pillars', 'pillarsSection'], 'pillar count', (obj, lang) => {
+      let changed = false;
+
+      const list = obj.pillarsData;
+      if (Array.isArray(list)) {
+        const kept = list.filter(
+          (p) =>
+            !p ||
+            typeof p !== 'object' ||
+            !RETIRED_PILLAR_KEYS.includes(String((p as Record<string, unknown>).key)),
+        );
+        if (kept.length !== list.length) {
+          obj.pillarsData = kept;
+          changed = true;
+        }
+      }
+
+      const rewriteCount = PILLAR_COUNT_COPY[lang];
+      for (const field of ['title', 'desc'] as const) {
+        const val = obj[field];
+        if (typeof val !== 'string' || !val) continue;
+        const replaced = rewriteCount(val);
+        if (replaced !== val) {
+          obj[field] = replaced;
+          changed = true;
+        }
+      }
+      return changed;
+    });
+  }
+
+  /**
+   * Applies a patch to the JSON payload of the named sections, in both
+   * languages, and persists only the payloads the patch actually changed.
+   * Best-effort: a failure here must never prevent the API from starting.
+   */
+  private async patchSections(sectionKeys: string[], reason: string, patch: SectionPatch) {
+    try {
+      const sections = await this.homeRepository.find({
+        where: sectionKeys.map((sectionKey) => ({ sectionKey })),
+      });
+
+      for (const section of sections) {
+        let changed = false;
+        const next: Partial<HomeSection> = {};
+
+        for (const field of ['content', 'contentAm'] as const) {
+          const raw = section[field];
+          if (typeof raw !== 'string' || !raw) continue;
+
+          let parsed: Record<string, unknown>;
+          try {
+            parsed = JSON.parse(raw);
+          } catch {
+            continue; // not a JSON section — leave untouched
+          }
+          if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) continue;
+
+          if (patch(parsed, field === 'content' ? 'en' : 'am')) {
+            next[field] = JSON.stringify(parsed);
+            changed = true;
+          }
+        }
+
+        if (changed) {
+          await this.homeRepository.update(section.id, next);
+          this.logger.log(
+            `Normalised ${reason} in home section "${section.sectionKey}" (${section.id})`,
+          );
+        }
+      }
+    } catch (err) {
+      this.logger.warn(
+        `Could not normalise ${reason}: ${err instanceof Error ? err.message : String(err)}`,
+      );
+    }
   }
 
   private async seed() {
@@ -25,7 +139,6 @@ export class HomeService implements OnModuleInit {
         title: 'Hero Section',
         titleAm: 'የመግቢያ ክፍል',
         content: JSON.stringify({
-          edition: '',
           motto: 'The Blueprint for Sustainable Industrial Growth',
           line1: 'The Blueprint for',
           line2: '',
@@ -36,7 +149,6 @@ export class HomeService implements OnModuleInit {
           bgImage: '',
         }),
         contentAm: JSON.stringify({
-          edition: '',
           motto: 'ለዘላቂ የኢንዱስትሪ እድገት የሚሆን ስትራቴጂካዊ ዕቅድ',
           line1: 'ብሉፕሪንቱ',
           line2: '',
