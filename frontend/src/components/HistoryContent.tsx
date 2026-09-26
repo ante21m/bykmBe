@@ -46,8 +46,8 @@ const milestones = [
     year: '2018 GC',
     title: { en: 'Strategic Transition to BYKM Trading PLC', am: 'ወደ ቢዋይኬኤም ትሬዲንግ ፒኤልሲ ስትራቴጂካዊ ሽግግር' },
     desc: {
-      en: 'Evolved from specialized contractor to diversified multi-sectoral powerhouse, spanning five integrated business pillars for a Modern Ethiopia.',
-      am: 'ከልዩ ኮንትራክተርነት ወደ ተለያዩ ዘርፎች የተስፋፋ ኃያል ኃይል ተለወጠ፣ ለዘመናዊቷ ኢትዮጵያ አምስት የተቀናጁ የንግድ ምሰሶዎችን ያካተተ።',
+      en: 'Evolved from specialized contractor to diversified multi-sectoral powerhouse, spanning four integrated business pillars for a Modern Ethiopia.',
+      am: 'ከልዩ ኮንትራክተርነት ወደ ተለያዩ ዘርፎች የተስፋፋ ኃያል ኃይል ተለወጠ፣ ለዘመናዊቷ ኢትዮጵያ አራት የተቀናጁ የንግድ ምሰሶዎችን ያካተተ።',
     },
     ribbonBg: 'bg-[#146B1F]',
     ribbonText: 'text-white',
@@ -95,7 +95,7 @@ const evolutionCards = [
       ],
       am: [
         'ዘመናዊ ሀገር የተቀናጀ ኢኮኖሚያዊ አቀራረብ እንደሚያስፈልገው በመገንዘብ ወደ ቢዋይኬኤም ትሬዲንግ ኃ/የተ/የግ/ማ ተለውጠናል።',
-        'ዛሬ በአምስት ስትራቴጂካዊ ምሰሶዎች ላይ እንሰራለን — መሠረተ ልማት፣ ዓለም አቀፍ ንግድ፣ ዲጂታል ኢኮኖሚ፣ አግሮ-ኢንዱስትሪላይዜሽን እና ሆስፒታሊቲ — ቅልጥፍናን ከፍ የሚያደርግ የተዘጋ ዑደት የእሴት ሰንሰለት ይፈጥራል።',
+        'ዛሬ በአራት ስትራቴጂካዊ ምሰሶዎች ላይ እንሰራለን — መሠረተ ልማት፣ ዓለም አቀፍ ንግድ፣ አግሮ-ኢንዱስትሪላይዜሽን እና ሆስፒታሊቲ — ቅልጥፍናን ከፍ የሚያደርግ የተዘጋ ዑደት የእሴት ሰንሰለት ይፈጥራል።',
       ],
     },
     ribbonBg: 'bg-[#146B1F]',

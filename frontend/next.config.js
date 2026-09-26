@@ -46,6 +46,16 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      // There is no dedicated careers page. The contact form already collects
+      // career inquiries (inquiryType: 'careers'), so send visitors there
+      // instead of 404-ing. Temporary (307) on purpose: browsers cache
+      // permanent redirects aggressively, which would fight a future
+      // /careers page. Flip to permanent once that page is unlikely.
+      { source: '/careers', destination: '/contact', permanent: false },
+    ];
+  },
   async rewrites() {
     return [
       {

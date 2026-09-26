@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: 'Services — BYKM Trading PLC',
-    description: 'Five integrated business pillars delivering industrial sovereignty across Ethiopia.',
+    description: 'Four integrated business pillars delivering industrial sovereignty across Ethiopia.',
   },
   alternates: {
     canonical: '/services',

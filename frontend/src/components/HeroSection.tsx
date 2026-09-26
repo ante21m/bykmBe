@@ -10,7 +10,6 @@ interface HeroText {
 
 interface HeroSectionProps {
   heroSection: {
-    edition: HeroText;
     motto: HeroText;
     line1: HeroText;
     line2: HeroText;
@@ -100,17 +99,6 @@ export function HeroSection({ heroSection, lang }: HeroSectionProps) {
 
       <div className="container-custom relative z-10 h-full flex flex-col">
         <div className="flex-1 flex flex-col justify-center max-w-3xl py-20">
-          {heroSection.edition[lang] && (
-            <ScrollReveal>
-              <div className="flex items-center gap-4 mb-10">
-                <div className="w-12 h-px bg-gradient-to-r from-gold-400 to-gold-400/0" />
-                <span className="font-mono text-[11px] tracking-[0.5em] text-gold-400/80 uppercase">
-                  {heroSection.edition[lang]}
-                </span>
-              </div>
-            </ScrollReveal>
-          )}
-
           <ScrollReveal delay={150}>
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white leading-[1.15] mb-6">
               {heroSection.motto[lang]}

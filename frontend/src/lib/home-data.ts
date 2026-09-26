@@ -44,7 +44,6 @@ interface KpiItem {
 
 export interface HomeApiData {
   heroSection: {
-    edition: BilingualField;
     motto: BilingualField;
     line1: BilingualField;
     line2: BilingualField;
@@ -147,7 +146,6 @@ export function transformHomeSections(sections: RawHomeSection[]): HomeApiData |
 
   return {
     heroSection: {
-      edition: flatToBf(heroEn, heroAm, 'edition', '', ''),
       motto: flatToBf(heroEn, heroAm, 'motto', 'The Blueprint for Sustainable Industrial Growth', 'ለዘላቂ የኢንዱስትሪ እድገት የሚሆን ስትራቴጂካዊ ዕቅድ'),
       line1: flatToBf(heroEn, heroAm, 'line1', 'The Blueprint for', 'ብሉፕሪንቱ'),
       line2: flatToBf(heroEn, heroAm, 'line2', '', ''),
@@ -170,7 +168,7 @@ export function transformHomeSections(sections: RawHomeSection[]): HomeApiData |
     },
     pillars: {
       label: bf(pillEn?.label || 'Our Strategic Pillars', pillAm?.label || 'ስትራቴጂካዊ ምሰሶዎቻችን'),
-      title: bf(pillEn?.title || 'Five Pillars of Impact', pillAm?.title || 'አምስት የተፅእኖ ምሰሶዎች'),
+      title: bf(pillEn?.title || 'Four Pillars of Impact', pillAm?.title || 'አራት የተፅእኖ ምሰሶዎች'),
       desc: bf(pillEn?.desc || '', pillAm?.desc || ''),
       explore: bf(pillEn?.explore || 'Explore', pillAm?.explore || 'ያስሱ'),
     },

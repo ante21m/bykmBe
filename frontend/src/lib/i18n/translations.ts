@@ -43,7 +43,6 @@
   },
   home: {
     heroSection: {
-      edition: { en: '', am: '' },
       motto: { en: 'The Blueprint for Sustainable Industrial Growth', am: 'ለዘላቂ የኢንዱስትሪ እድገት የሚሆን ስትራቴጂካዊ ዕቅድ' },
       line1: { en: 'The Blueprint for', am: 'ብሉፕሪንቱ' },
       line2: { en: '', am: '' },
@@ -124,7 +123,7 @@
       p1: { en: 'BYKM is built on a strong foundation of technical expertise, operational excellence, and a commitment to quality. Through years of experience delivering infrastructure and development projects, we have earned a reputation for reliability, innovation, and efficient project execution. This experience continues to guide our growth and our dedication to creating lasting value for clients and communities.', am: 'የቢዋይኬኤም (BYKM) መሠረት በጠንካራ የቴክኒክ ብቃት፣ በላቀ የሥራ አፈጻጸም እና ለጥራት ባለን ከፍተኛ ቁርጠኝነት ላይ የተገነባ ነው። መሠረተ ልማቶችንና የልማት ፕሮጀክቶችን በማስረከብ ባሳለፍናቸው ዓመታት፣ በታማኝነት፣ በፈጠራ እና በውጤታማ የፕሮጀክት አፈጻጸማችን ጠንካራ ስም ግንባታናል። ይህም ልምዳችን ለዕድገታችን እንዲሁም ለደንበኞቻችንና ለማህበረሰቡ ዘላቂ እሴት ለመፍጠር ለምናደርገው ጥረት እንደ ዋና መሪ መንገድ ሆኖ ያገለግላል።' },
       p1Bold: { en: '', am: '' },
       p1End: { en: '', am: '' },
-      p2: { en: 'Recognizing that a modern nation requires an integrated economic approach, we evolved into BYKM Trading PLC. This strategic transition expanded our mandate from specialized construction to a diversified ecosystem. Today, we operate across four strategic pillars, Infrastructure, Global Trade, the Digital Economy, Agro-Industrialization, and Hospitality, creating a closed-loop value chain that maximizes efficiency and minimizes import reliance.', am: 'ዘመናዊ አገር የተቀናጀ የኢኮኖሚ አቀራረብ እንደሚያስፈልገው በመገንዘብ፣ ወደ ቢዋይኬኤም ትሬዲንግ ኃ/የተ/የግ/ማኅበር (BYKM Trading PLC) ተሸጋግረናል። ይህ ስትራቴጂካዊ ሽግግር የሥራ ወሰናችንን ከተወሰኑ የኮንስትራክሽን ሥራዎች ወደ ሁለገብና የተቀናጀ የንግድ ሥርዓት አሰፍቶታል። ዛሬ በአምስት ዋና ዋና ስትራቴጂካዊ ዘርፎች—በመሠረተ ልማት፣ በዓለም አቀፍ ንግድ፣ በዲጂታል ኢኮኖሚ፣ በአግሮ-ኢንዱስትሪ እና በሆስፒታሊቲ—የምንንቀሳቀስ ሲሆን፣ ይህም የሥራ ቅልጥፍናን የሚያሳድግና የገቢ ምርቶችን ጥገኝነት የሚቀንስ የተቀናጀ የእሴት ሰንሰለት እንድንፈጥር አስችሎናል።' },
+      p2: { en: 'Recognizing that a modern nation requires an integrated economic approach, we evolved into BYKM Trading PLC. This strategic transition expanded our mandate from specialized construction to a diversified ecosystem. Today, we operate across four strategic pillars, Infrastructure, Global Trade, Agro-Industrialization, and Hospitality, creating a closed-loop value chain that maximizes efficiency and minimizes import reliance.', am: 'ዘመናዊ አገር የተቀናጀ የኢኮኖሚ አቀራረብ እንደሚያስፈልገው በመገንዘብ፣ ወደ ቢዋይኬኤም ትሬዲንግ ኃ/የተ/የግ/ማኅበር (BYKM Trading PLC) ተሸጋግረናል። ይህ ስትራቴጂካዊ ሽግግር የሥራ ወሰናችንን ከተወሰኑ የኮንስትራክሽን ሥራዎች ወደ ሁለገብና የተቀናጀ የንግድ ሥርዓት አሰፍቶታል። ዛሬ በአራት ዋና ዋና ስትራቴጂካዊ ዘርፎች—በመሠረተ ልማት፣ በዓለም አቀፍ ንግድ፣ በአግሮ-ኢንዱስትሪ እና በሆስፒታሊቲ—የምንንቀሳቀስ ሲሆን፣ ይህም የሥራ ቅልጥፍናን የሚያሳድግና የገቢ ምርቶችን ጥገኝነት የሚቀንስ የተቀናጀ የእሴት ሰንሰለት እንድንፈጥር አስችሎናል።' },
       p3: { en: 'At BYKM, engineering excellence shapes the way we work. We apply technical expertise, innovation, and a strong focus on quality to every project and business sector. By combining precision, efficiency, and continuous improvement, we deliver reliable solutions that meet the highest standards and create lasting value for our clients and partners.', am: 'በቢዋይኬኤም (BYKM) የኢንጂነሪንግ ልቀት የሥራችን መሪ መርህ ነው። ቴክኒካዊ ብቃታችንን፣ ፈጠራን እና ለጥራት የምንሰጠውን ከፍተኛ ትኩረት በእያንዳንዱ ፕሮጀክት እና በምንሰማራባቸው የንግድ ዘርፎች ላይ እንተገብራለን። ትክክለኛነትን፣ ቅልጥፍናን እና ቀጣይነት ያለው መሻሻልን በማጣመር፣ ከፍተኛ ደረጃዎችን የሚያሟሉ እና ለደንበኞቻችን እንዲሁም ለአጋሮቻችን ዘላቂ እሴት የሚፈጥሩ አስተማማኝ መፍትሔዎችን እናቀርባለን።' },
       statutoryTitle: { en: 'Statutory Profile', am: 'ህጋዊ መገለጫ' },
     },
@@ -188,7 +187,7 @@
     pipeline: {
       label: { en: 'Active Initiatives 2024–2030', am: 'ንቁ ተነሳሽነቶች 2024–2030' },
       title: { en: 'Strategic Growth Pipeline', am: 'ስትራቴጂካዊ የእድገት ቧንቧ' },
-      desc: { en: 'BYKM is currently executing these strategic pivots to manifest our diversified mandate across all five business clusters.', am: 'ቢዋይኬኤም በአሁኑ ጊዜ የተለያየ ሥልጣናችንን በአምስቱም የንግድ ክላስተሮች ላይ ለማሳየት እነዚህን ስትራቴጂካዊ ለውጦች እያስፈጸመ ነው።' },
+      desc: { en: 'BYKM is currently executing these strategic pivots to manifest our diversified mandate across all four business clusters.', am: 'ቢዋይኬኤም በአሁኑ ጊዜ የተለያየ ሥልጣናችንን በአራቱም የንግድ ክላስተሮች ላይ ለማሳየት እነዚህን ስትራቴጂካዊ ለውጦች እያስፈጸመ ነው።' },
     },
     ctaSection: {
       title: { en: 'Have a Project in Mind?', am: 'አእምሮዎ ውስጥ ፕሮጀክት አለ?' },

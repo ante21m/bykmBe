@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { ProjectsClient } from './ProjectsClient';
 
 const TITLE = 'Projects — BYKM Trading PLC';
-const DESC = 'Flagship projects and initiatives across all five strategic pillars driving Ethiopia\'s industrial transformation.';
+const DESC = 'Flagship projects and initiatives across all four strategic pillars driving Ethiopia\'s industrial transformation.';
 const OG_IMAGE = { url: '/images/logo-bykm.jpg', width: 600, height: 600, alt: 'BYKM Trading PLC' };
 
 export const metadata: Metadata = {

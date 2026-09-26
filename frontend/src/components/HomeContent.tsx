@@ -187,7 +187,6 @@ export function HomeContent({ sections: serverSections }: Props) {
 
   const h = api ? {
     heroSection: {
-      edition: { en: api.heroSection.edition.en, am: api.heroSection.edition.am },
       motto: { en: api.heroSection.motto.en, am: api.heroSection.motto.am },
       line1: { en: api.heroSection.line1.en, am: api.heroSection.line1.am },
       line2: { en: api.heroSection.line2.en, am: api.heroSection.line2.am },
