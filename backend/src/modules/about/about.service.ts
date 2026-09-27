@@ -25,7 +25,7 @@ export class AboutService implements OnModuleInit {
         title: 'Who We Are',
         titleAm: 'እኛ ማን ነን',
         content:
-          'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation, operating at the forefront of national development and industrial transformation. Registered under the Ethiopian Company Registration Proclamation and licensed by the Ethiopian Construction Authority — GC-4 certified in Building, Road, Water, and Electro-mechanical works — BYKM is uniquely positioned to execute complex, cross-sectoral initiatives that drive Ethiopia toward its goal of becoming an upper-middle-income nation by 2030.',
+          'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation, operating at the forefront of national development and industrial transformation. Registered under the Ethiopian Company Registration Proclamation and licensed by the Ethiopian Construction Authority for building, road, water, and electro-mechanical works, BYKM is uniquely positioned to execute complex, cross-sectoral initiatives that drive Ethiopia toward its goal of becoming an upper-middle-income nation by 2030.',
         contentAm:
           'ቢዋይኬኤም ትሬዲንግ ኃ/የተ/የግ/ማ በብሔራዊ ልማት እና በኢንዱስትሪ ለውጥ ግንባር ቀደም ሆኖ የሚሰራ ሁለገብ ዘርፍ የኢትዮጵያ ኮርፖሬሽን ነው።',
         sortOrder: 1,

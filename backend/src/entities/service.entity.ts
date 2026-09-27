@@ -21,20 +21,35 @@ export class Service {
   @Column({ length: 100 })
   pillarKey: string;
 
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable: true })
   pillarTitle: string;
 
-  @Column({ type: 'text' })
+  @Column({ length: 255, nullable: true })
+  pillarTitleAm: string;
+
+  @Column({ type: 'text', nullable: true })
   pillarDescription: string;
+
+  @Column({ type: 'text', nullable: true })
+  pillarDescriptionAm: string;
 
   @Column({ length: 255 })
   title: string;
 
+  @Column({ length: 255, nullable: true })
+  titleAm: string;
+
   @Column({ type: 'text' })
   description: string;
 
+  @Column({ type: 'text', nullable: true })
+  descriptionAm: string;
+
   @Column({ type: 'simple-array', nullable: true })
   features: string[];
+
+  @Column({ type: 'simple-array', nullable: true })
+  featuresAm: string[];
 
   @Column({ length: 100, nullable: true })
   icon: string;

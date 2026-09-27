@@ -5,26 +5,47 @@ export class CreateServiceDto {
   @MinLength(1)
   pillarKey: string;
 
+  @IsOptional()
   @IsString()
-  @MinLength(1)
-  pillarTitle: string;
+  pillarTitle?: string;
 
+  @IsOptional()
   @IsString()
-  @MinLength(1)
-  pillarDescription: string;
+  pillarTitleAm?: string;
+
+  @IsOptional()
+  @IsString()
+  pillarDescription?: string;
+
+  @IsOptional()
+  @IsString()
+  pillarDescriptionAm?: string;
 
   @IsString()
   @MinLength(1)
   title: string;
+
+  @IsOptional()
+  @IsString()
+  titleAm?: string;
 
   @IsString()
   @MinLength(1)
   description: string;
 
   @IsOptional()
+  @IsString()
+  descriptionAm?: string;
+
+  @IsOptional()
   @IsArray()
   @IsString({ each: true })
   features?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  featuresAm?: string[];
 
   @IsOptional()
   @IsString()

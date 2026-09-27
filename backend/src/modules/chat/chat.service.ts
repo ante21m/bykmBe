@@ -17,8 +17,8 @@ function isAmharic(text: string): boolean {
 const companyData: BilingualQAPair[] = [
   {
     keywords: ['what is bykm', 'who is bykm', 'tell me about bykm', 'about bykm', 'what does bykm do', 'company', 'overview'],
-    en: 'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation established in 2018. We operate through four integrated strategic pillars: Agro-Industrialization & Natural Resources, Infrastructure & Engineering, Global Trade & Logistics, and Hospitality & Retail. With a paid-up capital of more than 10,000,000 ETB and a General Contractor (GC-4) certification, we are committed to architecting Ethiopia\'s integrated future.',
-    am: 'ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር በ2018 ዓ.ም. የተመሰረተ ሁለገብ ዘርፍ የኢትዮጵያ ኮርፖሬሽን ነው። በአራት የተቀናጁ ስትራቴጂካዊ ምሰሶዎች ይሰራል፦ አግሮ-ኢንዱስትሪላይዜሽን እና የተፈጥሮ ሀብት፣ መሠረተ ልማት እና ምህንድስና፣ ዓለም አቀፍ ንግድ እና ሎጂስቲክስ፣ እንዲሁም ሆስፒታሊቲ እና ችርቻሮ። በmore than 10,000,000 ብር የተከፈለ ካፒታል እና በአጠቃላይ ኮንትራክተር (ጂሲ-4) የምስክር ወረቀት የተመሰከረለት ሲሆን፣ የኢትዮጵያን የተቀናጀ የወደፊት እድገት ለመቅረጽ ቆርጦ ይሰራል።',
+    en: 'BYKM Trading PLC is a premier multi-sectoral Ethiopian corporation established in 2018. We operate through four integrated strategic pillars: Agro-Industrialization & Natural Resources, Infrastructure & Engineering, Global Trade & Logistics, and Hospitality & Retail. With a paid-up capital of more than 10,000,000 ETB and a General Contractor certification, we are committed to architecting Ethiopia\'s integrated future.',
+    am: 'ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር በ2018 ዓ.ም. የተመሰረተ ሁለገብ ዘርፍ የኢትዮጵያ ኮርፖሬሽን ነው። በአራት የተቀናጁ ስትራቴጂካዊ ምሰሶዎች ይሰራል፦ አግሮ-ኢንዱስትሪላይዜሽን እና የተፈጥሮ ሀብት፣ መሠረተ ልማት እና ምህንድስና፣ ዓለም አቀፍ ንግድ እና ሎጂስቲክስ፣ እንዲሁም ሆስፒታሊቲ እና ችርቻሮ። በmore than 10,000,000 ብር የተከፈለ ካፒታል እና በአጠቃላይ ኮንትራክተር የምስክር ወረቀት የተመሰከረለት ሲሆን፣ የኢትዮጵያን የተቀናጀ የወደፊት እድገት ለመቅረጽ ቆርጦ ይሰራል።',
     suggestions: ['vision mission', 'business pillars', 'services offered'],
   },
   {
@@ -101,8 +101,8 @@ const companyData: BilingualQAPair[] = [
   },
   {
     keywords: ['registration', 'tin', 'vat', 'license', 'certificate', 'legal', 'tax'],
-    en: 'BYKM Trading PLC statutory details: Registration No: AACATB/2/0257491/2018, TIN: 0103921383, VAT No: 35205580010, Tax Category: "A" Taxpayer, Technical Grade: General Contractor (GC-4), Certificate No: CON/32486 (Ethiopian Construction Authority).',
-    am: 'የቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር ህጋዊ መረጃ፦ የምዝገባ ቁጥር፦ AACATB/2/0257491/2018፣ ቲኢን፦ 0103921383፣ የቫት ቁጥር፦ 35205580010፣ የግብር ምድብ፦ ምድብ "ሀ" ግብር ከፋይ፣ የቴክኒክ ደረጃ፦ አጠቃላይ ኮንትራክተር (ጂሲ-4)፣ የምስክር ወረቀት ቁጥር፦ CON/32486 (የኢትዮጵያ ኮንስትራክሽን ባለስልጣን)።',
+    en: 'BYKM Trading PLC statutory details: Registration No: AACATB/2/0257491/2018, TIN: 0103921383, VAT No: 35205580010, Tax Category: "A" Taxpayer, Technical Grade: General Contractor, Certificate No: CON/32486 (Ethiopian Construction Authority).',
+    am: 'የቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበር ህጋዊ መረጃ፦ የምዝገባ ቁጥር፦ AACATB/2/0257491/2018፣ ቲኢን፦ 0103921383፣ የቫት ቁጥር፦ 35205580010፣ የግብር ምድብ፦ ምድብ "ሀ" ግብር ከፋይ፣ የቴክኒክ ደረጃ፦ አጠቃላይ ኮንትራክተር፣ የምስክር ወረቀት ቁጥር፦ CON/32486 (የኢትዮጵያ ኮንስትራክሽን ባለስልጣን)።',
     suggestions: ['company overview', 'leadership', 'contact information'],
   },
   {
