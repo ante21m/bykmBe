@@ -136,7 +136,7 @@ const faq = {
       name: 'Is BYKM Trading PLC a licensed general contractor in Ethiopia?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, BYKM Trading PLC holds a General Contracting (GC-4) license for building, road, water, and electro-mechanical engineering in Ethiopia.',
+        text: 'Yes, BYKM Trading PLC holds a General Contracting license for building, road, water, and electro-mechanical engineering in Ethiopia.',
       },
     },
   ],

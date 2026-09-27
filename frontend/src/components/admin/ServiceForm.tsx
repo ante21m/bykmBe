@@ -95,8 +95,8 @@ export default function ServiceForm({ initial, onSave, saving, cancelPath }: Pro
           <CollapsibleSection label="Pillar Info" open={openSections.pillarInfo} onToggle={() => toggle('pillarInfo')}>
             {lang === 'en' ? (
               <>
-                <TextInput label="Pillar Title" value={form.pillarTitle} onChange={(e) => set('pillarTitle', e.target.value)} required />
-                <Textarea label="Pillar Description" value={form.pillarDescription} onChange={(e) => set('pillarDescription', e.target.value)} minRows={2} mt="sm" />
+                <TextInput label="Pillar Title" value={form.pillarTitle} onChange={(e) => set('pillarTitle', e.currentTarget.value)} />
+                <Textarea label="Pillar Description" value={form.pillarDescription} onChange={(e) => set('pillarDescription', e.currentTarget.value)} minRows={2} mt="sm" />
               </>
             ) : (
               <>

@@ -82,11 +82,16 @@ export interface AboutSectionData {
 export interface ServiceData {
   id: string;
   pillarKey: string;
-  pillarTitle: string;
-  pillarDescription: string;
+  pillarTitle?: string;
+  pillarTitleAm?: string;
+  pillarDescription?: string;
+  pillarDescriptionAm?: string;
   title: string;
+  titleAm?: string;
   description: string;
+  descriptionAm?: string;
   features: string[];
+  featuresAm?: string[];
   icon: string;
   sortOrder: number;
   active: boolean;
