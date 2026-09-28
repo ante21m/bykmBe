@@ -29,8 +29,6 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL:
       process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api',
-    NEXT_PUBLIC_BYKMGROUP_API_URL:
-      process.env.NEXT_PUBLIC_BYKMGROUP_API_URL || 'https://bykmgroup.com/api',
   },
   async headers() {
     return [
