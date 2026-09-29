@@ -45,7 +45,7 @@ import { TeamMember } from './entities/team-member.entity';
         port: configService.get('DB_PORT', 5432),
         username: configService.get('DB_USERNAME', 'postgres'),
         password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_DATABASE', 'bykm_trading'),
+        database: configService.get('DB_DATABASE', 'bykm_group'),
         entities: [ContactSubmission, Project, Service, AboutSection, News, HomeSection, Gallery, UnansweredQuery, User, TeamMember],
         synchronize: configService.get('NODE_ENV') !== 'production',
         logging: configService.get('NODE_ENV') === 'development',
