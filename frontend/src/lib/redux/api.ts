@@ -2,8 +2,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
-const baseQuery = fetchBaseQuery({
+const rawBaseQuery = fetchBaseQuery({
   baseUrl: BASE,
+  // Stop the browser replaying a cached API response.
+  cache: 'no-store',
   prepareHeaders: (headers) => {
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('admin_token');
@@ -14,6 +16,32 @@ const baseQuery = fetchBaseQuery({
     return headers;
   },
 });
+
+// The admin guard only checks that a token EXISTS, not that it is still valid.
+// An expired token passes the guard, every request 401s, and pages render a bare
+// "Failed to load ..." above an empty table and a "0 total" count. Treating a 401
+// as a dead session here fixes every admin page at once. A rejected login also
+// returns 401, so /auth/login is excluded or a wrong password would redirect
+// instead of showing an error.
+const baseQuery: typeof rawBaseQuery = async (args, api, extraOptions) => {
+  const result = await rawBaseQuery(args, api, extraOptions);
+
+  const status = (result.error as { status?: unknown } | undefined)?.status;
+  const url = typeof args === 'string' ? args : args?.url;
+
+  if (
+    status === 401 &&
+    !String(url).includes('/auth/login') &&
+    typeof window !== 'undefined'
+  ) {
+    window.localStorage.removeItem('admin_token');
+    if (!window.location.pathname.startsWith('/admin/login')) {
+      window.location.assign('/admin/login');
+    }
+  }
+
+  return result;
+};
 
 export interface ProjectData {
   id: string;

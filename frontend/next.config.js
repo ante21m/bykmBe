@@ -45,12 +45,7 @@ const nextConfig = {
         ],
       },
       {
-        // LiteSpeed on cPanel overrides origin cache directives and stamps
-        // `public, max-age=2592000` (30 days) onto responses. Two consequences:
-        // admin edits appear not to save, and a 500 gets pinned for a month so
-        // the site keeps serving the old error after a correct deploy.
-        // `no-store` is honoured by mod_cache, so these responses are never
-        // stored and errors are never cached.
+               // stored and errors are never cached.
         source: '/admin/:path*',
         headers: [
           { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate' },
@@ -60,12 +55,7 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // There is no dedicated careers page. The contact form already collects
-      // career inquiries (inquiryType: 'careers'), so send visitors there
-      // instead of 404-ing. Temporary (307) on purpose: browsers cache
-      // permanent redirects aggressively, which would fight a future
-      // /careers page. Flip to permanent once that page is unlikely.
-      { source: '/careers', destination: '/contact', permanent: false },
+     { source: '/careers', destination: '/contact', permanent: false },
     ];
   },
   async rewrites() {
