@@ -5,6 +5,7 @@ import {
   Group, Title, Text, Badge, Table, Select, Loader, Center, Card, SimpleGrid, Pagination, TextInput,
 } from '@mantine/core';
 import { useGetContactSubmissionsQuery, useUpdateContactStatusMutation } from '@/lib/redux/api';
+import { QueryErrorInline } from '@/components/admin/QueryErrorState';
 
 const STATUS_COLORS: Record<string, string> = {
   pending: 'yellow', read: 'blue', replied: 'green', archived: 'gray',
@@ -105,7 +106,7 @@ export default function AdminContactPage() {
       />
 
       {isLoading && <Center py="xl"><Loader /></Center>}
-      {error && <Text c="red" size="sm">Failed to load submissions</Text>}
+      {error && <QueryErrorInline error={error} />}
 
       {filtered.length === 0 && !isLoading && (
         <Center py="xl"><Text c="dimmed" size="sm">No submissions found</Text></Center>

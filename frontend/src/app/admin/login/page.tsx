@@ -1,6 +1,7 @@
 'use client';
 
 import '@mantine/core/styles.css';
+import { describeQueryError } from '@/lib/adminQueryError';
 import {
   MantineProvider,
   Paper,
@@ -39,8 +40,16 @@ export default function AdminLoginPage() {
       const res = await login({ username, password }).unwrap();
       localStorage.setItem('admin_token', res.token);
       router.replace('/admin/dashboard');
-    } catch {
-      setError('Invalid username or password');
+    } catch (err) {
+      const info = describeQueryError(err);
+      // Reporting every failure as "Invalid username or password" tells an
+      // admin their password is wrong when the API is actually down, which
+      // sends them chasing the wrong problem entirely.
+      setError(
+        info.kind === 'unauthorized'
+          ? 'Invalid username or password'
+          : `${info.title} — ${info.detail}`
+      );
     }
   };
 

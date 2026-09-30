@@ -7,6 +7,9 @@ import {
   ActionIcon, Tooltip, Pagination, TextInput,
 } from '@mantine/core';
 import { useGetServicesQuery, useDeleteServiceMutation } from '@/lib/redux/api';
+import { describeQueryError } from '@/lib/adminQueryError';
+import { useToast } from '@/components/ui/Toaster';
+import { QueryErrorInline } from '@/components/admin/QueryErrorState';
 
 const PILLAR_COLORS: Record<string, string> = {
   agro: 'green', infrastructure: 'indigo', logistics: 'blue',
@@ -26,11 +29,24 @@ export default function AdminServicesPage() {
   const [sortDir, setSortDir] = useState<SortDir>('asc');
   const { data: services, isLoading, error } = useGetServicesQuery();
   const [deleteService, { isLoading: deleting }] = useDeleteServiceMutation();
+  const { addToast } = useToast();
 
   const handleDelete = async () => {
     if (!deleteId) return;
-    await deleteService(deleteId);
-    setDeleteId(null);
+    try {
+      // unwrap() is what makes a rejected delete throw. Without it the
+      // promise resolves with { error }, so the modal closed and the row
+      // simply stayed put with nothing to tell the admin it was refused.
+      await deleteService(deleteId).unwrap();
+      setDeleteId(null);
+    } catch (err) {
+      const info = describeQueryError(err);
+      addToast({
+        type: 'error',
+        title: 'Could not delete service',
+        message: `${info.title} — ${info.detail}`,
+      });
+    }
   };
 
   const toggleSort = (field: SortField) => {
@@ -89,7 +105,7 @@ export default function AdminServicesPage() {
       />
 
       {isLoading && <Center py="xl"><Loader /></Center>}
-      {error && <Text c="red" size="sm">Failed to load services</Text>}
+      {error && <QueryErrorInline error={error} />}
 
       {services && services.length === 0 && !search && (
         <Center py="xl">

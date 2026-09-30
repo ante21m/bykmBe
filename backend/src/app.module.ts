@@ -18,16 +18,7 @@ import { GalleryModule } from './modules/gallery/gallery.module';
 import { HomeModule } from './modules/home/home.module';
 import { UnansweredQueriesModule } from './modules/unanswered-queries/unanswered-queries.module';
 import { TeamModule } from './modules/team/team.module';
-import { ContactSubmission } from './entities/contact-submission.entity';
-import { Project } from './entities/project.entity';
-import { Service } from './entities/service.entity';
-import { AboutSection } from './entities/about-section.entity';
-import { News } from './entities/news.entity';
-import { Gallery } from './entities/gallery.entity';
-import { HomeSection } from './entities/home-content.entity';
-import { UnansweredQuery } from './entities/unanswered-query.entity';
-import { User } from './entities/user.entity';
-import { TeamMember } from './entities/team-member.entity';
+import { buildTypeOrmOptions } from './database/typeorm-options';
 
 @Module({
   imports: [
@@ -39,17 +30,8 @@ import { TeamMember } from './entities/team-member.entity';
     ThrottlerModule.forRoot([{ ttl: 60000, limit: 60 }]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get('DB_HOST', 'localhost'),
-        port: configService.get('DB_PORT', 5432),
-        username: configService.get('DB_USERNAME', 'postgres'),
-        password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_DATABASE', 'bykm_group'),
-        entities: [ContactSubmission, Project, Service, AboutSection, News, HomeSection, Gallery, UnansweredQuery, User, TeamMember],
-        synchronize: configService.get('NODE_ENV') !== 'production',
-        logging: configService.get('NODE_ENV') === 'development',
-      }),
+      useFactory: (configService: ConfigService) =>
+        buildTypeOrmOptions(configService),
       inject: [ConfigService],
     }),
     ContactModule,

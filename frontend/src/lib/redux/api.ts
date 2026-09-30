@@ -4,6 +4,8 @@ const BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE,
+  cache: 'no-store',            // never reuse a cached (possibly failed) API response
+  credentials: 'include',        // send cookies if backend uses cookie auth
   prepareHeaders: (headers) => {
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('admin_token');

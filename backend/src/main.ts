@@ -2,13 +2,35 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import type { Request, Response, NextFunction } from 'express';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
+import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  // cPanel puts LiteSpeed in front of this process. Without this, req.ip
+  // is the proxy's address, so the throttler rate-limits every visitor as
+  // if they were one client.
+  app.set('trust proxy', 1);
+
   app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
+
+  // Never let the browser or LiteSpeed cache an API response. This is the
+  // header that stops a 500 being pinned in the edge cache for 30 days and
+  app.use('/api', (req: Request, res: Response, next: NextFunction) => {
+    if (!req.path.startsWith('/uploads')) {
+      res.setHeader(
+        'Cache-Control',
+        'no-store, no-cache, must-revalidate, proxy-revalidate',
+      );
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      res.setHeader('Surrogate-Control', 'no-store');
+    }
+    next();
+  });
 
   const frontendUrl = process.env.FRONTEND_URL;
   const origins: string[] = [];
@@ -35,6 +57,11 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  // Every unhandled error becomes structured JSON and gets logged to
+  // stderr, which is where cPanel surfaces it. Production was previously
+  // silent, so a 500 arrived with no trace of its cause anywhere.
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   app.setGlobalPrefix('api');
 
