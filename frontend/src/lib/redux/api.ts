@@ -201,6 +201,10 @@ export const api = createApi({
   reducerPath: 'api',
   baseQuery,
   tagTypes: ['Projects', 'About', 'Home', 'Services', 'Contact', 'News', 'Gallery', 'UnansweredQueries', 'Team'],
+  // `cache: 'no-store'` in baseQuery stops the *browser* from replaying a
+  refetchOnMountOrArgChange: true, // never serve a stored result to a new mount
+  refetchOnFocus: false,           // a tab switch is not a reason to re-hit the API
+  keepUnusedDataFor: 0,            // drop the entry as soon as nothing is subscribed
   endpoints: (builder) => ({
     sendChat: builder.mutation<{ reply: string; suggestions: string[] }, { message: string; lang: string }>({
       query: (body) => ({ url: '/chat', method: 'POST', body }),

@@ -10,6 +10,8 @@ async function fetchAPI<T>(
       ...options.headers,
     },
     ...options,
+       // replaying a cached or stale response is worse than one extra request.
+    cache: 'no-store',
   });
 
   if (!res.ok) {
