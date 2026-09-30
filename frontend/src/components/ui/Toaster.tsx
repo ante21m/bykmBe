@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, createContext, useContext, useCallback } from 'react';
+import { useState, createContext, useContext, useCallback, type ReactNode } from 'react';
 import { CheckCircle, XCircle, X } from 'lucide-react';
 
 interface Toast {
@@ -20,7 +20,15 @@ export function useToast() {
   return useContext(ToastContext);
 }
 
-export function Toaster() {
+/**
+ * Renders the toast stack AND provides the context.
+ *
+ * `children` must be nested inside this component, not rendered as a sibling
+ * of it. The provider used to wrap only the toast display div, so every
+ * caller of `useToast()` fell through to the default no-op context and no
+ * toast in the app ever appeared.
+ */
+export function Toaster({ children }: { children?: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const addToast = useCallback((toast: Omit<Toast, 'id'>) => {
@@ -37,6 +45,7 @@ export function Toaster() {
 
   return (
     <ToastContext.Provider value={{ addToast }}>
+      {children}
       <div className="fixed bottom-6 right-6 z-[100] flex flex-col gap-3 max-w-sm w-full">
         {toasts.map((toast) => (
           <div

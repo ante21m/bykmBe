@@ -5,8 +5,9 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslation } from '@/lib/i18n/LanguageProvider';
 import { useGetNewsItemQuery, useGetRecentNewsQuery } from '@/lib/redux/api';
+import { describeQueryError } from '@/lib/adminQueryError';
 import DOMPurify from 'isomorphic-dompurify';
-import { CalendarDays, Clock, ArrowLeft, ArrowRight, Tag, ExternalLink, Download, Share2, X, ZoomIn } from 'lucide-react';
+import { CalendarDays, Clock, ArrowLeft, ArrowRight, Tag, ExternalLink, Download, Share2, X, ZoomIn, RefreshCw } from 'lucide-react';
 
 export function NewsDetailContent() {
   const [lightbox, setLightbox] = useState<string | null>(null);
@@ -36,7 +37,7 @@ export function NewsDetailContent() {
 
   const { id } = useParams<{ id: string }>();
   const { lang } = useTranslation();
-  const { data: article, isLoading, error } = useGetNewsItemQuery(id);
+  const { data: article, isLoading, error, refetch } = useGetNewsItemQuery(id);
   const { data: relatedNews } = useGetRecentNewsQuery({ limit: 4 });
 
   const formatDate = (d: string) =>
@@ -74,24 +75,59 @@ export function NewsDetailContent() {
   }
 
   if (error || !article) {
+    // Only a real 404 means the article is gone. A 500 or a dead network
+    // used to render "Article Not Found" too, which told a visitor their
+    // link was broken when the site was. Only `kind` is used here — never
+    // `detail`, which can carry a database or server message that has no
+    // business being shown to the public.
+    const info = describeQueryError(error);
+    const isMissing = !error || info.kind === 'not-found';
+
     return (
       <main className="min-h-screen bg-[#f5f4ef]">
         <div className="pt-32 pb-16">
           <div className="container-custom text-center">
             <div className="max-w-md mx-auto">
               <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-slate-100 flex items-center justify-center">
-                <CalendarDays size={32} className="text-slate-300" />
+                {isMissing ? (
+                  <CalendarDays size={32} className="text-slate-300" />
+                ) : (
+                  <RefreshCw size={32} className="text-slate-300" />
+                )}
               </div>
               <h2 className="text-2xl font-bold text-navy-900 mb-3">
-                {lang === 'en' ? 'Article Not Found' : 'ጽሑፍ አልተገኘም'}
+                {isMissing
+                  ? lang === 'en'
+                    ? 'Article Not Found'
+                    : 'ጽሑፍ አልተገኘም'
+                  : lang === 'en'
+                    ? 'Temporarily Unavailable'
+                    : 'ለጊዜ ማልቀቂያ አይችልም'}
               </h2>
               <p className="text-slate-500 text-base mb-8">
-                {lang === 'en' ? 'The article you are looking for does not exist or has been removed.' : 'እርስዎ የሚፈልጉት ጽሑፍ የለም ወይም ተወግዷል።'}
+                {isMissing
+                  ? lang === 'en'
+                    ? 'The article you are looking for does not exist or has been removed.'
+                    : 'እርስዎ የሚፈልጉት ጽሑፍ የለም ወይም ተወግዷል።'
+                  : lang === 'en'
+                    ? 'We could not load this article just now. Please try again.'
+                    : 'ይህን ጽሑፍ አሁን መጫን አልቻልንም። እባክዎ ደጋሞ ይሞክሩ።'}
               </p>
-              <Link href="/news" className="inline-flex items-center gap-2 bg-[#183587] text-white px-6 py-3 text-sm font-medium hover:bg-[#1a237e] transition-all duration-300">
-                <ArrowLeft size={16} />
-                {lang === 'en' ? 'Back to News' : 'ወደ ዜና ተመለስ'}
-              </Link>
+              <div className="flex items-center justify-center gap-3">
+                {!isMissing && (
+                  <button
+                    onClick={() => refetch()}
+                    className="inline-flex items-center gap-2 border border-[#183587] text-[#183587] px-6 py-3 text-sm font-medium hover:bg-[#183587] hover:text-white transition-all duration-300"
+                  >
+                    <RefreshCw size={16} />
+                    {lang === 'en' ? 'Try Again' : 'ደጋሞ ይሞክሩ'}
+                  </button>
+                )}
+                <Link href="/news" className="inline-flex items-center gap-2 bg-[#183587] text-white px-6 py-3 text-sm font-medium hover:bg-[#1a237e] transition-all duration-300">
+                  <ArrowLeft size={16} />
+                  {lang === 'en' ? 'Back to News' : 'ወደ ዜና ተመለስ'}
+                </Link>
+              </div>
             </div>
           </div>
         </div>
