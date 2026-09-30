@@ -6,9 +6,6 @@ import {
   Center, Stack, Button, ActionIcon, Tooltip, Pagination,
 } from '@mantine/core';
 import { useGetUnansweredQueriesQuery, useDeleteUnansweredQueryMutation } from '@/lib/redux/api';
-import { describeQueryError } from '@/lib/adminQueryError';
-import { useToast } from '@/components/ui/Toaster';
-import { QueryErrorInline } from '@/components/admin/QueryErrorState';
 
 const PAGE_SIZE = 15;
 
@@ -17,24 +14,11 @@ export default function AdminUnansweredQueriesPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const { data, isLoading, error } = useGetUnansweredQueriesQuery({ page, limit: PAGE_SIZE });
   const [deleteQuery, { isLoading: deleting }] = useDeleteUnansweredQueryMutation();
-  const { addToast } = useToast();
 
   const handleDelete = async () => {
     if (!deleteId) return;
-    try {
-      // unwrap() is what makes a rejected delete throw. Without it the
-      // promise resolves with { error }, so the modal closed and the row
-      // simply stayed put with nothing to tell the admin it was refused.
-      await deleteQuery(deleteId).unwrap();
-      setDeleteId(null);
-    } catch (err) {
-      const info = describeQueryError(err);
-      addToast({
-        type: 'error',
-        title: 'Could not delete query',
-        message: `${info.title} — ${info.detail}`,
-      });
-    }
+    await deleteQuery(deleteId);
+    setDeleteId(null);
   };
 
   return (
@@ -47,7 +31,7 @@ export default function AdminUnansweredQueriesPage() {
       </Group>
 
       {isLoading && <Center py="xl"><Loader /></Center>}
-      {error && <QueryErrorInline error={error} />}
+      {error && <Text c="red" size="sm">Failed to load queries</Text>}
 
       {data && data.data.length === 0 && (
         <Center py="xl">

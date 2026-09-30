@@ -128,11 +128,8 @@ export default function RootLayout({
           <ReduxProvider>
             <LanguageProvider>
               <JsonLd />
-              {/* Toaster must wrap the page tree, not sit beside it -- it owns
-                  the toast context that useToast() reads. */}
-              <Toaster>
-                <SiteShell>{children}</SiteShell>
-              </Toaster>
+              <SiteShell>{children}</SiteShell>
+              <Toaster />
               <SmartChat />
             </LanguageProvider>
           </ReduxProvider>

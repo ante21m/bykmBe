@@ -7,9 +7,6 @@ import {
   ActionIcon, Tooltip, TextInput,
 } from '@mantine/core';
 import { useGetAboutSectionsQuery, useDeleteAboutSectionMutation } from '@/lib/redux/api';
-import { describeQueryError } from '@/lib/adminQueryError';
-import { useToast } from '@/components/ui/Toaster';
-import { QueryErrorInline } from '@/components/admin/QueryErrorState';
 
 type SortField = 'sectionKey' | 'title' | 'active';
 type SortDir = 'asc' | 'desc';
@@ -21,24 +18,11 @@ export default function AdminAboutPage() {
   const [sortDir, setSortDir] = useState<SortDir>('asc');
   const { data: sections, isLoading, error } = useGetAboutSectionsQuery();
   const [deleteSection, { isLoading: deleting }] = useDeleteAboutSectionMutation();
-  const { addToast } = useToast();
 
   const handleDelete = async () => {
     if (!deleteId) return;
-    try {
-      // unwrap() is what makes a rejected delete throw. Without it the
-      // promise resolves with { error }, so the modal closed and the row
-      // simply stayed put with nothing to tell the admin it was refused.
-      await deleteSection(deleteId).unwrap();
-      setDeleteId(null);
-    } catch (err) {
-      const info = describeQueryError(err);
-      addToast({
-        type: 'error',
-        title: 'Could not delete section',
-        message: `${info.title} — ${info.detail}`,
-      });
-    }
+    await deleteSection(deleteId);
+    setDeleteId(null);
   };
 
   const toggleSort = (field: SortField) => {
@@ -94,7 +78,7 @@ export default function AdminAboutPage() {
       />
 
       {isLoading && <Center py="xl"><Loader /></Center>}
-      {error && <QueryErrorInline error={error} />}
+      {error && <Text c="red" size="sm">Failed to load sections</Text>}
 
       {sections && sections.length === 0 && !search && (
         <Center py="xl">

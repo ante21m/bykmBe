@@ -20,9 +20,6 @@ import {
   TextInput,
 } from '@mantine/core';
 import { useGetProjectsQuery, useDeleteProjectMutation } from '@/lib/redux/api';
-import { describeQueryError } from '@/lib/adminQueryError';
-import { useToast } from '@/components/ui/Toaster';
-import { QueryErrorInline } from '@/components/admin/QueryErrorState';
 
 const PILLAR_COLORS: Record<string, string> = {
   agro: 'green',
@@ -58,24 +55,11 @@ export default function AdminProjectsPage() {
       : undefined,
   );
   const [deleteProject, { isLoading: deleting }] = useDeleteProjectMutation();
-  const { addToast } = useToast();
 
   const handleDelete = async () => {
     if (!deleteId) return;
-    try {
-      // unwrap() is what makes a rejected delete throw. Without it the
-      // promise resolves with { error }, so the modal closed and the row
-      // simply stayed put with nothing to tell the admin it was refused.
-      await deleteProject(deleteId).unwrap();
-      setDeleteId(null);
-    } catch (err) {
-      const info = describeQueryError(err);
-      addToast({
-        type: 'error',
-        title: 'Could not delete project',
-        message: `${info.title} — ${info.detail}`,
-      });
-    }
+    await deleteProject(deleteId);
+    setDeleteId(null);
   };
 
   const toggleSort = (field: SortField) => {
@@ -168,7 +152,9 @@ export default function AdminProjectsPage() {
         </Center>
       )}
 
-      {error && <QueryErrorInline error={error} />}
+      {error && (
+        <Text c="red" size="sm">Failed to load projects</Text>
+      )}
 
       {projects && projects.length === 0 && !search && (
         <Center py="xl">

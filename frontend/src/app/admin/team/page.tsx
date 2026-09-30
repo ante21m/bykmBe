@@ -6,32 +6,16 @@ import {
   Group, Title, Text, Button, Table, Badge, Modal, Loader, Center, Stack, ActionIcon, Tooltip,
 } from '@mantine/core';
 import { useGetTeamMembersQuery, useDeleteTeamMemberMutation } from '@/lib/redux/api';
-import { describeQueryError } from '@/lib/adminQueryError';
-import { useToast } from '@/components/ui/Toaster';
-import { QueryErrorInline } from '@/components/admin/QueryErrorState';
 
 export default function AdminTeamPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const { data: members, isLoading, error } = useGetTeamMembersQuery();
   const [deleteMember, { isLoading: deleting }] = useDeleteTeamMemberMutation();
-  const { addToast } = useToast();
 
   const handleDelete = async () => {
     if (!deleteId) return;
-    try {
-      // unwrap() is what makes a rejected delete throw. Without it the
-      // promise resolves with { error }, so the modal closed and the row
-      // simply stayed put with nothing to tell the admin it was refused.
-      await deleteMember(deleteId).unwrap();
-      setDeleteId(null);
-    } catch (err) {
-      const info = describeQueryError(err);
-      addToast({
-        type: 'error',
-        title: 'Could not delete member',
-        message: `${info.title} — ${info.detail}`,
-      });
-    }
+    await deleteMember(deleteId);
+    setDeleteId(null);
   };
 
   return (
@@ -45,7 +29,7 @@ export default function AdminTeamPage() {
       </Group>
 
       {isLoading && <Center py="xl"><Loader /></Center>}
-      {error && <QueryErrorInline error={error} />}
+      {error && <Text c="red" size="sm">Failed to load team members</Text>}
 
       {members && members.length === 0 && (
         <Center py="xl">

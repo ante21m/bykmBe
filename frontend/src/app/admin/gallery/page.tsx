@@ -7,9 +7,6 @@ import {
   Center, Stack, ActionIcon, Tooltip, Pagination, TextInput,
 } from '@mantine/core';
 import { useGetGalleryQuery, useDeleteGalleryMutation } from '@/lib/redux/api';
-import { describeQueryError } from '@/lib/adminQueryError';
-import { useToast } from '@/components/ui/Toaster';
-import { QueryErrorInline } from '@/components/admin/QueryErrorState';
 
 const PAGE_SIZE = 10;
 
@@ -19,24 +16,11 @@ export default function AdminGalleryPage() {
   const [search, setSearch] = useState('');
   const { data: gallery, isLoading, error } = useGetGalleryQuery();
   const [deleteGallery, { isLoading: deleting }] = useDeleteGalleryMutation();
-  const { addToast } = useToast();
 
   const handleDelete = async () => {
     if (!deleteId) return;
-    try {
-      // unwrap() is what makes a rejected delete throw. Without it the
-      // promise resolves with { error }, so the modal closed and the row
-      // simply stayed put with nothing to tell the admin it was refused.
-      await deleteGallery(deleteId).unwrap();
-      setDeleteId(null);
-    } catch (err) {
-      const info = describeQueryError(err);
-      addToast({
-        type: 'error',
-        title: 'Could not delete image',
-        message: `${info.title} — ${info.detail}`,
-      });
-    }
+    await deleteGallery(deleteId);
+    setDeleteId(null);
   };
 
   const filtered = useMemo(() => {
@@ -72,7 +56,7 @@ export default function AdminGalleryPage() {
       />
 
       {isLoading && <Center py="xl"><Loader /></Center>}
-      {error && <QueryErrorInline error={error} />}
+      {error && <Text c="red" size="sm">Failed to load gallery</Text>}
 
       {gallery && gallery.length === 0 && !search && (
         <Center py="xl">

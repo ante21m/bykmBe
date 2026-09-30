@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { Text } from '@mantine/core';
 import TeamForm from '@/components/admin/TeamForm';
 import { useCreateTeamMemberMutation } from '@/lib/redux/api';
-import { describeQueryError } from '@/lib/adminQueryError';
 
 export default function NewTeamMemberPage() {
   const router = useRouter();
@@ -17,11 +16,9 @@ export default function NewTeamMemberPage() {
     try {
       await createMember(data).unwrap();
       router.push('/admin/team');
-    } catch (err) {
-      // TeamForm awaits onSave unguarded, so a rejection here would be an
-      // unhandled promise rejection with no visible feedback.
-      const info = describeQueryError(err);
-      setSaveError(`${info.title} — ${info.detail}`);
+    } catch (err: any) {
+      const msg = err?.data?.message ?? err?.error ?? 'Failed to create member';
+      setSaveError(Array.isArray(msg) ? msg.join(', ') : String(msg));
     }
   };
 

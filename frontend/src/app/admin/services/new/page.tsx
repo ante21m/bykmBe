@@ -1,36 +1,19 @@
 'use client';
 
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Text } from '@mantine/core';
 import { useCreateServiceMutation } from '@/lib/redux/api';
-import { describeQueryError } from '@/lib/adminQueryError';
 import ServiceForm from '@/components/admin/ServiceForm';
 
 export default function NewServicePage() {
   const router = useRouter();
   const [create, { isLoading }] = useCreateServiceMutation();
-  const [saveError, setSaveError] = useState<string | null>(null);
 
   const handleSave = async (data: any) => {
-    setSaveError(null);
-    try {
-      await create(data).unwrap();
-      router.push('/admin/services');
-    } catch (err) {
-      // ServiceForm awaits onSave unguarded, so a rejection here would be an
-      // unhandled promise rejection with no visible feedback.
-      const info = describeQueryError(err);
-      setSaveError(`${info.title} — ${info.detail}`);
-    }
+    await create(data).unwrap();
+    router.push('/admin/services');
   };
 
   return (
-    <>
-      {saveError && (
-        <Text c="red" size="sm" mb="md">{saveError}</Text>
-      )}
-      <ServiceForm onSave={handleSave} saving={isLoading} cancelPath="/admin/services" />
-    </>
+<ServiceForm onSave={handleSave} saving={isLoading} cancelPath="/admin/services" />
   );
 }
