@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build --webpack",
+    "start": "node .next/standalone/server.js",
+    "postbuild": "node scripts/postbuild.js",
     "lint": "next lint"
   },
   "dependencies": {

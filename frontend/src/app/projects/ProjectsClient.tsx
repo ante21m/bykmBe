@@ -32,7 +32,10 @@ function CountUp({ value, duration = 1200 }: { value: number; duration?: number 
     const el = ref.current;
     if (!el) return;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) { setDisplay(value); return; }
+    if (reduced) { 
+      const timeout = setTimeout(() => setDisplay(value), 0);
+      return () => clearTimeout(timeout);
+    }
 
     const io = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !started.current) {
@@ -41,16 +44,21 @@ function CountUp({ value, duration = 1200 }: { value: number; duration?: number 
         const tick = (now: number) => {
           const progress = Math.min((now - from) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
-          setDisplay(Math.round(eased * value));
+          const next = Math.round(eased * value);
+          if (next !== display) setDisplay(next);
           if (progress < 1) rafId.current = requestAnimationFrame(tick);
         };
         rafId.current = requestAnimationFrame(tick);
         io.disconnect();
       }
     }, { threshold: 0.4 });
+
     io.observe(el);
-    return () => { io.disconnect(); cancelAnimationFrame(rafId.current); };
-  }, [value, duration]);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(rafId.current);
+    };
+  }, [value, duration, display]);
 
   return <div ref={ref}>{display}</div>;
 }

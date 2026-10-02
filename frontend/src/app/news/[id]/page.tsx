@@ -1,10 +1,16 @@
 import type { Metadata } from 'next';
 import { NewsDetailContent } from '@/components/NewsDetailContent';
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+type Props = {
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
   try {
-    const res = await fetch(`${baseUrl}/news/${params.id}`, { cache: 'no-store' });
+    const res = await fetch(`${baseUrl}/news/${id}`, { cache: 'no-store' });
     if (!res.ok) return { title: 'News — BYKM Trading PLC' };
     const article = await res.json();
     return {
@@ -22,6 +28,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 }
 
-export default function NewsDetailPage() {
-  return <NewsDetailContent />;
+export default async function NewsDetailPage({ params }: Props) {
+  const { id } = await params;
+  return <NewsDetailContent id={id} />;
 }

@@ -31,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.bykmgroup.com/api';
     const res = await fetch(`${apiUrl}/news`, { cache: 'no-store', signal: AbortSignal.timeout(5000) });
     if (res.ok) {
       const news: { id: string; updatedAt?: string }[] = await res.json();

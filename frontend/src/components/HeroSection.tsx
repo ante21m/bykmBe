@@ -54,11 +54,14 @@ export function HeroSection({ heroSection, lang }: HeroSectionProps) {
       : HERO_IMAGES;
 
   useEffect(() => {
-    setActive(0);
+    const timeout = setTimeout(() => {
+      setActive(0);
+      setProgress(0);
+    }, 0);
+    return () => clearTimeout(timeout);
   }, [heroSection.heroImages]);
 
   useEffect(() => {
-    setProgress(0);
     const interval = 50;
     const step = (interval / SLIDE_INTERVAL) * 100;
     const timer = setInterval(() => {

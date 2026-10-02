@@ -29,7 +29,7 @@ export function GalleryContent() {
   // Build image URL
   const getImageSrc = (imageUrl: string) => {
     return `${
-      process.env.NEXT_PUBLIC_UPLOAD_URL || 'http://localhost:3001/api'
+      process.env.NEXT_PUBLIC_UPLOAD_URL || process.env.NEXT_PUBLIC_API_URL || 'https://api.bykmgroup.com/api'
     }${imageUrl}`;
   };
 

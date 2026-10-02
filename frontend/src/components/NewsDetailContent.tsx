@@ -8,7 +8,11 @@ import { useGetNewsItemQuery, useGetRecentNewsQuery } from '@/lib/redux/api';
 import DOMPurify from 'isomorphic-dompurify';
 import { CalendarDays, Clock, ArrowLeft, ArrowRight, Tag, ExternalLink, Download, Share2, X, ZoomIn } from 'lucide-react';
 
-export function NewsDetailContent() {
+interface NewsDetailContentProps {
+  id?: string;
+}
+
+export function NewsDetailContent({ id: propId }: NewsDetailContentProps = {}) {
   const [lightbox, setLightbox] = useState<string | null>(null);
 
   const openLightbox = useCallback((src: string) => setLightbox(src), []);
@@ -34,7 +38,8 @@ export function NewsDetailContent() {
     });
   });
 
-  const { id } = useParams<{ id: string }>();
+  const params = useParams<{ id: string }>();
+  const id = propId ?? params.id;
   const { lang } = useTranslation();
   const { data: article, isLoading, error } = useGetNewsItemQuery(id);
   const { data: relatedNews } = useGetRecentNewsQuery({ limit: 4 });
@@ -188,7 +193,7 @@ export function NewsDetailContent() {
                   </div>
                 </div>
                 <a
-                  href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api'}${article.fileUrl}`}
+                  href={`${process.env.NEXT_PUBLIC_API_URL || 'https://api.bykmgroup.com/api'}${article.fileUrl}`}
                   download={article.fileName}
                   className="inline-flex items-center gap-2 bg-[#183587] text-white px-6 py-3 text-xs font-mono tracking-wider uppercase hover:bg-[#1a237e] transition-all duration-300 shrink-0"
                 >

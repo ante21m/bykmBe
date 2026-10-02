@@ -30,9 +30,12 @@ export function SearchDialog({ open, onClose }: Props) {
 
   useEffect(() => {
     if (open) {
-      setQuery('');
-      setDebounced('');
-      setTimeout(() => inputRef.current?.focus(), 100);
+      const timeout = setTimeout(() => {
+        setQuery('');
+        setDebounced('');
+        inputRef.current?.focus();
+      }, 100);
+      return () => clearTimeout(timeout);
     }
   }, [open]);
 

@@ -14,12 +14,15 @@
 
 // module.exports = nextConfig;
 /** @type {import('next').NextConfig} */
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.bykmgroup.com/api';
 const apiBase = apiUrl.replace(/\/api\/?$/, '');
 
 const nextConfig = {
    ...(process.env.NEXT_OUTPUT_STANDALONE === '1' ? { output: 'standalone' } : {}),
   trailingSlash: false,
+ 
+  
+  
   images: {
     remotePatterns: [
       { protocol: 'http', hostname: 'localhost' },
@@ -28,7 +31,7 @@ const nextConfig = {
   },
   env: {
     NEXT_PUBLIC_API_URL:
-      process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api',
+      process.env.NEXT_PUBLIC_API_URL || 'https://api.bykmgroup.com/api',
   },
   async headers() {
     return [
@@ -41,7 +44,7 @@ const nextConfig = {
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
           { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
-          { key: 'Content-Security-Policy', value: `default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' ${apiBase} https://bykmgroup.com data: blob:; font-src 'self' data:; connect-src 'self' ${apiBase} https://bykmgroup.com; frame-src https://www.google.com; frame-ancestors 'none';` },
+          { key: 'Content-Security-Policy', value: `default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' ${apiBase} https://bykmgroup.com https://api.bykmgroup.com data: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' ${apiBase} https://api.bykmgroup.com https://bykmgroup.com; frame-src https://www.google.com; frame-ancestors 'none';` },
         ],
       },
       {
