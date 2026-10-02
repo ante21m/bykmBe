@@ -15,7 +15,7 @@ async function bootstrap() {
   // and a trailing slash in it (or a missing var entirely) made every
   // preflight come back without Access-Control-Allow-Origin, which the
   // browser reports as a generic CORS error. Env can only add origins now.
-  const origins: string[] = ['https://bykmgroup.com', 'https://www.bykmgroup.com'];
+  const origins: string[] = [];
 
   const corsOrigins = process.env.CORS_ORIGINS;
   if (corsOrigins) {
