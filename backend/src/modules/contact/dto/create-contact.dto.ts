@@ -31,7 +31,7 @@ export class CreateContactDto {
   @MaxLength(255)
   email: string;
 
-  @ApiPropertyOptional({ example: '+251911343290' })
+  @ApiPropertyOptional({ example: '+251947848384' })
   @IsOptional()
   @IsString()
   @MaxLength(20)

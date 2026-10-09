@@ -71,8 +71,8 @@ const companyData: BilingualQAPair[] = [
   },
   {
     keywords: ['contact', 'reach', 'phone', 'email', 'address', 'location', 'get in touch'],
-    en: 'You can reach BYKM Trading PLC at our headquarters: Yeka Sub-City, Woreda 08, House No. 4-04, Addis Ababa, Ethiopia. Phone: +251 911 34 32 90 (Primary) or +251 912 76 43 43 (Operations). Email: info@bykmgroup.com. For partnerships, contact gm@bykmgroup.com. You can also use our contact form to submit a detailed inquiry.',
-    am: 'ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበርን በዋና መሥሪያ ቤታችን ማግኘት ይችላሉ፦ የካ ክፍለ ከተማ፣ ወረዳ 08፣ ቤት ቁጥር 4-04፣ አዲስ አበባ፣ ኢትዮጵያ። ስልክ፦ +251 911 34 32 90 (ዋና) ወይም +251 912 76 43 43 (ኦፕሬሽን)። ኢሜይል፦ info@bykmgroup.com። ለአጋርነት፦ gm@bykmgroup.com። እንዲሁም የእውቂያ ቅጻችንን በመጠቀም ዝርዝር ጥያቄ ማቅረብ ይችላሉ።',
+    en: 'You can reach BYKM Trading PLC at our headquarters: Yeka Sub-City, Woreda 08, House No. 4-04, Addis Ababa, Ethiopia. Phone: +251 94 784 8384. Email: info@bykmgroup.com. For partnerships, contact gm@bykmgroup.com. You can also use our contact form to submit a detailed inquiry.',
+    am: 'ቢኬኤም ትሬዲንግ ኃላፊነቱ የተወሰነ የግል ማህበርን በዋና መሥሪያ ቤታችን ማግኘት ይችላሉ፦ የካ ክፍለ ከተማ፣ ወረዳ 08፣ ቤት ቁጥር 4-04፣ አዲስ አበባ፣ ኢትዮጵያ። ስልክ፦ +251 94 784 8384። ኢሜይል፦ info@bykmgroup.com። ለአጋርነት፦ gm@bykmgroup.com። እንዲሁም የእውቂያ ቅጻችንን በመጠቀም ዝርዝር ጥያቄ ማቅረብ ይችላሉ።',
     suggestions: ['partnership', 'careers', 'company overview'],
   },
   {
