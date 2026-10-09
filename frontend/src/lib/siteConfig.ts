@@ -11,8 +11,7 @@ export const SOCIAL_LINKS = {
 
 export const CONTACT_INFO = {
   phones: [
-    { number: '+251 911 34 32 90', label: 'Primary' },
-    { number: '+251 912 76 43 43', label: 'Operations' },
+    { number: '+251 94 784 8384', label: 'Primary' },
   ],
   email: 'bykm@bykmgroup.com',
   supportEmail: 'besufekad@bykmgroup.com',

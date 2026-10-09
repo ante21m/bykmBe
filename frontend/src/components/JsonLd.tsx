@@ -19,14 +19,14 @@ const org = {
   contactPoint: [
     {
       '@type': 'ContactPoint',
-      telephone: '+251-XXX-XXXXXXX',
+      telephone: '+251 94 784 8384',
       contactType: 'customer service',
       email: CONTACT_INFO.email,
       availableLanguage: ['English', 'Amharic'],
     },
     {
       '@type': 'ContactPoint',
-      telephone: '+251-XXX-XXXXXXX',
+      telephone: '+251 94 784 8384',
       contactType: 'sales',
       email: CONTACT_INFO.email,
     },
@@ -88,7 +88,7 @@ const localBusiness = {
   name: 'BYKM Trading PLC',
   image: `${BASE_URL}/images/logo-banner.png`,
   url: BASE_URL,
-  telephone: '+251-XXX-XXXXXXX',
+  telephone: '+251 94 784 8384',
   email: CONTACT_INFO.email,
   address: {
     '@type': 'PostalAddress',
